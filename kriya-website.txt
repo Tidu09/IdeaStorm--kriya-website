@@ -1,0 +1,13 @@
+/kriya-website
+  ├─ index.html
+  ├─ /images
+  │   ├─ hero-kid-building.jpg
+  │   ├─ step1-box.svg
+  │   ├─ step2-explore.svg
+  │   ├─ step3-subscribe.svg
+  │   ├─ success-vs-failure.jpg
+  └─ /css
+      └─ styles.css (optional external)
+
+
+Kriya kits help kids build, create, and thrive through hands-on STEM activities
