@@ -171,9 +171,39 @@
         "name": "Kriya Kits",
         "description": label,
         "handler": function (response) {
-          alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
-          window.location.href = "/thank-you.html";
-        },
+        const orderData = {
+          payment_id: response.razorpay_payment_id,
+          plan: selectedPlan,
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          address: {
+            house: document.getElementById("house").value,
+            building: document.getElementById("building").value,
+            locality: document.getElementById("locality").value,
+            city: document.getElementById("city").value,
+            pincode: document.getElementById("pincode").value
+          }
+        };
+
+        fetch("https://idea-storm-kriya-website.vercel.app/api/shiprocket-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderData)
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = "/thank-you.html";
+          } else {
+            alert("Shipping order failed: " + data.error);
+          }
+        })
+        .catch(err => {
+          alert("Something went wrong while creating shipping order.");
+          console.error(err);
+        });
+      },
         "prefill": {
           "name": name,
           "email": email,
