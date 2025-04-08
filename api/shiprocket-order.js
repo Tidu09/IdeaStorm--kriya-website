@@ -50,17 +50,24 @@ const payload = {
   
   try {
     console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
-    const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${SHIPROCKET_TOKEN}`
-      },
-      body: JSON.stringify(payload)
-    });
+const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
+    method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${SHIPROCKET_TOKEN}`
+  },
+  body: JSON.stringify(payload)
+});
 
-    const result = await response.json();
+if (!response.ok) {
+  const errorText = await response.text();
+  console.log("❌ Shiprocket Response:", errorText);
+  throw new Error(errorText || "Shiprocket API failed");
+}
 
+const result = await response.json();
+
+    
     if (!response.ok) {
       throw new Error(result.message || "Shiprocket API failed");
     }
