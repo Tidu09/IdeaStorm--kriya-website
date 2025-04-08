@@ -4,8 +4,12 @@ export default async function handler(req, res) {
   }
 
   const SHIPROCKET_TOKEN = process.env.SHIPROCKET_TOKEN;
-
   const data = req.body;
+
+  // Determine price based on plan
+  let price = 999;
+  if (data.plan === "monthly") price = 1350;
+  else if (data.plan === "annual") price = 14500;
 
   const payload = {
     order_id: data.payment_id,
@@ -15,7 +19,7 @@ export default async function handler(req, res) {
     billing_address: `${data.address.house}, ${data.address.building}`,
     billing_city: data.address.city,
     billing_pincode: data.address.pincode,
-    billing_state: "YourState",
+    billing_state: "YourState", // optional: you can add this to the form
     billing_country: "India",
     billing_email: data.email,
     billing_phone: data.phone,
@@ -24,11 +28,11 @@ export default async function handler(req, res) {
         name: `Kriya STEM Kit - ${data.plan}`,
         sku: `kriya-kit-${data.plan}`,
         units: 1,
-        selling_price: data.plan === "annual" ? 7999 : data.plan === "monthly" ? 799 : 199
+        selling_price: price
       }
     ],
     payment_method: "Prepaid",
-    sub_total: data.plan === "annual" ? 7999 : data.plan === "monthly" ? 799 : 199,
+    sub_total: price,
     length: 10,
     breadth: 10,
     height: 10,
