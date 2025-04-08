@@ -15,28 +15,28 @@ const payload = {
   order_id: data.payment_id,
   order_date: new Date().toISOString().split('T')[0],
   pickup_location: "Primary",
+  shipping_is_billing: true,
+  customer_gstin: "",
   billing_customer_name: data.name,
-
-  // ✅ Join only non-empty parts of the address
   billing_address: [
     data.address.house,
     data.address.building,
     data.address.locality
   ].filter(Boolean).join(', '),
-
   billing_city: data.address.city,
   billing_pincode: data.address.pincode,
-  billing_state: data.address.state,  // ✅ Make sure it's from the dropdown
+  billing_state: data.address.state,
   billing_country: "India",
   billing_email: data.email,
   billing_phone: data.phone,
-
   order_items: [
     {
       name: `Kriya STEM Kit - ${data.plan}`,
       sku: `kriya-kit-${data.plan}`,
       units: 1,
-      selling_price: price
+      selling_price: price,
+      discount: 0,
+      tax: 0
     }
   ],
   payment_method: "Prepaid",
@@ -46,6 +46,7 @@ const payload = {
   height: 10,
   weight: 1
 };
+
   
   try {
     console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
