@@ -18,6 +18,7 @@ const payload = {
   shipping_is_billing: true,
   customer_gstin: "",
   billing_customer_name: data.name,
+  billing_last_name: "",
   billing_address: [
     data.address.house,
     data.address.building,
