@@ -11,34 +11,42 @@ export default async function handler(req, res) {
   if (data.plan === "monthly") price = 1350;
   else if (data.plan === "annual") price = 14500;
 
-  const payload = {
-    order_id: data.payment_id,
-    order_date: new Date().toISOString().split('T')[0],
-    pickup_location: "Primary",
-    billing_customer_name: data.name,
-    billing_address: `${data.address.house}, ${data.address.building}`,
-    billing_city: data.address.city,
-    billing_pincode: data.address.pincode,
-    billing_state: data.address.state, // optional: you can add this to the form
-    billing_country: "India",
-    billing_email: data.email,
-    billing_phone: data.phone,
-    order_items: [
-      {
-        name: `Kriya STEM Kit - ${data.plan}`,
-        sku: `kriya-kit-${data.plan}`,
-        units: 1,
-        selling_price: price
-      }
-    ],
-    payment_method: "Prepaid",
-    sub_total: price,
-    length: 10,
-    breadth: 10,
-    height: 10,
-    weight: 1
-  };
+const payload = {
+  order_id: data.payment_id,
+  order_date: new Date().toISOString().split('T')[0],
+  pickup_location: "Primary",
+  billing_customer_name: data.name,
 
+  // ✅ Join only non-empty parts of the address
+  billing_address: [
+    data.address.house,
+    data.address.building,
+    data.address.locality
+  ].filter(Boolean).join(', '),
+
+  billing_city: data.address.city,
+  billing_pincode: data.address.pincode,
+  billing_state: data.address.state,  // ✅ Make sure it's from the dropdown
+  billing_country: "India",
+  billing_email: data.email,
+  billing_phone: data.phone,
+
+  order_items: [
+    {
+      name: `Kriya STEM Kit - ${data.plan}`,
+      sku: `kriya-kit-${data.plan}`,
+      units: 1,
+      selling_price: price
+    }
+  ],
+  payment_method: "Prepaid",
+  sub_total: price,
+  length: 10,
+  breadth: 10,
+  height: 10,
+  weight: 1
+};
+  
   try {
     const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
       method: "POST",
