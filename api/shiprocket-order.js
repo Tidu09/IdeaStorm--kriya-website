@@ -48,6 +48,7 @@ const payload = {
 };
   
   try {
+    console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
     const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
       method: "POST",
       headers: {
