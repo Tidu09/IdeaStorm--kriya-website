@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     billing_address: `${data.address.house}, ${data.address.building}`,
     billing_city: data.address.city,
     billing_pincode: data.address.pincode,
-    billing_state: "YourState", // optional: you can add this to the form
+    billing_state: data.address.state, // optional: you can add this to the form
     billing_country: "India",
     billing_email: data.email,
     billing_phone: data.phone,
