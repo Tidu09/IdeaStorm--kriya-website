@@ -110,8 +110,8 @@ const shipmentId = result.shipment_id;
 
 // const assignResult = await assignRes.json();
 
-const awbCode = assignResult.response?.data?.awb_code || null;
-const courierName = assignResult.response?.data?.courier_name || null;
+// const awbCode = assignResult.response?.data?.awb_code || null;
+// const courierName = assignResult.response?.data?.courier_name || null;
 
 // if (!assignRes.ok || !awbCode) {
 //   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
@@ -201,8 +201,8 @@ return res.status(200).json({
   success: true,
   tracking: {
     shipment_id: shipmentId,
-    awb_code: awbCode,
-    courier_name: courierName
+    // awb_code: awbCode,
+    // courier_name: courierName
   }
 });
   } catch (error) {
