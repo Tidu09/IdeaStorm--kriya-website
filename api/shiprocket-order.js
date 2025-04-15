@@ -88,9 +88,9 @@ module.exports = async function handler(req, res) {
       throw new Error(result.message || "Shiprocket order creation failed");
     }
     
-    const shipmentId = result.shipments?.[0]?.shipment_id;
+const shipmentId = result.shipment_id;
     
-  if (!response.ok || !result.shipments?.[0]?.shipment_id) {
+if (!response.ok || !result.shipment_id) {
   console.log("❌ Shiprocket Order Creation Failed:", JSON.stringify(result, null, 2));
   throw new Error("Shiprocket order creation failed");
 }
