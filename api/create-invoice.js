@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 module.exports = async function handler(req, res) {
   const allowedOrigin = "https://kriyaedu.com";
 
