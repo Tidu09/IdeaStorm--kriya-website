@@ -99,70 +99,70 @@ if (!result.shipment_id) {
 const shipmentId = result.shipment_id;
 
 
-const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ shipment_id: shipmentId })
-});
+// const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
+//   method: "POST",
+//   headers: {
+//     "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
+//     "Content-Type": "application/json"
+//   },
+//   body: JSON.stringify({ shipment_id: shipmentId })
+// });
 
-const assignResult = await assignRes.json();
+// const assignResult = await assignRes.json();
 
-const awbCode = assignResult.response?.data?.awb_code;
-const courierName = assignResult.response?.data?.courier_name;
+const awbCode = assignResult.response?.data?.awb_code || null;
+const courierName = assignResult.response?.data?.courier_name || null;
 
-if (!assignRes.ok || !awbCode) {
-  console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
-  throw new Error("AWB assignment failed");
-}
+// if (!assignRes.ok || !awbCode) {
+//   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
+//   throw new Error("AWB assignment failed");
+// }
 
-    await fetch("https://apiv2.shiprocket.in/v1/external/courier/generate/pickup", {
-  method: "POST",
-  headers: {
-    Authorization: `Bearer ${SHIPROCKET_TOKEN}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ shipment_id: shipmentId })
-});
+//     await fetch("https://apiv2.shiprocket.in/v1/external/courier/generate/pickup", {
+//   method: "POST",
+//   headers: {
+//     Authorization: `Bearer ${SHIPROCKET_TOKEN}`,
+//     "Content-Type": "application/json"
+//   },
+//   body: JSON.stringify({ shipment_id: shipmentId })
+// });
 
-    // Fetch the shipping label
-    const labelRes = await fetch(
-      `https://apiv2.shiprocket.in/v1/external/courier/generate/label?shipment_id=${shipmentId}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-        }
-      }
-    );
+//     // Fetch the shipping label
+//     const labelRes = await fetch(
+//       `https://apiv2.shiprocket.in/v1/external/courier/generate/label?shipment_id=${shipmentId}`,
+//       {
+//         method: 'GET',
+//         headers: {
+//           Authorization: `Bearer ${SHIPROCKET_TOKEN}`
+//         }
+//       }
+//     );
 
-    const labelBuffer = await labelRes.arrayBuffer();
+//     const labelBuffer = await labelRes.arrayBuffer();
 
-    const invoiceRes = await fetch(
-  `https://apiv2.shiprocket.in/v1/external/courier/generate/invoice?shipment_id=${shipmentId}`,
-  {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-    }
-  }
-);
+//     const invoiceRes = await fetch(
+//   `https://apiv2.shiprocket.in/v1/external/courier/generate/invoice?shipment_id=${shipmentId}`,
+//   {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${SHIPROCKET_TOKEN}`
+//     }
+//   }
+// );
 
-const invoiceBuffer = await invoiceRes.arrayBuffer();
+// const invoiceBuffer = await invoiceRes.arrayBuffer();
 
-    const manifestRes = await fetch(
-  `https://apiv2.shiprocket.in/v1/external/manifests/generate?shipment_id=${shipmentId}`,
-  {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-    }
-  }
-);
+//     const manifestRes = await fetch(
+//   `https://apiv2.shiprocket.in/v1/external/manifests/generate?shipment_id=${shipmentId}`,
+//   {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${SHIPROCKET_TOKEN}`
+//     }
+//   }
+// );
 
-const manifestBuffer = await manifestRes.arrayBuffer();
+// const manifestBuffer = await manifestRes.arrayBuffer();
 
     // Send email with label
 const transporter = nodemailer.createTransport({
