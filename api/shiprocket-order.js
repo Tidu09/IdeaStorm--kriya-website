@@ -140,6 +140,30 @@ if (!assignRes.ok || !awbCode) {
 
     const labelBuffer = await labelRes.arrayBuffer();
 
+    const invoiceRes = await fetch(
+  `https://apiv2.shiprocket.in/v1/external/courier/generate/invoice?shipment_id=${shipmentId}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${SHIPROCKET_TOKEN}`
+    }
+  }
+);
+
+const invoiceBuffer = await invoiceRes.arrayBuffer();
+
+    const manifestRes = await fetch(
+  `https://apiv2.shiprocket.in/v1/external/manifests/generate?shipment_id=${shipmentId}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${SHIPROCKET_TOKEN}`
+    }
+  }
+);
+
+const manifestBuffer = await manifestRes.arrayBuffer();
+
     // Send email with label
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -154,13 +178,23 @@ await transporter.sendMail({
   to: 'ideastorm.technologies@gmail.com',
   subject: `Shipping Label - Shipment #${shipmentId}`,
   text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
-  attachments: [
-    {
-      filename: `Label-${shipmentId}.pdf`,
-      content: Buffer.from(labelBuffer),
-      contentType: 'application/pdf'
-    }
-  ]
+ attachments: [
+  {
+    filename: `Label-${shipmentId}.pdf`,
+    content: Buffer.from(labelBuffer),
+    contentType: 'application/pdf'
+  },
+  {
+    filename: `Invoice-${shipmentId}.pdf`,
+    content: Buffer.from(invoiceBuffer),
+    contentType: 'application/pdf'
+  },
+  {
+    filename: `Manifest-${shipmentId}.pdf`,
+    content: Buffer.from(manifestBuffer),
+    contentType: 'application/pdf'
+  }
+]
 });
 
 return res.status(200).json({
