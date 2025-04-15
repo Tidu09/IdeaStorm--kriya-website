@@ -81,19 +81,23 @@ module.exports = async function handler(req, res) {
       throw new Error(errorText || "Shiprocket API failed");
     }
 
-    const result = await response.json();
+const result = await response.json();
 
-    if (!response.ok || result.status !== 1) {
-      console.log("❌ Shiprocket Order Creation Failed:", JSON.stringify(result, null, 2));
-      throw new Error(result.message || "Shiprocket order creation failed");
-    }
-    
-const shipmentId = result.shipment_id;
-    
-if (!response.ok || !result.shipment_id) {
-  console.log("❌ Shiprocket Order Creation Failed:", JSON.stringify(result, null, 2));
-  throw new Error("Shiprocket order creation failed");
+// Check if HTTP failed
+if (!response.ok) {
+  const errorText = await response.text();
+  console.log("❌ Shiprocket API Error:", errorText);
+  throw new Error("Shiprocket API failed");
 }
+
+// Check if shipment_id exists (order was created)
+if (!result.shipment_id) {
+  console.log("⚠️ Order created, but no shipment_id found:", JSON.stringify(result, null, 2));
+  throw new Error("Shiprocket order creation failed: shipment_id missing");
+}
+
+const shipmentId = result.shipment_id;
+
 
     // Fetch the shipping label
     const labelRes = await fetch(
