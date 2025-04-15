@@ -1,18 +1,18 @@
 const nodemailer = require('nodemailer');
+const fetch = require('node-fetch'); // ensure it's installed in your project
 
-const allowedOrigin = "https://kriyaedu.com";
+module.exports = async function handler(req, res) {
+  const allowedOrigin = "https://kriyaedu.com";
 
-if (req.method === 'OPTIONS') {
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.status(200).end();
+  }
+
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  return res.status(200).end();
-}
 
-res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
-
-
-export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -65,7 +65,7 @@ export default async function handler(req, res) {
   };
 
   try {
-    console.log("\uD83D\uDE9A SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
+    console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
 
     const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
       method: "POST",
@@ -78,14 +78,14 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.log("\u274C Shiprocket Response:", errorText);
+      console.log("❌ Shiprocket Response:", errorText);
       throw new Error(errorText || "Shiprocket API failed");
     }
 
     const result = await response.json();
     const shipmentId = result.shipments?.[0]?.shipment_id;
 
-    // Fetch the shipping label as a PDF
+    // Fetch the shipping label
     const labelRes = await fetch(
       `https://apiv2.shiprocket.in/v1/external/courier/generate/label?shipment_id=${shipmentId}`,
       {
@@ -98,7 +98,7 @@ export default async function handler(req, res) {
 
     const labelBuffer = await labelRes.arrayBuffer();
 
-    // Email the label PDF
+    // Send email with label
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -108,8 +108,8 @@ export default async function handler(req, res) {
     });
 
     await transporter.sendMail({
-      from: 'Kriya <no-reply@kriyakits.in>',
-      to: 'logistics@kriyakits.in',
+      from: 'Kriya <ideastorm.technologies@gmail.com>',
+      to: 'ideastorm.technologies@gmail.com',
       subject: `Shipping Label - Shipment #${shipmentId}`,
       text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
       attachments: [
@@ -125,4 +125,4 @@ export default async function handler(req, res) {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-}
+};
