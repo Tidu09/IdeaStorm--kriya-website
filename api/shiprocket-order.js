@@ -110,9 +110,12 @@ const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/a
 
 const assignResult = await assignRes.json();
 
-if (!assignRes.ok || !assignResult.awb_code) {
+const awbCode = assignResult.response?.data?.awb_code;
+const courierName = assignResult.response?.data?.courier_name;
+
+if (!assignRes.ok || !awbCode) {
   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
-  throw new Error(assignResult.message || "AWB assignment failed");
+  throw new Error("AWB assignment failed");
 }
 
     // Fetch the shipping label
@@ -155,9 +158,8 @@ return res.status(200).json({
   success: true,
   tracking: {
     shipment_id: shipmentId,
-    awb_code: assignResult.awb_code,
-    courier_name: assignResult.courier_name,
-    label_sent_to: EMAIL_USER // optional, for confirmation
+    awb_code: awbCode,
+    courier_name: courierName
   }
 });
   } catch (error) {
