@@ -106,13 +106,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.sendMail({
-  from: "Kriya <ideastorm.technologies@gmail.com>",
-  to: "ideastorm.technologies@gmail.com",
-  subject: "Test Email",
-  text: "This is a test",
-}, (err, info) => {
-  console.log(err || info);
+await transporter.sendMail({
+  from: 'Kriya <ideastorm.technologies@gmail.com>',
+  to: 'ideastorm.technologies@gmail.com',
+  subject: `Shipping Label - Shipment #${shipmentId}`,
+  text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
+  attachments: [
+    {
+      filename: `Label-${shipmentId}.pdf`,
+      content: Buffer.from(labelBuffer),
+      contentType: 'application/pdf'
+    }
+  ]
 });
 
     return res.status(200).json({ success: true, tracking: result });
