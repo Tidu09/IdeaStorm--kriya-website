@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const fetch = require('node-fetch'); // ensure it's installed in your project
 
 module.exports = async function handler(req, res) {
   const allowedOrigin = "https://kriyaedu.com";
