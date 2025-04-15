@@ -178,23 +178,23 @@ await transporter.sendMail({
   to: 'ideastorm.technologies@gmail.com',
   subject: `Shipping Label - Shipment #${shipmentId}`,
   text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
- attachments: [
-  {
-    filename: `Label-${shipmentId}.pdf`,
-    content: Buffer.from(labelBuffer),
-    contentType: 'application/pdf'
-  },
-  {
-    filename: `Invoice-${shipmentId}.pdf`,
-    content: Buffer.from(invoiceBuffer),
-    contentType: 'application/pdf'
-  },
-  {
-    filename: `Manifest-${shipmentId}.pdf`,
-    content: Buffer.from(manifestBuffer),
-    contentType: 'application/pdf'
-  }
-]
+//  attachments: [
+//   {
+//     filename: `Label-${shipmentId}.pdf`,
+//     content: Buffer.from(labelBuffer),
+//     contentType: 'application/pdf'
+//   },
+//   {
+//     filename: `Invoice-${shipmentId}.pdf`,
+//     content: Buffer.from(invoiceBuffer),
+//     contentType: 'application/pdf'
+//   },
+//   {
+//     filename: `Manifest-${shipmentId}.pdf`,
+//     content: Buffer.from(manifestBuffer),
+//     contentType: 'application/pdf'
+//   }
+// ]
 });
 
 return res.status(200).json({
