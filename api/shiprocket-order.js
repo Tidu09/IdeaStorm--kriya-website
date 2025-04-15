@@ -101,8 +101,8 @@ module.exports = async function handler(req, res) {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "ideastorm.technologies@gmail.com",
-    pass: "tokblqqahodsifhb",
+    user: EMAIL_USER,
+    pass:EMAIL_PASS,
   },
 });
 
