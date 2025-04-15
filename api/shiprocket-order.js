@@ -29,7 +29,7 @@ module.exports = async function handler(req, res) {
   const payload = {
     order_id: data.payment_id,
     order_date: new Date().toISOString().split('T')[0],
-    pickup_location: "Primary",
+    pickup_location: "home",
     shipping_is_billing: true,
     customer_gstin: "",
     billing_customer_name: data.name,
