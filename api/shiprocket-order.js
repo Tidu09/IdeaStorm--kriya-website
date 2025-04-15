@@ -98,27 +98,22 @@ module.exports = async function handler(req, res) {
     const labelBuffer = await labelRes.arrayBuffer();
 
     // Send email with label
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS
-      }
-    });
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "ideastorm.technologies@gmail.com",
+    pass: "tokblqqahodsifhb",
+  },
+});
 
-    await transporter.sendMail({
-      from: 'Kriya <ideastorm.technologies@gmail.com>',
-      to: 'ideastorm.technologies@gmail.com',
-      subject: `Shipping Label - Shipment #${shipmentId}`,
-      text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
-      attachments: [
-        {
-          filename: `Label-${shipmentId}.pdf`,
-          content: Buffer.from(labelBuffer),
-          contentType: 'application/pdf'
-        }
-      ]
-    });
+transporter.sendMail({
+  from: "Kriya <ideastorm.technologies@gmail.com>",
+  to: "ideastorm.technologies@gmail.com",
+  subject: "Test Email",
+  text: "This is a test",
+}, (err, info) => {
+  console.log(err || info);
+});
 
     return res.status(200).json({ success: true, tracking: result });
   } catch (error) {
