@@ -82,7 +82,19 @@ module.exports = async function handler(req, res) {
     }
 
     const result = await response.json();
+
+    if (!response.ok || result.status !== 1) {
+      console.log("❌ Shiprocket Order Creation Failed:", JSON.stringify(result, null, 2));
+      throw new Error(result.message || "Shiprocket order creation failed");
+    }
+    
     const shipmentId = result.shipments?.[0]?.shipment_id;
+    
+    if (!shipmentId) {
+      console.log("⚠️ No shipment ID received:", JSON.stringify(result, null, 2));
+      throw new Error("No shipment ID received from Shiprocket");
+    }
+
 
     // Fetch the shipping label
     const labelRes = await fetch(
