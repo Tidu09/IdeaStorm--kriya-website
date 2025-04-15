@@ -196,10 +196,28 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderData)
         })
-        .then(res => res.json())
+        .then(async res => {
+        const contentType = res.headers.get("content-type");
+
+        if (!res.ok) {
+          const errorText = await res.text(); // this avoids the JSON error
+          throw new Error("Server error: " + errorText);
+        }
+
+        if (contentType && contentType.includes("application/json")) {
+          return res.json();
+        } else {
+          throw new Error("Expected JSON response, got something else.");
+        }
+      })
         .then(async data => {
           if (data.success) {
-            sessionStorage.setItem('tracking_id', data.tracking.shipments[0].tracking_id);
+            //sessionStorage.setItem('tracking_id', data.tracking.shipments[0].tracking_id);
+            
+            const awbCode = data.tracking?.awb_code;
+              if (awbCode) {
+                sessionStorage.setItem('tracking_id', awbCode);
+              }
 
             // ✅ Generate Razorpay invoice
             const invoiceRes = await fetch("/api/create-invoice", {
