@@ -3,6 +3,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const allowedOrigin = "https://kriyaedu.com";
+
+if (req.method === 'OPTIONS') {
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  return res.status(200).end();
+}
+
+res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+
+
   const { name, email, phone, plan, payment_id } = req.body;
 
   const planNameMap = {
