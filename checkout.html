@@ -169,7 +169,7 @@
       }
 
       const options = {
-        "key": "rzp_test_nR3lFchROnuUXJ",
+        "key": "rzp_test_ucKufwYUwGNUCt",
         "amount": amount,
         "currency": "INR",
         "name": "Kriya Kits",
@@ -197,8 +197,28 @@
           body: JSON.stringify(orderData)
         })
         .then(res => res.json())
-        .then(data => {
+        .then(async data => {
           if (data.success) {
+            sessionStorage.setItem('tracking_id', data.tracking.shipments[0].tracking_id);
+
+            // ✅ Generate Razorpay invoice
+            const invoiceRes = await fetch("/api/create-invoice", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                email,
+                phone,
+                plan: selectedPlan,
+                payment_id: orderData.payment_id
+              })
+            });
+
+            const invoiceData = await invoiceRes.json();
+            if (invoiceData.invoice_url) {
+              sessionStorage.setItem('invoice_url', invoiceData.invoice_url);
+            }
+
             window.location.href = "/thank-you.html";
           } else {
             alert("Shipping order failed: " + data.error);
