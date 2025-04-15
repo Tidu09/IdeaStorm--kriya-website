@@ -118,6 +118,15 @@ if (!assignRes.ok || !awbCode) {
   throw new Error("AWB assignment failed");
 }
 
+    await fetch("https://apiv2.shiprocket.in/v1/external/courier/generate/pickup", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${SHIPROCKET_TOKEN}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ shipment_id: shipmentId })
+});
+
     // Fetch the shipping label
     const labelRes = await fetch(
       `https://apiv2.shiprocket.in/v1/external/courier/generate/label?shipment_id=${shipmentId}`,
