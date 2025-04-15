@@ -191,7 +191,7 @@
           }
         };
 
-        fetch("https://idea-storm-kriya-website.vercel.app/api/shiprocket-order", {
+        fetch("/api/shiprocket-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderData)
