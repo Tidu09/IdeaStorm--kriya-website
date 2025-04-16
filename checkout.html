@@ -188,10 +188,51 @@
         }
       })
       .then(options => {
-        const rzp = new Razorpay(options);
-        rzp.open();
+  options.handler = function (response) {
+    document.getElementById("loading-overlay").classList.add("loading-visible");
+
+    const orderData = {
+      payment_id: response.razorpay_payment_id || response.razorpay_subscription_id,
+      plan: selectedPlan,
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      address: {
+        house: document.getElementById("house").value,
+        building: document.getElementById("building").value,
+        locality: document.getElementById("locality").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        pincode: document.getElementById("pincode").value
+      }
+    };
+
+    fetch("/api/shiprocket-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          sessionStorage.setItem("tracking_id", data.tracking.awb_code || "");
+          window.location.href = "/thank-you.html";
+        } else {
+          alert("Shipping order failed: " + data.error);
+          document.getElementById("loading-overlay").classList.remove("loading-visible");
+        }
       })
       .catch(err => {
+        console.error("Shipping error:", err);
+        alert("Something went wrong with shipment.");
+        document.getElementById("loading-overlay").classList.remove("loading-visible");
+      });
+  };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    })  
+  .catch(err => {
         alert("Something went wrong while initiating payment.");
         console.error(err);
       });
