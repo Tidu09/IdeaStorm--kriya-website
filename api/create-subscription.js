@@ -10,8 +10,6 @@ module.exports = async (req, res) => {
 
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
 
-
-module.exports = async (req, res) => {
   const { name, email, phone, selectedPlan } = req.body;
 
   const key = process.env.RAZORPAY_KEY;
@@ -27,8 +25,7 @@ module.exports = async (req, res) => {
 
   try {
     if (selectedPlan === "monthly") {
-      // ✅ Razorpay Subscription Logic
-      const plan_id = process.env.MONTHLY_PLAN_ID; // Razorpay plan for ₹1350/month x 12
+      const plan_id = process.env.MONTHLY_PLAN_ID;
 
       const subRes = await fetch("https://api.razorpay.com/v1/subscriptions", {
         method: "POST",
@@ -51,7 +48,6 @@ module.exports = async (req, res) => {
       options.description = "Monthly Subscription – Autopay Enabled";
 
     } else {
-      // ✅ One-time Order Logic (Trial or Annual)
       const amount = selectedPlan === "trial" ? 99900 : 1450000;
 
       const orderRes = await fetch("https://api.razorpay.com/v1/orders", {
@@ -74,13 +70,15 @@ module.exports = async (req, res) => {
       options.order_id = order.id;
       options.amount = amount;
       options.currency = "INR";
-      options.description = selectedPlan === "trial" ? "Trial Kit – One-time" : "Annual Plan – One-time";
+      options.description = selectedPlan === "trial"
+        ? "Trial Kit – One-time"
+        : "Annual Plan – One-time";
     }
 
     return res.status(200).json(options);
 
   } catch (err) {
-    console.error("❌ Error creating Razorpay session:", err.message);
+    console.error("❌ Razorpay Error:", err.message);
     return res.status(500).json({ error: err.message });
   }
 };
