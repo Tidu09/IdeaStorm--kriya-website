@@ -144,14 +144,11 @@
 </div>
 
 <!-- Arrows below -->
-<div class="carousel-controls text-center mt-3">
-  <button class="btn btn-outline-secondary me-2" data-bs-target="#kitCarousel" data-bs-slide="prev">
-    &larr; Prev
-  </button>
-  <button class="btn btn-outline-secondary" data-bs-target="#kitCarousel" data-bs-slide="next">
-    Next &rarr;
-  </button>
+<div class="carousel-controls text-center mt-2">
+  <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#kitCarousel" data-bs-slide="prev">&larr; Prev</button>
+  <button class="btn btn-outline-dark" type="button" data-bs-target="#kitCarousel" data-bs-slide="next">Next &rarr;</button>
 </div>
+
 
   <div class="text-start mt-4 px-2">
     <h5 id="kit-title"><strong>Loading...</strong></h5>
@@ -184,10 +181,12 @@
 
     document.getElementById("plan-label").innerText = label;
     document.getElementById("plan-amount").innerText = `₹${(amount / 100).toLocaleString()}`;
-    document.getElementById("kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
-    document.getElementById("kit-desc").innerHTML = kitDesc;
-    document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
-    document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+    document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+  document.getElementById("kit-desc").innerHTML = kitDesc;
+  document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+  document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+});
 
 
     document.getElementById('rzp-button1').onclick = function(e) {
