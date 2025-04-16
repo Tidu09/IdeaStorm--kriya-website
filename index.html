@@ -65,13 +65,10 @@
       content: "\2714";
       color: green;
     }
-    .transform-highlight .transform-label {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #198754; /* Bootstrap green */
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
+    .transform-arrow svg {
+  max-width: 100%;
 }
+
   </style>
 </head>
 <body>
@@ -188,10 +185,15 @@
     <div class="mt-5">
       <img src="images/success-vs-failure.png" alt="Comparison image" class="img-fluid comparison-img">
     </div>
-    <div class="transform-highlight mt-4 d-flex flex-column align-items-center">
-      <span class="transform-label">TRANSFORM</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#198754" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM5.5 4.5a.5.5 0 0 1 .5.5v2h4.793L9.146 5.146a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 1 1-.708-.708L10.793 8H6v2a.5.5 0 0 1-1 0v-5z"/>
+    <div class="transform-arrow mt-4 d-flex justify-content-center">
+      <svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7"
+            refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#0d6efd" />
+          </marker>
+        </defs>
+        <line x1="0" y1="30" x2="200" y2="30" stroke="#0d6efd" stroke-width="8" marker-end="url(#arrowhead)" />
       </svg>
     </div>
   </div>
