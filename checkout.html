@@ -158,129 +158,35 @@
   document.getElementById("modal-kit-desc").innerHTML = kitDesc;
 });
 
-
-    document.getElementById('rzp-button1').onclick = function(e) {
+    document.getElementById("rzp-button1").onclick = function (e) {
       const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
       const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
 
-      if (!name || !phone || !email) {
-        alert("Please fill in all required fields before proceeding.");
+      if (!name || !email || !phone) {
+        alert("Please fill in all required fields.");
         return;
       }
 
-      const city = document.getElementById("city").value;
-      const state = document.getElementById("state").value;
-      const pincode = document.getElementById("pincode").value;
-      const house = document.getElementById("house").value;
-
-      if (!house.trim()) {
-        alert("Please enter a valid house number or flat.");
-        return;
-      }
-
-      if (!city || !state || !pincode || !pincode.match(/^\d{6}$/)) {
-        alert("Please enter a valid address with a 6-digit pincode.");
-        return;
-      }
-
-      const options = {
-        "key": "rzp_test_ucKufwYUwGNUCt",
-        "amount": amount,
-        "currency": "INR",
-        "name": "Kriya Kits",
-        "description": label,
-        "handler": function (response) {
-        const orderData = {
-          payment_id: response.razorpay_payment_id,
-          plan: selectedPlan,
-          name: document.getElementById("name").value,
-          email: document.getElementById("email").value,
-          phone: document.getElementById("phone").value,
-          address: {
-            house: document.getElementById("house").value,
-            building: document.getElementById("building").value,
-            locality: document.getElementById("locality").value,
-            city: document.getElementById("city").value,
-            state: document.getElementById("state").value,
-            pincode: document.getElementById("pincode").value
-          }
-        };
-
-
-        document.getElementById("loading-overlay").classList.add("loading-visible");
-
-        fetch("/api/shiprocket-order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderData)
-        })
-        .then(async res => {
-        const contentType = res.headers.get("content-type");
-
-        if (!res.ok) {
-          const errorText = await res.text(); // this avoids the JSON error
-          throw new Error("Server error: " + errorText);
-        }
-
-        if (contentType && contentType.includes("application/json")) {
-          return res.json();
-        } else {
-          throw new Error("Expected JSON response, got something else.");
-        }
+      fetch("/api/create-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, selectedPlan })
       })
-        .then(async data => {
-          if (data.success) {
-            //sessionStorage.setItem('tracking_id', data.tracking.shipments[0].tracking_id);
-            
-            // const awbCode = data.tracking?.awb_code;
-            //   if (awbCode) {
-            //     sessionStorage.setItem('tracking_id', awbCode);
-            //   }
+        .then(res => res.json())
+        .then(options => {
+          if (options.error) throw new Error(options.error);
 
-            // ✅ Generate Razorpay invoice
-            const invoiceRes = await fetch("/api/create-invoice", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name,
-                email,
-                phone,
-                plan: selectedPlan,
-                payment_id: orderData.payment_id
-              })
-            });
-
-            const invoiceData = await invoiceRes.json();
-            if (invoiceData.invoice_url) {
-              sessionStorage.setItem('invoice_url', invoiceData.invoice_url);
-            }
-
-            window.location.href = "/thank-you.html";
-          } else {
-            alert("Shipping order failed: " + data.error);
-          }
+          const rzp = new Razorpay(options);
+          rzp.open();
         })
         .catch(err => {
-          alert("Something went wrong while creating shipping order.");
-          document.getElementById("loading-overlay").classList.remove("loading-visible");
+          alert("Something went wrong while initiating payment.");
           console.error(err);
         });
-      },
-        "prefill": {
-          "name": name,
-          "email": email,
-          "contact": phone
-        },
-        "theme": {
-          "color": "#bc9670"
-        }
-      };
 
-      const rzp1 = new Razorpay(options);
-      rzp1.open();
       e.preventDefault();
-    }
+    };
   </script>
 
   <script>
