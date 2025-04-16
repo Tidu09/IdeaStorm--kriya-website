@@ -39,6 +39,7 @@
       margin: 0 auto;
       display: block;
     }
+    
     .carousel-controls {
       text-align: center;
       margin-top: 0.5rem;
@@ -47,10 +48,27 @@
       margin-bottom: 1rem;
     }
   </style>
+  <style>
+    .carousel-item img {
+      max-height: 400px;
+      object-fit: contain;
+    }
+  
+    @media (max-width: 768px) {
+      .carousel-item img {
+        max-height: 250px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="checkout-box">
+      <div class="text-end mb-3">
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#kitPreviewModal">
+          👀 Preview what's inside
+        </button>
+      </div>
       <div class="row">
         <!-- Left: Payment Form -->
         <div class="col-md-6">
@@ -104,9 +122,6 @@
 
  <!-- Right: Image Carousel + Description -->
 <!-- Toggle Button -->
-<button class="btn btn-outline-primary w-100 my-3" type="button" data-bs-toggle="collapse" data-bs-target="#kitPreview" aria-expanded="false" aria-controls="kitPreview">
-  👀 Preview what's inside
-</button>
 
 <!-- Collapsible Kit Preview Section -->
 <div class="collapse" id="kitPreview">
@@ -161,6 +176,9 @@
     document.getElementById("plan-amount").innerText = `₹${(amount / 100).toLocaleString()}`;
     document.getElementById("kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
     document.getElementById("kit-desc").innerHTML = kitDesc;
+    document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+    document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+
 
     document.getElementById('rzp-button1').onclick = function(e) {
       const name = document.getElementById("name").value;
@@ -387,6 +405,44 @@
     }
   }
 </style>
+<!-- Preview Modal -->
+<div class="modal fade" id="kitPreviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content bg-white text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">👀 What’s Inside the Kit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="carousel-wrapper mb-4">
+          <div id="kitModalCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/kit1.jpg" class="d-block w-100 img-fluid" alt="Kit 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit2.jpg" class="d-block w-100 img-fluid" alt="Kit 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit3.jpg" class="d-block w-100 img-fluid" alt="Kit 3">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+        </div>
+        <div class="px-3 text-start">
+          <h5 id="modal-kit-title"><strong>Loading...</strong></h5>
+          <p id="modal-kit-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
