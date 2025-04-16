@@ -1,4 +1,14 @@
+const allowedOrigin = "https://kriyaedu.com"; // ✅ Your frontend domain
 
+module.exports = async (req, res) => {
+  if (req.method === 'OPTIONS') {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    return res.status(200).end();
+  }
+
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
 
 
 module.exports = async (req, res) => {
