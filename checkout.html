@@ -216,22 +216,7 @@
       .then(async data => {
         if (data.success) {
           sessionStorage.setItem("tracking_id", data.tracking.awb_code || "");
-          const invoiceRes = await fetch("/api/create-invoice", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                name,
-                email,
-                phone,
-                plan: selectedPlan,
-                payment_id: orderData.payment_id
-              })
-            });
-
-            const invoiceData = await invoiceRes.json();
-            if (invoiceData.invoice_url) {
-              sessionStorage.setItem('invoice_url', invoiceData.invoice_url);
-            }
+          sessionStorage.setItem("payment_id", response.razorpay_payment_id);
           window.location.href = "/thank-you.html";
         } else {
           alert("Shipping order failed: " + data.error);
