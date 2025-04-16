@@ -33,12 +33,11 @@ module.exports = async (req, res) => {
           Authorization: `Basic ${auth}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          plan_id,
-          total_count: 12,
-          customer_notify: 1,
-          customer: { name, email, contact: phone }
-        })
+    body: JSON.stringify({
+      plan_id,
+      total_count: 12,
+      customer_notify: 1 // ✅ This is enough
+    })
       });
 
       const subscription = await subRes.json();
