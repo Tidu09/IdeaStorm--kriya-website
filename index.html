@@ -65,8 +65,12 @@
       content: "\2714";
       color: green;
     }
-    .transform-arrow {
-  font-size: 1.25rem;
+    .transform-highlight .transform-label {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #198754; /* Bootstrap green */
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
 }
   </style>
 </head>
@@ -184,11 +188,10 @@
     <div class="mt-5">
       <img src="images/success-vs-failure.png" alt="Comparison image" class="img-fluid comparison-img">
     </div>
-    <div class="mt-4 d-flex justify-content-center align-items-center transform-arrow">
-      <span class="me-2 fw-semibold text-secondary">Transform</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-arrow-right text-primary" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M10.146 3.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8 10.146 4.854a.5.5 0 0 1 0-.708z"/>
-        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8z"/>
+    <div class="transform-highlight mt-4 d-flex flex-column align-items-center">
+      <span class="transform-label">TRANSFORM</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#198754" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM5.5 4.5a.5.5 0 0 1 .5.5v2h4.793L9.146 5.146a.5.5 0 1 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 1 1-.708-.708L10.793 8H6v2a.5.5 0 0 1-1 0v-5z"/>
       </svg>
     </div>
   </div>
