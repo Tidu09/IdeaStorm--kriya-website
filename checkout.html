@@ -52,18 +52,23 @@
   margin: 2rem auto;
 }
   </style>
-  <style>
-    .carousel-item img {
-      max-height: 400px;
-      object-fit: contain;
+<style>
+  .btn-outline-dark {
+    min-width: 100px;
+    font-weight: 500;
+  }
+
+  .carousel-wrapper img {
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-wrapper img {
+      max-height: 200px;
     }
-  
-    @media (max-width: 768px) {
-      .carousel-item img {
-        max-height: 250px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div class="container">
@@ -388,7 +393,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="carousel-wrapper mb-4">
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper mb-3">
           <div id="kitModalCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -401,14 +408,20 @@
                 <img src="images/kit3.jpg" class="d-block w-100 img-fluid" alt="Kit 3">
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
+          </div>
+
+          <!-- Black Arrows Below Carousel -->
+          <div class="text-center mt-3">
+            <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
+              ← Prev
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
+            <button class="btn btn-outline-dark" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
+              Next →
             </button>
           </div>
         </div>
+
+        <!-- Kit Text -->
         <div class="px-3 text-start">
           <h5 id="modal-kit-title"><strong>Loading...</strong></h5>
           <p id="modal-kit-desc"></p>
@@ -417,6 +430,7 @@
     </div>
   </div>
 </div>
+
 
 </body>
 </html>
