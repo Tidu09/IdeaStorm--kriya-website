@@ -39,9 +39,9 @@
 
     <a href="/index.html" class="btn btn-kriya mt-4">🏠 Go to Homepage</a>
 
-    <div class="mt-4">
-      <a id="invoice-link" class="btn btn-outline-primary" target="_blank" style="display: none;">
-        🧾 Download Invoice
+    <div class="text-center mt-4">
+      <a id="download-receipt-btn" class="btn btn-outline-primary" target="_blank" download>
+        📄 Download Receipt
       </a>
     </div>
   </div>
@@ -54,12 +54,19 @@
       document.getElementById('tracking-id').innerText = 'Unavailable';
     }
 
-    const invoiceUrl = sessionStorage.getItem('invoice_url');
-    if (invoiceUrl) {
-      const link = document.getElementById('invoice-link');
-      link.href = invoiceUrl;
-      link.style.display = 'inline-block';
-    }
+    const paymentId = sessionStorage.getItem("payment_id");
+
+if (paymentId) {
+  const cloudName = "das1rgfrb"; // 👈 Replace with your Cloudinary cloud name
+  const receiptUrl = `https://res.cloudinary.com/${cloudName}/raw/upload/receipts/receipt-${paymentId}.pdf`;
+
+  const btn = document.getElementById("download-receipt-btn");
+  btn.href = receiptUrl;
+  btn.style.display = "inline-block";
+} else {
+  // Optional fallback
+  document.getElementById("download-receipt-btn").style.display = "none";
+}
   </script>
 </body>
 </html>
