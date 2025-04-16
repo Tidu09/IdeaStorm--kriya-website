@@ -169,21 +169,32 @@
       }
 
       fetch("/api/create-subscription", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, selectedPlan })
-      })
-        .then(res => res.json())
-        .then(options => {
-          if (options.error) throw new Error(options.error);
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone, selectedPlan })
+    })
+      .then(async res => {
+        const contentType = res.headers.get("content-type");
 
-          const rzp = new Razorpay(options);
-          rzp.open();
-        })
-        .catch(err => {
-          alert("Something went wrong while initiating payment.");
-          console.error(err);
-        });
+        if (!res.ok) {
+          const errorText = await res.text(); // 👈 avoid trying to parse JSON here
+          throw new Error("Server error: " + errorText);
+        }
+
+        if (contentType && contentType.includes("application/json")) {
+          return res.json();
+        } else {
+          throw new Error("Expected JSON response, got something else.");
+        }
+      })
+      .then(options => {
+        const rzp = new Razorpay(options);
+        rzp.open();
+      })
+      .catch(err => {
+        alert("Something went wrong while initiating payment.");
+        console.error(err);
+      });
 
       e.preventDefault();
     };
