@@ -1,4 +1,14 @@
 const crypto = require("crypto");
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+const puppeteer = require("puppeteer");
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 // Helper to get raw body for signature validation
 const getRawBody = req =>
@@ -12,7 +22,6 @@ const getRawBody = req =>
 module.exports = async (req, res) => {
   const allowedOrigin = "https://kriyaedu.com";
 
-  // ✅ CORS preflight
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -30,6 +39,7 @@ module.exports = async (req, res) => {
     const rawBody = await getRawBody(req);
     const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
     const signature = req.headers["x-razorpay-signature"];
+
     const expectedSignature = crypto
       .createHmac("sha256", secret)
       .update(rawBody)
@@ -40,20 +50,19 @@ module.exports = async (req, res) => {
     }
 
     const body = JSON.parse(rawBody);
-
     if (body.event !== "payment.captured") {
       return res.status(200).json({ message: "Ignored non-payment event." });
     }
 
     const payment = body.payload.payment.entity;
 
-    // ✅ Create clean receipt
+    // ✅ Receipt HTML
     const receiptHTML = `
       <!DOCTYPE html>
       <html>
       <head>
         <style>
-          body { font-family: Arial; padding: 2rem; }
+          body { font-family: Arial, sans-serif; padding: 2rem; }
           h2 { color: #265098; }
           table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
           td, th { border: 1px solid #ccc; padding: 8px; }
@@ -71,9 +80,40 @@ module.exports = async (req, res) => {
       </html>
     `;
 
-    console.log("✅ Receipt generated for payment:", payment.id);
+    console.log("✅ Generating PDF for:", payment.id);
+    const receiptPath = `/tmp/receipt-${payment.id}.pdf`;
 
-    // Optional: Email or Save this HTML
+    // ✅ Create and upload PDF
+await new Promise(async (resolve, reject) => {
+  try {
+    const browser = await puppeteer.launch({
+      headless: "new", // or true if using older versions
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
+
+    const page = await browser.newPage();
+    await page.setContent(receiptHTML, { waitUntil: "networkidle0" });
+    await page.pdf({
+      path: receiptPath,
+      format: "A4",
+      printBackground: true
+    });
+
+    await browser.close();
+
+    const uploadResult = await cloudinary.uploader.upload(receiptPath, {
+      resource_type: "raw",
+      public_id: `receipts/receipt-${payment.id}`,
+      folder: "receipts",
+    });
+
+    console.log("✅ Uploaded to Cloudinary:", uploadResult.secure_url);
+    resolve();
+  } catch (err) {
+    console.error("❌ PDF generation/upload error:", err);
+    reject(err);
+  }
+});
 
     return res.status(200).json({ success: true });
   } catch (err) {
