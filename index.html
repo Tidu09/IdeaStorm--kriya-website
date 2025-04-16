@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kriya</title>
+  <title>Kriya Checkout</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Rubik', sans-serif;
-      color: #333;
+      background-color: #f5f5f5;
     }
-    .kriya-blue {
-      background-color: #265098;
-      color: white;
+    .checkout-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      margin: 3rem auto;
     }
     .kriya-gold {
       color: #bc9670;
@@ -27,235 +32,361 @@
     .btn-kriya:hover {
       background-color: #a87d5e;
     }
-    .section-padding {
-      padding: 60px 0;
+    .carousel-image {
+      height: 275px;
+      width: auto;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
     }
-    .section-title {
-      font-weight: bold;
-      font-size: 2rem;
-      margin-bottom: 30px;
-    }
-    .step-box {
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
+    .carousel-controls {
       text-align: center;
+      margin-top: 0.5rem;
     }
-    .step-box img {
-      margin-bottom: 15px;
+    .carousel-wrapper {
+      margin-bottom: 1rem;
     }
-    .comparison-img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 30px;
-    }
-    .icon-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    .icon-list li::before {
-      content: "\2716";
-      color: red;
-      display: inline-block;
-      width: 1.5em;
-      margin-right: 0.5em;
-    }
-    .icon-list.tick li::before {
-      content: "\2714";
-      color: green;
-    }
-    .transform-arrow svg {
-  max-width: 100%;
-}
-
   </style>
 </head>
 <body>
-
-<!-- Hero Section -->
-<section class="kriya-blue py-5">
   <div class="container">
-    <div class="row align-items-center text-white">
-      <div class="col-md-4 text-center mb-4 mb-md-0">
-        <img src="images/hero-kid-boy.png" alt="Boy with STEM kit" class="img-fluid rounded shadow">
-      </div>
-      <div class="col-md-4 text-center">
-        <h1 class="fw-bold">MAKE KIDS SMART</h1>
-        <p class="fs-5">Ensure your kid is a cut above</p>
-        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
-        <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline">or watch how it works</a></p>
-      </div>
-      <div class="col-md-4 text-center">
-        <img src="images/hero-kid-girl.png" alt="Girl with STEM kit" class="img-fluid rounded shadow">
-      </div>
-    </div>
-    <div class="text-center mt-5">
-      <p class="fs-5 fw-semibold"><em>We provide a hands-on STEM curriculum for ages <strong>11</strong> and up</em></p>
-    </div>
-  </div>
-</section>
+    <div class="checkout-box">
+      <div class="row">
+        <!-- Left: Payment Form -->
+        <div class="col-md-6">
+          <h2 class="text-center mb-4"><strong>Checkout</strong></h2>
+          <form id="checkout-form">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="house" class="form-label">House Number</label>
+              <input type="text" class="form-control" id="house" placeholder="Start typing your address..." required>
+            </div>
+            <div class="mb-3">
+              <label for="building" class="form-label">Building Name</label>
+              <input type="text" class="form-control" id="building">
+            </div>
+            <div class="mb-3">
+              <label for="locality" class="form-label">Locality / Area</label>
+              <input type="text" class="form-control" id="locality" required>
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="mb-3">
+              <label for="state" class="form-label">State</label>
+              <input type="text" class="form-control" id="state" required>
+            </div>
+            <div class="mb-3">
+              <label for="pincode" class="form-label">Pincode</label>
+              <input type="text" class="form-control" id="pincode" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Selected Plan</label>
+              <p id="plan-label" class="fs-6 text-muted">Loading...</p>
+              <label class="form-label mt-2">Amount Payable</label>
+              <p id="plan-amount" class="fs-5 fw-bold">Loading...</p>
+            </div>
+            <button type="button" class="btn btn-kriya w-100" id="rzp-button1">Pay with Razorpay</button>
+          </form>
+        </div>
 
-<!-- Problem Section -->
-<section class="section-padding">
-  <div class="container">
-    <div class="row justify-content-center text-center text-md-start">
-      <!-- Problems Column -->
-      <div class="col-md-5 mb-4 mb-md-0">
-        <h2 class="section-title text-danger">Problems Kids Face</h2>
-        <ul class="fs-5 icon-list ps-3 ps-md-4">
-          <li>≈ 70% screen time is wasted on passive content</li>
-          <li>No structured guidance to learn new-age skills</li>
-          <li>Outdated school curriculum</li>
-          <li>Lack of peer inspiration</li>
-        </ul>
-      </div>
+ <!-- Right: Image Carousel + Description -->
+<!-- Toggle Button -->
+<button class="btn btn-outline-primary w-100 my-3" type="button" data-bs-toggle="collapse" data-bs-target="#kitPreview" aria-expanded="false" aria-controls="kitPreview">
+  👀 Preview what's inside
+</button>
 
-      <!-- Help Column -->
-      <div class="col-md-6">
-        <h2 class="section-title text-success">How We Help</h2>
-        <ul class="fs-5 icon-list tick ps-3 ps-md-4">
-          <li>Turn screen time into skills and creation</li>
-          <li>8-kit annual plan for structured learning</li>
-          <li>STEM curriculum - Coding, Mechatronics and AI</li>
-          <li>Connect to creative community of peers</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Guide Section -->
-<section class="py-3 bg-light text-center">
-  <div class="container">
-    <em>Finding meaningful activities for your child can be tough. That’s why over <strong>100+ families</strong>  have trusted Kriya to bring creativity home.</em>
-  </div>
-</section>
-
-<!-- Getting Started Section -->
-<section id="get-started" class="section-padding text-center">
-  <div class="container">
-    <h2 class="section-title">Getting Started is Easy</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-4 step-box">
-        <img src="images/step1-box.png" alt="Step 1 Icon" width="80">
-        <h5 class="fw-bold">Get 1<sup>st</sup> kit as trial</h5>
-      </div>
-      <div class="col-md-4 step-box">
-        <img src="images/step2-explore.png" alt="Step 2 Icon" width="80">
-        <h5 class="fw-bold">Kid explores and builds</h5>
-      </div>
-      <div class="col-md-4 step-box">
-        <img src="images/step3-subscribe.png" alt="Step 3 Icon" width="80">
-        <h5 class="fw-bold">Kid enrolls to keep up the creativity</h5>
-      </div>
-    </div>
-    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mt-4">
-      <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
-      <p class="fw-bold m-0">
-        Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
-      </p>
-    </div>
-    <p class="mt-2 fst-italic">and begin proactive parenting !</p>
-  </div>
-</section>
-
-<!-- Success vs Failure Section -->
-<section class="section-padding bg-light text-center">
-  <div class="container">
-    <h2 class="section-title mb-5">What’s at Stake?</h2>
-    <div class="row justify-content-center text-center">
-      <div class="col-md-5">
-        <h4 class="text-danger">Without Kriya</h4>
-        <ul class="list-unstyled ps-0 fs-5">
-          <li>Passive screen time continues</li>
-          <li>Missed early learning opportunities</li>
-          <li>Creativity goes untapped</li>
-        </ul>
-      </div>
-      <div class="col-md-5">
-        <h4 class="text-success">With Kriya</h4>
-        <ul class="list-unstyled ps-0 fs-5">
-          <li>Your child builds real-world skills</li>
-          <li>Hands-on learning experiences</li>
-          <li>Boosted creativity and confidence</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mt-5">
-      <img src="images/success-vs-failure.png" alt="Comparison image" class="img-fluid comparison-img">
-    </div>
-    <div class="transform-arrow mt-4 d-flex justify-content-center">
-      <svg width="100%" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="10"
-            refX="0" refY="5" orient="auto">
-            <polygon points="0 0, 10 5, 0 10" fill="#0d6efd" />
-          </marker>
-        </defs>
-        <line x1="0" y1="30" x2="280" y2="30" stroke="#0d6efd" stroke-width="4" marker-end="url(#arrowhead)" />
-      </svg>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- Call to Action -->
-<section id="subscribe" class="kriya-blue text-center py-5">
-  <div class="container">
-    <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
-    <p class="lead">Let them go from uninspired to inspired</p>
-    <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
-    <p class="fw-bold m-0 mt-3">
-      Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
-    </p>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-dark text-white py-4">
-  <div class="container text-center">
-    <div class="mb-2">
-      <a href="/policy/privacy-policy.html" class="text-white text-decoration-none me-3">Privacy Policy</a>
-      <a href="/policy/terms-and-conditions.html" class="text-white text-decoration-none me-3">Terms & Conditions</a>
-      <a href="/policy/cancellation-and-refund.html" class="text-white text-decoration-none me-3">Cancellation & Refund</a>
-      <a href="/policy/shipping-and-delivery.html" class="text-white text-decoration-none me-3">Shipping & Delivery</a>
-      <a href="/policy/contact.html" class="text-white text-decoration-none">Contact Us</a>
-    </div>
-    <p class="mb-0">&copy; 2025 Kriya | Made with ❤️ in India</p>
-  </div>
-</footer>
-
-<!-- Order Modal -->
-<!-- Order Modal -->
-<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center">
-      <div class="modal-header border-0">
-        <h5 class="modal-title w-100" id="orderModalLabel">Where would you like to order from?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="d-flex flex-column align-items-center gap-3">
-          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
-            <a href="https://amazon.in" target="_blank" class="btn btn-outline-secondary text-center w-100">
-              Order from Amazon<br>
-              <span style="font-size: 0.8rem; font-style: italic; color: #888;">a little bit costlier</span>
-            </a>
-            <span class="fw-semibold">or</span>
-            <a href="checkout.html" target="_blank" class="btn btn-kriya text-white w-100">
-              Order from Kriya
-            </a>
-          </div>
+<!-- Collapsible Kit Preview Section -->
+<div class="collapse" id="kitPreview">
+  <div class="carousel-wrapper">
+    <div id="kitCarousel" class="carousel slide w-100" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/kit1.jpg" class="carousel-image" alt="Kit 1">
+        </div>
+        <div class="carousel-item">
+          <img src="images/kit2.jpg" class="carousel-image" alt="Kit 2">
+        </div>
+        <div class="carousel-item">
+          <img src="images/kit3.jpg" class="carousel-image" alt="Kit 3">
         </div>
       </div>
     </div>
+    <div class="carousel-controls text-center mt-2">
+      <button class="btn btn-outline-secondary me-2" type="button" data-bs-target="#kitCarousel" data-bs-slide="prev">&larr; Prev</button>
+      <button class="btn btn-outline-secondary" type="button" data-bs-target="#kitCarousel" data-bs-slide="next">Next &rarr;</button>
+    </div>
+  </div>
+  <div class="text-start mt-4 px-2">
+    <h5 id="kit-title"><strong>Loading...</strong></h5>
+    <p id="kit-desc"></p>
   </div>
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPlan = urlParams.get("plan") || "trial";
+
+    let amount = 99900;
+    let label = "Trial Kit";
+    let kitTitle = "What’s Inside the Trial Kit?";
+    let kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='#subscribe' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
+
+    if (selectedPlan === "monthly") {
+      amount = 135000;
+      label = "Monthly Plan - Autopay Enabled";
+      kitTitle = "Glance inside the first kit";
+      kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
+    } else if (selectedPlan === "annual") {
+      amount = 1450000;
+      label = "Annual Plan - One-Time Payment";
+      kitTitle = "Glance inside the first kit";
+      kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
+    }
+
+    document.getElementById("plan-label").innerText = label;
+    document.getElementById("plan-amount").innerText = `₹${(amount / 100).toLocaleString()}`;
+    document.getElementById("kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+    document.getElementById("kit-desc").innerHTML = kitDesc;
+
+    document.getElementById('rzp-button1').onclick = function(e) {
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+
+      if (!name || !phone || !email) {
+        alert("Please fill in all required fields before proceeding.");
+        return;
+      }
+
+      const city = document.getElementById("city").value;
+      const state = document.getElementById("state").value;
+      const pincode = document.getElementById("pincode").value;
+      const house = document.getElementById("house").value;
+
+      if (!house.trim()) {
+        alert("Please enter a valid house number or flat.");
+        return;
+      }
+
+      if (!city || !state || !pincode || !pincode.match(/^\d{6}$/)) {
+        alert("Please enter a valid address with a 6-digit pincode.");
+        return;
+      }
+
+      const options = {
+        "key": "rzp_test_ucKufwYUwGNUCt",
+        "amount": amount,
+        "currency": "INR",
+        "name": "Kriya Kits",
+        "description": label,
+        "handler": function (response) {
+        const orderData = {
+          payment_id: response.razorpay_payment_id,
+          plan: selectedPlan,
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          address: {
+            house: document.getElementById("house").value,
+            building: document.getElementById("building").value,
+            locality: document.getElementById("locality").value,
+            city: document.getElementById("city").value,
+            state: document.getElementById("state").value,
+            pincode: document.getElementById("pincode").value
+          }
+        };
+
+
+        document.getElementById("loading-overlay").classList.add("loading-visible");
+
+        fetch("/api/shiprocket-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderData)
+        })
+        .then(async res => {
+        const contentType = res.headers.get("content-type");
+
+        if (!res.ok) {
+          const errorText = await res.text(); // this avoids the JSON error
+          throw new Error("Server error: " + errorText);
+        }
+
+        if (contentType && contentType.includes("application/json")) {
+          return res.json();
+        } else {
+          throw new Error("Expected JSON response, got something else.");
+        }
+      })
+        .then(async data => {
+          if (data.success) {
+            //sessionStorage.setItem('tracking_id', data.tracking.shipments[0].tracking_id);
+            
+            // const awbCode = data.tracking?.awb_code;
+            //   if (awbCode) {
+            //     sessionStorage.setItem('tracking_id', awbCode);
+            //   }
+
+            // ✅ Generate Razorpay invoice
+            const invoiceRes = await fetch("/api/create-invoice", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                email,
+                phone,
+                plan: selectedPlan,
+                payment_id: orderData.payment_id
+              })
+            });
+
+            const invoiceData = await invoiceRes.json();
+            if (invoiceData.invoice_url) {
+              sessionStorage.setItem('invoice_url', invoiceData.invoice_url);
+            }
+
+            window.location.href = "/thank-you.html";
+          } else {
+            alert("Shipping order failed: " + data.error);
+          }
+        })
+        .catch(err => {
+          alert("Something went wrong while creating shipping order.");
+          document.getElementById("loading-overlay").classList.remove("loading-visible");
+          console.error(err);
+        });
+      },
+        "prefill": {
+          "name": name,
+          "email": email,
+          "contact": phone
+        },
+        "theme": {
+          "color": "#bc9670"
+        }
+      };
+
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+    }
+  </script>
+
+  <script>
+    window.initAutocomplete = function () {
+      try {
+        const houseInput = document.getElementById("house");
+        const autocomplete = new google.maps.places.Autocomplete(houseInput, {
+          types: ["address"]
+        });
+
+        autocomplete.addListener("place_changed", function () {
+          const place = autocomplete.getPlace();
+          if (!place || !place.formatted_address || !place.address_components) return;
+
+          const parts = place.formatted_address.split(",");
+          document.getElementById("house").value = parts[0]?.trim() || "";
+          document.getElementById("building").value = parts[1]?.trim() || "";
+          document.getElementById("locality").value = parts[2]?.trim() || "";
+
+          for (const comp of place.address_components) {
+            if (comp.types.includes("administrative_area_level_2")) {
+              document.getElementById("city").value = comp.long_name;
+            }
+            if (comp.types.includes("postal_code")) {
+              document.getElementById("pincode").value = comp.long_name;
+            }
+          }
+        });
+      } catch (error) {
+        console.error("Autocomplete init error:", error);
+      }
+    };
+
+
+  </script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFP3rGbRCt4isGIoIaOlg_oS2namjPnS4&libraries=places&callback=initAutocomplete"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Fullscreen Loading Overlay with SVG Spinner -->
+<div id="loading-overlay" class="loading-hidden">
+  <svg class="spinner" viewBox="0 0 50 50">
+    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+  </svg>
+  <p class="mt-4 fw-semibold text-primary">Processing your shipment...</p>
+</div>
+
+<style>
+  #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 9999;
+  }
+
+  #loading-overlay.loading-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .spinner {
+    animation: rotate 2s linear infinite;
+    width: 60px;
+    height: 60px;
+  }
+
+  .spinner .path {
+    stroke: #265098;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+</style>
+
 </body>
 </html>
