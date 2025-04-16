@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   try {
     if (selectedPlan === "monthly") {
       const plan_id = process.env.MONTHLY_PLAN_ID;
-
+      console.log("🚨 Using plan_id:", process.env.MONTHLY_PLAN_ID);
       const subRes = await fetch("https://api.razorpay.com/v1/subscriptions", {
         method: "POST",
         headers: {
