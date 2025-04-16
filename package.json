@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Tidu09/IdeaStorm--kriya-website#readme",
   "dependencies": {
+    "cloudinary": "^2.6.0",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.10.1"
   }
