@@ -68,13 +68,34 @@
     .transform-arrow svg {
   max-width: 100%;
 }
+.kriya-logo {
+    height: 40px; /* mobile default */
+  }
+
+  @media (min-width: 576px) {
+    .kriya-logo {
+      height: 60px; /* tablets and small screens */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .kriya-logo {
+      height: 80px; /* medium desktops */
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .kriya-logo {
+      height: 100px; /* large desktops */
+    }
+  }
 
   </style>
 </head>
 <body>
 
   <header class="py-3 text-center border-bottom">
-    <img src="images/kriya-logo.png" alt="Kriya Logo" class="mx-auto d-block img-fluid" style="max-height: 80px;">
+    <img src="images/kriya-logo.png" alt="Kriya Logo" class="kriya-logo mx-auto d-block">
   </header>
 
 <!-- Hero Section -->
