@@ -92,9 +92,9 @@ await new Promise(async (resolve, reject) => {
   const browser = await puppeteer.launch({
   args: chromium.args,
   executablePath: await chromium.executablePath,
+  console.log("🚨 Chromium path resolved to:", execPath);
   headless: chromium.headless,
 });
-    console.log("📦 Chromium path:", execPath);
 
     const page = await browser.newPage();
     await page.setContent(receiptHTML, { waitUntil: "networkidle0" });
