@@ -21,7 +21,7 @@
     "cloudinary": "^2.6.0",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.10.1",
-    "puppeteer": "^24.6.1"
+    "puppeteer": "^24.6.1",
     "puppeteer-core": "^21.3.8",      
     "chrome-aws-lambda": "^10.1.0"
   }
