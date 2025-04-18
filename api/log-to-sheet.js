@@ -50,6 +50,9 @@ console.log("🔓 first 60 chars decoded:", privateKey.slice(0, 60));
     } = req.body;
 
     const fullAddress = `${house}, ${building}, ${locality}, ${city}, ${state} - ${pincode}`;
+    const timestamp = new Date().toLocaleString("en-IN", {
+  timeZone: "Asia/Kolkata",
+});   // → e.g. 19‑Apr‑2025 14:22:10
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
@@ -57,7 +60,7 @@ console.log("🔓 first 60 chars decoded:", privateKey.slice(0, 60));
       valueInputOption: "RAW",
       requestBody: {
         values: [[
-          new Date().toLocaleString("en-IN"),
+         timestamp,
           name,
           phone,
           email,
