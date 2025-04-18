@@ -94,6 +94,7 @@ await new Promise(async (resolve, reject) => {
   executablePath: await chromium.executablePath,
   headless: chromium.headless,
 });
+    console.log("📦 Chromium path:", execPath);
 
     const page = await browser.newPage();
     await page.setContent(receiptHTML, { waitUntil: "networkidle0" });
