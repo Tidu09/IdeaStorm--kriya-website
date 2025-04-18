@@ -101,11 +101,10 @@ await new Promise(async (resolve, reject) => {
 
     await browser.close();
 
-    const uploadResult = await cloudinary.uploader.upload(receiptPath, {
-      resource_type: "raw",
-      public_id: `receipts/receipt-${payment.id}`,
-      folder: "receipts",
-    });
+cloudinary.uploader.upload(receiptPath, {
+  resource_type: "raw",
+  public_id: `receipts/receipt-${payment.id}`, // ✅ already includes the folder path
+});
 
     console.log("✅ Uploaded to Cloudinary:", uploadResult.secure_url);
     resolve();
