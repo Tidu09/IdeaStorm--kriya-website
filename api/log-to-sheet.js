@@ -16,19 +16,25 @@ module.exports = async (req, res) => {
   }
 
 
-  console.log('🔑 first 60 chars of key:', process.env.GCP_PRIVATE_KEY?.slice(0,60));
+
+  const privateKey = Buffer.from(
+  process.env.GCP_PRIVATE_KEY_B64,
+  "base64"
+).toString("utf8");
+
+console.log("🔓 first 60 chars decoded:", privateKey.slice(0, 60));
+
+  
   try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        type: "service_account",
-        project_id: process.env.GCP_PROJECT_ID,
-        private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, "\n"),
-        client_email: process.env.GCP_CLIENT_EMAIL,
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-
+  const auth = new google.auth.GoogleAuth({
+  credentials: {
+    type: "service_account",
+    project_id: process.env.GCP_PROJECT_ID,
+    private_key: privateKey,
+    client_email: process.env.GCP_CLIENT_EMAIL,
+  },
+  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+});
 
     const sheets = google.sheets({ version: "v4", auth });
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
