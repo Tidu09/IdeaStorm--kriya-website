@@ -19,6 +19,8 @@ const getRawBody = req =>
     req.on("error", reject);
   });
 
+console.log("📬 Webhook hit at", new Date().toISOString());
+
 module.exports = async (req, res) => {
   const allowedOrigin = "https://kriyaedu.com";
 
@@ -105,6 +107,7 @@ cloudinary.uploader.upload(receiptPath, {
   resource_type: "raw",
   public_id: `receipts/receipt-${payment.id}`, // ✅ already includes the folder path
 });
+    
 
     console.log("✅ Uploaded to Cloudinary:", uploadResult.secure_url);
     resolve();
