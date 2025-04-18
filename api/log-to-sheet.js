@@ -15,6 +15,8 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+
+  console.log('🔑 first 60 chars of key:', process.env.GCP_PRIVATE_KEY?.slice(0,60));
   try {
     const auth = new google.auth.GoogleAuth({
       credentials: {
@@ -25,6 +27,8 @@ module.exports = async (req, res) => {
       },
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
+
+
 
     const sheets = google.sheets({ version: "v4", auth });
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
