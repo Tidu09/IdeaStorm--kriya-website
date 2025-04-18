@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: "Sheet1!A1",
+      range: ""All!A1",
       valueInputOption: "RAW",
       requestBody: {
         values: [[
