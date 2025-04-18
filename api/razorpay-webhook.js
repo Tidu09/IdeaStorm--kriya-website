@@ -92,7 +92,7 @@ await new Promise(async (resolve, reject) => {
   const browser = await puppeteer.launch({
   args: chromium.args,
   executablePath: await chromium.executablePath,
-  console.log("Chromium path resolved to:", execPath);
+  console.log("Chromium path resolved to:", executablePath),
   headless: chromium.headless,
 });
 
