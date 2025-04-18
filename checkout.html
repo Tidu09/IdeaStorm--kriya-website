@@ -162,9 +162,19 @@
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const phone = document.getElementById("phone").value;
+      const house = document.getElementById("house").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const state = document.getElementById("state").value.trim();
+      const pincode = document.getElementById("pincode").value.trim();
+      const pincodePattern = /^[1-9][0-9]{5}$/;
 
-      if (!name || !email || !phone) {
-        alert("Please fill in all required fields.");
+      if (!name || !email || !phone || !house || !city || !state || !pincode) {
+        alert("Please fill in all required address fields.");
+        return;
+      }
+
+      if (!pincodePattern.test(pincode)) {
+        alert("Please enter a valid 6-digit Indian Pincode.");
         return;
       }
 
