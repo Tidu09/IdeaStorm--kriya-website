@@ -1,7 +1,8 @@
 const crypto = require("crypto");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
-const puppeteer = require("puppeteer");
+const chromium = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer-core");
 
 // Cloudinary config
 cloudinary.config({
@@ -88,10 +89,11 @@ module.exports = async (req, res) => {
     // ✅ Create and upload PDF
 await new Promise(async (resolve, reject) => {
   try {
-    const browser = await puppeteer.launch({
-      headless: "new", // or true if using older versions
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+  const browser = await puppeteer.launch({
+  args: chromium.args,
+  executablePath: await chromium.executablePath,
+  headless: chromium.headless,
+});
 
     const page = await browser.newPage();
     await page.setContent(receiptHTML, { waitUntil: "networkidle0" });
