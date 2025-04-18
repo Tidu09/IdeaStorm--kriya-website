@@ -20,7 +20,7 @@ const getRawBody = req =>
     req.on("error", reject);
   });
 
-console.log("📬 Webhook hit at", new Date().toISOString());
+console.log(" Webhook hit at", new Date().toISOString());
 
 module.exports = async (req, res) => {
   const allowedOrigin = "https://kriyaedu.com";
@@ -92,7 +92,7 @@ await new Promise(async (resolve, reject) => {
   const browser = await puppeteer.launch({
   args: chromium.args,
   executablePath: await chromium.executablePath,
-  console.log("🚨 Chromium path resolved to:", execPath);
+  console.log("Chromium path resolved to:", execPath);
   headless: chromium.headless,
 });
 
