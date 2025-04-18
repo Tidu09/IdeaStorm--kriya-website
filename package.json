@@ -23,6 +23,8 @@
     "nodemailer": "^6.10.1",
     "puppeteer": "^24.6.1",
     "puppeteer-core": "^10.1.0",      
-    "chrome-aws-lambda": "^10.1.0"
+    "chrome-aws-lambda": "^10.1.0",
+    "googleapis": "^118.0.0"
+
   }
 }
