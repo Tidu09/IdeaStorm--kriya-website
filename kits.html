@@ -72,10 +72,13 @@
       font-weight: bold;
     }
     .btn-kriya {
-      background-color: #bc9670;
-      color: white;
-      border: none;
-    }
+  background-color: #bc9670;
+  color: white;
+  border: none;
+}
+.btn-kriya:hover {
+  background-color: #a87d5e;
+}
   </style>
   </style>
 </head>
@@ -148,13 +151,39 @@
       </div>
 
       <!-- Call to Action -->
-    <div>
-      <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
-      <p class="fw-bold m-0 mt-3">
-        Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
-      </p>
-    </div>
+      <section id="subscribe" class="kriya-blue text-center py-5">
+        <div class="container">
+          <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
+          <p class="lead">Watch them go from bored to brilliant</p>
+          <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
+          <p class="fw-bold m-0 mt-3">
+            Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
+          </p>
+        </div>
+      </section>
 
+  <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header border-0">
+          <h5 class="modal-title w-100" id="orderModalLabel">Where would you like to order from?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-column align-items-center gap-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
+              <a href="https://amazon.in" target="_blank" class="btn btn-outline-secondary text-center w-100">
+                Order from Amazon<br>
+                <span style="font-size: 0.8rem; font-style: italic; color: #888;">a little bit costlier</span>
+              </a>
+              <span class="fw-semibold">or</span>
+              <a href="checkout.html" target="_blank" class="btn btn-kriya text-white w-100">
+                Order from Kriya
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
