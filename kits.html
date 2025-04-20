@@ -10,9 +10,16 @@
       font-family: 'Rubik', sans-serif;
       background: #f9f9f9;
     }
+    .kriya-blue {
+      background-color: #265098;
+      color: white;
+    }
+    .kriya-gold {
+      color: #bc9670;
+    }
     .kit-card {
       perspective: 1000px;
-      height: 420px; /* Fixed height for all cards */
+      height: 420px;
       cursor: pointer;
     }
     .kit-inner {
@@ -43,7 +50,7 @@
       max-height: 180px;
       width: auto;
       object-fit: contain;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
     .kit-back {
       transform: rotateY(180deg);
@@ -76,14 +83,14 @@
           <div class="kit-inner">
             <div class="kit-front">
               <div class="badge-box">Box 1</div>
-              <img src="/images/box1.jpg" alt="Gems Sortter">
-              <h5 class="fw-bold">Gems Sortter</h5>
-              <p class="text-muted">STEM Principle: Motion | Sensing</p>
+              <img src="/images/box1.png" alt="Infrared Turret">
+              <h5 class="fw-bold">Infrared Turret</h5>
+              <p class="text-muted">STEM Principle: IR Communication</p>
               <button class="btn btn-danger mt-auto">SEE MORE ↗</button>
             </div>
             <div class="kit-back">
-              <h5>Gems Sortter</h5>
-              <p><strong>Gems Sortter</strong> uses sensor to detect colours of gems. The servo then sorts the gems based on the colour into different testubes</p>
+              <h5>Infrared Turret</h5>
+              <p><strong>The IR Turret</strong> uses infrared communication to rotate, aim, and execute commands with precision. Launch darts, guard doors, or play spy games!</p>
               <p><u>Peek Inside Box 1</u></p>
               <button class="btn btn-light mt-auto">SEE LESS ↙</button>
             </div>
