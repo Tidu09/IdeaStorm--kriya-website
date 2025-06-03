@@ -94,15 +94,15 @@ Charts serve as good non-screen modes of learning, but relying solely on them re
 
 Today, students can express their ideas in richer, more engaging formats.
 
-For instance, instead of traditional charts, students could design a **website** to showcase their project.
+For instance, instead of traditional charts, students could design a website to showcase their project.
 
 *PROMPT*: _I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup._
 
-*ChatGPT's RESPONSE*:
+*ChatGPT's* *RESPONSE*:
 
 #IMG homepage-mockup.jpg
 
-Advanced tools like Google’s Vertex Studio can help students even create **videos** to embed in their websites.
+Advanced tools like Google’s Vertex Studio can help students even create videos to embed in their websites.
 
 Even if the output needs to be static, tools like ChatGPT can make them more appealing.
 
@@ -123,10 +123,10 @@ The AI Trident — Conscience, Competence, and Creativity — leads to AI-augmen
 While many fear that AI might dull thinking, the opposite is true: AI amplifies human thought, empowering students to explore new areas.
 
 *To truly harness AI’s potential, schools must introduce a dedicated AI curriculum, covering:
-- Fundamentals of AI systems
-- Prompt engineering
-- Iteration techniques
-- Overview of available tools*
+- #p1 Fundamentals of AI systems
+- #p1 Prompt engineering
+- #p1 Iteration techniques
+- #p1 Overview of available tools*
 
 Just like we once taught kids how to use the Internet or PowerPoint, it’s time to teach them to collaborate with AI.
 
