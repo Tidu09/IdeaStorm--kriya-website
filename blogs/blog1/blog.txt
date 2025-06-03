@@ -1,7 +1,0 @@
-#KIT1 5 DIY Projects for Kids
-#KIT2 Fun and Educational Activities
-Unleash your child's creativity with these DIY projects.
-#IMG blogs/blog1/pic1.jpg
-Start with a simple paper rocket.
-#IMG blogs/blog1/pic2.jpg
-Make a water bottle bird feeder.
