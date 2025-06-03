@@ -92,7 +92,7 @@
 
 function parseBlogContent(text) {
   const lines = text.split('\n').map(line => line.trim());
-  let title = '', subtitle = '', content = '';
+  let title = '', subtitle = '', fullContent = '', firstParagraph = '', paragraphCaptured = false;
 
   lines.forEach(line => {
     if (line.startsWith('#KIT1')) {
@@ -101,14 +101,19 @@ function parseBlogContent(text) {
       subtitle = line.replace('#KIT2', '').trim();
     } else if (line.startsWith('#IMG')) {
       const imgSrc = line.replace('#IMG', '').trim();
-      content += `<img src="${imgSrc}" alt="Blog image" loading="lazy" style="max-width: 100%; margin: 10px 0;">`;
+      fullContent += `<img src="${imgSrc}" alt="Blog image" loading="lazy" style="max-width: 100%; margin: 10px 0;">`;
     } else if (line.length > 0) {
-      content += `<p>${line}</p>`;
+      if (!paragraphCaptured) {
+        firstParagraph = line;
+        paragraphCaptured = true;
+      }
+      fullContent += `<p>${line}</p>`;
     }
   });
 
-  return { title, subtitle, content };
+  return { title, subtitle, firstParagraph, fullContent };
 }
+
 
 async function loadBlogs() {
   const container = document.getElementById('blogsContainer');
@@ -119,28 +124,31 @@ async function loadBlogs() {
       const text = await response.text();
       const { title, subtitle, content } = parseBlogContent(text);
 
-      const cardHTML = `
+        const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
+        const blogPage = `blogs/${blogName}/blog.html`;
+
+        const cardHTML = `
         <div class="col-md-4">
-          <div class="blog-card" onclick="this.classList.toggle('flipped')">
+            <div class="blog-card" onclick="this.classList.toggle('flipped')">
             <div class="blog-inner">
-              <div class="blog-front">
+                <div class="blog-front">
                 <div class="badge-box">Blog</div>
                 <img src="/images/blog-placeholder.jpg" alt="${title}" loading="lazy">
                 <h5 class="fw-bold">${title}</h5>
                 <p class="text-muted">${subtitle}</p>
                 <button class="btn btn-kriya mt-auto">READ MORE ↗</button>
-              </div>
-              <div class="blog-back">
-                <h5>${title}</h5>
-                <div class="blog-content" style="overflow-y:auto; max-height:200px;">
-                  ${content}
                 </div>
-                <a href="#" class="btn btn-light mt-auto">READ FULL BLOG ↗</a>
-              </div>
+                <div class="blog-back">
+                <h5>${title}</h5>
+                <div class="blog-content">
+                    <p>${firstParagraph}</p>
+                </div>
+                <a href="${blogPage}" target="_blank" class="btn btn-light mt-auto">READ FULL BLOG ↗</a>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      `;
+        `;
 
       container.insertAdjacentHTML('beforeend', cardHTML);
     } catch (error) {
