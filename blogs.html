@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: #f9f9f9;
+    }
+    .kriya-blue { background-color: #265098; color: white; }
+    .blog-card {
+      perspective: 1000px;
+      height: 360px;
+      cursor: pointer;
+    }
+    .blog-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .blog-card.flipped .blog-inner {
+      transform: rotateY(180deg);
+    }
+    .blog-front, .blog-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    .blog-front img {
+      max-height: 180px;
+      width: auto;
+      object-fit: contain;
+      margin: 2rem 0 1rem 0;
+    }
+    .blog-back {
+      transform: rotateY(180deg);
+      background-color: #333;
+      color: white;
+      text-align: left;
+    }
+    .blog-back h5 {
+      margin-top: 1rem;
+    }
+    .badge-box {
+      position: absolute;
+      top: 3px;
+      background-color:#bc9670;
+      color: black;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    .btn-kriya {
+      background-color: #bc9670;
+      color: white;
+      border: none;
+    }
+    .btn-kriya:hover {
+      background-color: #a87d5e;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-5">
+    <h2 class="text-center fw-bold mb-4" style="color:  #265098;">Explore Our Blogs</h2>
+    <div id="blogsContainer" class="row g-4 justify-content-center">
+      <!-- Dynamic blogs will come here -->
+    </div>
+  </div>
+
+<script>
+  const blogFiles = [
+  'blogs/blog1/blog.txt',
+  'blogs/blog2/blog.txt',
+  'blogs/blog3/blog.txt'
+];
+
+function parseBlogContent(text) {
+  const lines = text.split('\n').map(line => line.trim());
+  let title = '', subtitle = '', content = '';
+
+  lines.forEach(line => {
+    if (line.startsWith('#KIT1')) {
+      title = line.replace('#KIT1', '').trim();
+    } else if (line.startsWith('#KIT2')) {
+      subtitle = line.replace('#KIT2', '').trim();
+    } else if (line.startsWith('#IMG')) {
+      const imgSrc = line.replace('#IMG', '').trim();
+      content += `<img src="${imgSrc}" alt="Blog image" loading="lazy" style="max-width: 100%; margin: 10px 0;">`;
+    } else if (line.length > 0) {
+      content += `<p>${line}</p>`;
+    }
+  });
+
+  return { title, subtitle, content };
+}
+
+async function loadBlogs() {
+  const container = document.getElementById('blogsContainer');
+
+  for (let file of blogFiles) {
+    try {
+      const response = await fetch(file);
+      const text = await response.text();
+      const { title, subtitle, content } = parseBlogContent(text);
+
+      const cardHTML = `
+        <div class="col-md-4">
+          <div class="blog-card" onclick="this.classList.toggle('flipped')">
+            <div class="blog-inner">
+              <div class="blog-front">
+                <div class="badge-box">Blog</div>
+                <img src="/images/blog-placeholder.jpg" alt="${title}" loading="lazy">
+                <h5 class="fw-bold">${title}</h5>
+                <p class="text-muted">${subtitle}</p>
+                <button class="btn btn-kriya mt-auto">READ MORE ↗</button>
+              </div>
+              <div class="blog-back">
+                <h5>${title}</h5>
+                <div class="blog-content" style="overflow-y:auto; max-height:200px;">
+                  ${content}
+                </div>
+                <a href="#" class="btn btn-light mt-auto">READ FULL BLOG ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML('beforeend', cardHTML);
+    } catch (error) {
+      console.error('Error loading blog:', file, error);
+    }
+  }
+}
+
+loadBlogs();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
