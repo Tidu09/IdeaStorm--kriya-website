@@ -122,11 +122,11 @@ The AI Trident — Conscience, Competence, and Creativity — leads to AI-augmen
 
 While many fear that AI might dull thinking, the opposite is true: AI amplifies human thought, empowering students to explore new areas.
 
-To truly harness AI’s potential, schools must introduce a **dedicated AI curriculum**, covering:
+*To truly harness AI’s potential, schools must introduce a dedicated AI curriculum, covering:
 - Fundamentals of AI systems
 - Prompt engineering
 - Iteration techniques
-- Overview of available tools
+- Overview of available tools*
 
 Just like we once taught kids how to use the Internet or PowerPoint, it’s time to teach them to collaborate with AI.
 
