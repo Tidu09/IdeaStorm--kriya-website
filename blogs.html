@@ -120,7 +120,7 @@ async function loadBlogs() {
     try {
       const response = await fetch(file);
       const text = await response.text();
-      const { title, subtitle, content } = parseBlogContent(text);
+      const { title, subtitle, firstParagraph, fullContent } = parseBlogContent(text);
 
         const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
         const blogPage = `blogs/${blogName}/blog.html`;
