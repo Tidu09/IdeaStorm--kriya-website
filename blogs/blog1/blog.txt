@@ -21,10 +21,10 @@ Let’s look at the curriculum now.
 
 The guiding principle behind an AI-based curriculum should rest on 3 prongs — Conscience, Competence, and Creativity.
 
-All school projects should harness AI to:
-- Deepen conscience toward society and nation
-- Sharpen problem-solving competency
-- Amplify creativity to make presentations stand out
+*All school projects should harness AI to:*
+#p1 - *Deepen conscience toward society and nation*
+#p2 - *Sharpen problem-solving competency*
+#p3 - *Amplify creativity to make presentations stand out*
 
 These are the three prongs of our AI Trident.
 
