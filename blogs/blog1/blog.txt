@@ -48,9 +48,9 @@ School projects often nudge students toward broad issues like climate change and
 
 In our example, students can use the following prompt on ChatGPT:
 
-**PROMPT**: _I want to design a questionnaire regarding the water supply issue in an urban slum in Delhi. What are the things I should focus on?_
+*PROMPT*: _I want to design a questionnaire regarding the water supply issue in an urban slum in Delhi. What are the things I should focus on?_
 
-ChatGPT's **RESPONSE**: It provides guiding principles along with a sample questionnaire, which I asked to be turned into a poster, shown below.
+*ChatGPT's* *RESPONSE*: _It provides guiding principles along with a sample questionnaire, which I asked to be turned into a poster, shown below._
 
 #IMG questionnaire-poster.jpg
 
@@ -68,9 +68,9 @@ For example, kids collect the questionnaire responses and collate them like show
 
 They can then prompt ChatGPT:
 
-**PROMPT**: _Based on the data, give me the top 5 insights and analysis. Also, make a pie chart of the primary sources of water._
+*PROMPT*: _Based on the data, give me the top 5 insights and analysis. Also, make a pie chart of the primary sources of water._
 
-ChatGPT's **RESPONSE**: It gave the top 5 insights and a pie chart.
+*ChatGPT's* *RESPONSE*: _It gave the top 5 insights and a pie chart._
 
 #IMG insights-piechart.jpg
 
@@ -78,9 +78,9 @@ Notably, a large portion is labeled 'Other' because students missed including wa
 
 Additionally, using Google Gemini’s research capabilities, kids can augment their survey quickly:
 
-**PROMPT**: _I want to research the water crisis in Delhi’s Urban Slums and its effect on lives and livelihoods. Include data and facts._
+*PROMPT*: _I want to research the water crisis in Delhi’s Urban Slums and its effect on lives and livelihoods. Include data and facts._
 
-ChatGPT's **RESPONSE**: It generated a report with key facts and data.
+*ChatGPT's* *RESPONSE*: _It generated a report with key facts and data._
 
 Building these skills sharpens critical thinking and problem-solving, laying the foundation for independent learning.
 
@@ -96,9 +96,9 @@ Today, students can express their ideas in richer, more engaging formats.
 
 For instance, instead of traditional charts, students could design a **website** to showcase their project.
 
-**PROMPT**: _I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup._
+*PROMPT*: _I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup._
 
-ChatGPT's **RESPONSE**:
+*ChatGPT's RESPONSE*:
 
 #IMG homepage-mockup.jpg
 
@@ -108,9 +108,9 @@ Even if the output needs to be static, tools like ChatGPT can make them more app
 
 For example, create a comic-style representation:
 
-**PROMPT**: _Create a comic-style layout showing the effects of poor-quality water supply on children in urban slums._
+*PROMPT*: _Create a comic-style layout showing the effects of poor-quality water supply on children in urban slums._
 
-ChatGPT's **RESPONSE**:
+*ChatGPT's* *RESPONSE*:
 
 #IMG comic-layout.jpg
 
@@ -134,6 +134,6 @@ At the end of the day, the human remains the master.
 
 As the iconic line from _Koi Mil Gaya_ goes:
 
-> “Computer ne insaan ko nahi banaya hai … insaan ne computer ko banaya hai … is liye joh dimaag kar sakta hai, woh aapka computer nahi kar sakta hai.”
+_“Computer ne insaan ko nahi banaya hai … insaan ne computer ko banaya hai … is liye joh dimaag kar sakta hai, woh aapka computer nahi kar sakta hai."_
 
 The story of AI is no different — it’s not here to replace human thought, but to elevate it. In the hands of curious students, AI becomes a thinking partner — one that helps them analyze, imagine, and express in ways we couldn’t have imagined a decade ago.
