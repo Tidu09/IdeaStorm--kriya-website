@@ -30,12 +30,15 @@
       font-size: 1.125rem;
       color: #333;
     }
-    img {
-      max-width: 100%;
-      margin: 30px 0;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
+  .img-center {
+    text-align: center;
+    margin: 30px 0;
+  }
+  .img-center img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
     .container {
       max-width: 800px;
       margin: auto;
@@ -70,7 +73,7 @@
             content += `<h2>${subheading}</h2>`;
           } else if (line.startsWith('#IMG')) {
             const imgPath = line.replace('#IMG', '').trim();
-            content += `<img src="${imgPath}" alt="Blog Image">`;
+            content += `<div class="img-center"><img src="${imgPath}" alt="Blog Image"></div>`;
           } else if (line.length > 0) {
             // ✅ Apply Bold and Italics
             let formattedLine = line
