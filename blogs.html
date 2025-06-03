@@ -124,6 +124,8 @@ async function loadBlogs() {
 
         const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
         const blogPage = `blogs/${blogName}/blog.html`;
+        const coverImage = `blogs/${blogName}/cover.jpg`;
+
 
         const cardHTML = `
         <div class="col-md-4">
@@ -131,7 +133,7 @@ async function loadBlogs() {
             <div class="blog-inner">
                 <div class="blog-front">
                 <div class="badge-box">Blog</div>
-                <img src="/images/blog-placeholder.jpg" alt="${title}" loading="lazy">
+                <img src="${coverImage}" alt="${title}" loading="lazy">
                 <h5 class="fw-bold">${title}</h5>
                 <p class="text-muted">${subtitle}</p>
                 <button class="btn btn-kriya mt-auto">READ MORE ↗</button>
