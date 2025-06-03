@@ -3,7 +3,6 @@
 
 Over the past few years, generative AI advancements have democratized its use, making it easier to boost productivity and creativity. Today, schools must not just teach students what AI is — they must teach them how to use it. In this article, we propose a curriculum to do exactly that.
 
-
 #KIT2 INTRODUCTION
 
 Today, anyone — and I mean anyone — from a 6-year-old to an 80-year-old, can use AI to gain an edge. India has nearly half a billion people under the age of 18. For them, learning to leverage AI isn’t optional; it’s essential for being employable and exceptional in tomorrow’s world.
@@ -18,7 +17,7 @@ When we say learning AI, we don’t mean writing code or diving deep into techni
 
 Let’s look at the curriculum now.
 
-#KIT2 CIRRICULUM
+#KIT2 CURRICULUM
 
 The guiding principle behind an AI-based curriculum should rest on 3 prongs — Conscience, Competence, and Creativity.
 
@@ -29,7 +28,7 @@ All school projects should harness AI to:
 
 These are the three prongs of our AI Trident.
 
-#IMG blogs/blog1/ai-trident.jpg
+#IMG ai-trident.jpg
 
 In this article, I will highlight an example project that incorporates all three prongs.
 
@@ -43,17 +42,17 @@ The school assigns 9th-grade students a holiday homework project focused on this
 
 We will use this example throughout the article.
 
-CONSCIENCE
+#KIT2 CONSCIENCE
 
 School projects often nudge students toward broad issues like climate change and women’s safety. But with AI, we can shift the lens closer to home. Local issues — once overlooked — become powerful learning opportunities, as research, survey design, and data analysis are now just a prompt away.
 
 In our example, students can use the following prompt on ChatGPT:
 
-PROMPT: I want to design a questionnaire regarding the water supply issue in an urban slum in Delhi. What are the things I should focus on?
+**PROMPT**: _I want to design a questionnaire regarding the water supply issue in an urban slum in Delhi. What are the things I should focus on?_
 
-ChatGPT's RESPONSE: It provides guiding principles along with a sample questionnaire, which I asked to be turned into a poster, shown below.
+ChatGPT's **RESPONSE**: It provides guiding principles along with a sample questionnaire, which I asked to be turned into a poster, shown below.
 
-#IMG blogs/blog1/questionnaire-poster.jpg
+#IMG questionnaire-poster.jpg
 
 The above can be digitized on Google Forms, allowing students to record answers and collate responses in minutes!
 
@@ -65,23 +64,23 @@ Teaching data analysis may seem tough, but with tools like ChatGPT, kids can ana
 
 For example, kids collect the questionnaire responses and collate them like shown here:
 
-#IMG blogs/blog1/data-collection.jpg
+#IMG data-collection.jpg
 
 They can then prompt ChatGPT:
 
-PROMPT: Based on the data, give me the top 5 insights and analysis. Also, make a pie chart of the primary sources of water.
+**PROMPT**: _Based on the data, give me the top 5 insights and analysis. Also, make a pie chart of the primary sources of water._
 
-ChatGPT's RESPONSE: It gave the top 5 insights and a pie chart.
+ChatGPT's **RESPONSE**: It gave the top 5 insights and a pie chart.
 
-#IMG blogs/blog1/insights-piechart.jpg
+#IMG insights-piechart.jpg
 
 Notably, a large portion is labeled 'Other' because students missed including water tankers as an option — a valuable lesson in survey design!
 
 Additionally, using Google Gemini’s research capabilities, kids can augment their survey quickly:
 
-PROMPT: I want to research the water crisis in Delhi’s Urban Slums and its effect on lives and livelihoods. Include data and facts.
+**PROMPT**: _I want to research the water crisis in Delhi’s Urban Slums and its effect on lives and livelihoods. Include data and facts._
 
-ChatGPT's RESPONSE: It generated a report with key facts and data.
+ChatGPT's **RESPONSE**: It generated a report with key facts and data.
 
 Building these skills sharpens critical thinking and problem-solving, laying the foundation for independent learning.
 
@@ -89,7 +88,7 @@ Building these skills sharpens critical thinking and problem-solving, laying the
 
 A hundred years ago, students used charts to present ideas. Sadly, this format has remained unchanged in many developing countries.
 
-#IMG blogs/blog1/classroom-100years.jpg
+#IMG classroom-100years.jpg
 
 Charts serve as good non-screen modes of learning, but relying solely on them reflects a lack of progress.
 
@@ -97,11 +96,11 @@ Today, students can express their ideas in richer, more engaging formats.
 
 For instance, instead of traditional charts, students could design a **website** to showcase their project.
 
-PROMPT: I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup.
+**PROMPT**: _I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup._
 
-ChatGPT's RESPONSE:
+ChatGPT's **RESPONSE**:
 
-#IMG blogs/blog1/homepage-mockup.jpg
+#IMG homepage-mockup.jpg
 
 Advanced tools like Google’s Vertex Studio can help students even create **videos** to embed in their websites.
 
@@ -109,11 +108,11 @@ Even if the output needs to be static, tools like ChatGPT can make them more app
 
 For example, create a comic-style representation:
 
-PROMPT: Create a comic-style layout showing the effects of poor-quality water supply on children in urban slums.
+**PROMPT**: _Create a comic-style layout showing the effects of poor-quality water supply on children in urban slums._
 
-ChatGPT's RESPONSE:
+ChatGPT's **RESPONSE**:
 
-#IMG blogs/blog1/comic-layout.jpg
+#IMG comic-layout.jpg
 
 Creativity remains a human trait, but AI boosts students' imaginations — offering more ways to remix and innovate.
 
@@ -131,9 +130,9 @@ To truly harness AI’s potential, schools must introduce a **dedicated AI curri
 
 Just like we once taught kids how to use the Internet or PowerPoint, it’s time to teach them to collaborate with AI.
 
-At the end of the day, the human remains the master. 
+At the end of the day, the human remains the master.
 
-As the iconic line from *Koi Mil Gaya* goes:
+As the iconic line from _Koi Mil Gaya_ goes:
 
 > “Computer ne insaan ko nahi banaya hai … insaan ne computer ko banaya hai … is liye joh dimaag kar sakta hai, woh aapka computer nahi kar sakta hai.”
 
