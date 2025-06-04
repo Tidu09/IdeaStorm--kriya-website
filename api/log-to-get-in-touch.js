@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
       range: "Sheet1!A1",
       valueInputOption: "RAW",
       requestBody: {
-        values: [[timestamp, name, school, role, whatsapp, email]]
+        values: [[timestamp, name, role, whatsapp, email]]
       }
     });
 
