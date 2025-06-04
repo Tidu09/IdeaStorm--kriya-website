@@ -3,192 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading...</title> <!-- Dynamic title will replace this -->
+  <title>AI Belongs in the Classroom | How Schools Can Teach Students to Harness AI Effectively</title>
+  <meta name="description" content="Discover how schools can empower students to effectively harness AI with a curriculum focused on conscience, competence, and creativity. Learn practical strategies.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-  body {
-    font-family: 'Rubik', sans-serif;
-    padding: 16px;
-    line-height: 1.8;
-    background-color: #f9f9f9;
-    color: #555; /* Softer color for better reading */
-  }
-
-  h1, h2, p, li {
-    font-family: inherit;
-  }
-
-  h1 {
-    color: #265098;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
-  h2 {
-    color: #333;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  p, li {
-    font-size: 1.125rem;
-    margin-bottom: 1.25rem;
-  }
-
-  p.compact, li.compact {
-    margin-bottom: 0.75rem;
-  }
-
-  ul {
-    padding-left: 1.25rem;
-    margin-bottom: 1.5rem;
-    list-style-type: disc;
-  }
-
-  ul li {
-    margin-bottom: 0.75rem;
-  }
-
-  ul li.compact {
-    margin-bottom: 0.5rem;
-  }
-
-  .img-center {
-    text-align: center;
-    margin: 2rem 0;
-  }
-
-  .img-center img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  .container {
-    max-width: 1000px; /* Wider container on desktop */
-    margin: auto;
-    background: #ffffff;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
+  <style>
     body {
-      padding: 12px;
+      font-family: 'Rubik', sans-serif;
+      padding: 16px;
+      line-height: 1.8;
+      background-color: #f9f9f9;
+      color: #555;
     }
 
-    .container {
-      padding: 1.5rem;
-      max-width: 95%; /* Fluid width on mobile */
+    h1, h2, p, li {
+      font-family: inherit;
     }
 
     h1 {
-      font-size: 1.6rem;
+      color: #265098;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
     }
 
     h2 {
-      font-size: 1.3rem;
+      color: #333;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
     p, li {
-      font-size: 1.05rem;
+      font-size: 1.125rem;
+      margin-bottom: 1.25rem;
     }
-  }
-</style>
 
-</head>
-<body>
-  <div class="container" id="fullBlogContent">
-    <!-- Blog Content will be dynamically loaded here -->
-  </div>
+    p.compact, li.compact {
+      margin-bottom: 0.75rem;
+    }
 
-<script>
-  const blogTxtPath = 'blog.txt'; // Local blog.txt file
+    ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1.5rem;
+      list-style-type: disc;
+    }
 
-  fetch(blogTxtPath)
-    .then(response => response.text())
-    .then(text => {
-      const lines = text.split('\n').map(line => line.trim());
-      let content = '';
-      let blogTitle = '';
-      let insideList = false; // track if we're inside a <ul>
+    ul li {
+      margin-bottom: 0.75rem;
+    }
 
-      lines.forEach(line => {
-        if (line.startsWith('#KIT1')) {
-          if (insideList) {
-            content += '</ul>';
-            insideList = false;
-          }
-          blogTitle = line.replace('#KIT1', '').trim();
-          content += `<h1>${blogTitle}</h1>`;
-        } else if (line.startsWith('#KIT2')) {
-          if (insideList) {
-            content += '</ul>';
-            insideList = false;
-          }
-          const subheading = line.replace('#KIT2', '').trim();
-          content += `<h2>${subheading}</h2>`;
-        } else if (line.startsWith('#IMG')) {
-          if (insideList) {
-            content += '</ul>';
-            insideList = false;
-          }
-          const imgPath = line.replace('#IMG', '').trim();
-          content += `<div class="img-center"><img src="${imgPath}" alt="Blog Image"></div>`;
-        } else if (line.length > 0) {
-          let pClass = '';
-          let formattedLine = line;
+    ul li.compact {
+      margin-bottom: 0.5rem;
+    }
 
-          // ✅ Detect and handle #p1 marker ANYWHERE
-          if (formattedLine.includes('#p1')) {
-            formattedLine = formattedLine.replace('#p1', '').trim(); // Remove #p1
-            pClass = 'compact';
-          }
+    .img-center {
+      text-align: center;
+      margin: 2rem 0;
+    }
 
-          // ✅ Inline bold and italics
-          formattedLine = formattedLine
-            .replace(/\*(.*?)\*/g, '<strong>$1</strong>')  // *bold*
-            .replace(/_(.*?)_/g, '<em>$1</em>');           // _italic_
+    .img-center img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-          // ✅ Detect list item
-          if (formattedLine.startsWith('-')) {
-            if (!insideList) {
-              content += `<ul>`; // Start <ul> if not already inside
-              insideList = true;
-            }
-            formattedLine = formattedLine.replace('-', '').trim(); // Remove leading dash
-            const liClass = pClass ? ` class="${pClass}"` : '';
-            content += `<li${liClass}>${formattedLine}</li>`;
-          } else {
-            if (insideList) {
-              content += `</ul>`; // Close </ul> when list ends
-              insideList = false;
-            }
-            content += `<p class="${pClass}">${formattedLine}</p>`;
-          }
-        }
-      });
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #ffffff;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+    }
 
-      if (insideList) {
-        content += `</ul>`; // Close any remaining <ul> at end
+    @media (max-width: 768px) {
+      body {
+        padding: 12px;
       }
 
-      document.title = blogTitle || "Blog"; // Dynamically set <title>
-      document.getElementById('fullBlogContent').innerHTML = content;
-    })
-    .catch(error => {
-      console.error('Failed to load blog:', error);
-      document.getElementById('fullBlogContent').innerHTML = "<p>Failed to load blog content.</p>";
-    });
-</script>
+      .container {
+        padding: 1.5rem;
+        max-width: 95%;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      p, li {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Belongs in the Classroom</h1>
+
+    <h2>How schools can teach students to harness AI effectively</h2>
+
+    <p>Over the past few years, generative AI advancements have democratized its use, making it easier to boost productivity and creativity. Today, schools must not just teach students what AI is — they must teach them how to use it. In this article, we propose a curriculum to do exactly that.</p>
+
+    <h2>INTRODUCTION</h2>
+
+    <p>Today, anyone — and I mean anyone — from a 6-year-old to an 80-year-old, can use AI to gain an edge. India has nearly half a billion people under the age of 18. For them, learning to leverage AI isn’t optional; it’s essential for being employable and exceptional in tomorrow’s world.</p>
+
+    <p>Schools have a massive opportunity (and responsibility) to equip students with this powerful tool.</p>
+
+    <p>The Indian school curriculum is robust — it includes projects, group activities, and even holiday homework. But here’s the thing: AI tools like ChatGPT, Google’s Vertex AI, and others can now multiply the quality and creativity of student output. It’s time schools move away from boring, static formats and embrace dynamic, new-age expressions.</p>
+
+    <p>Why ask kids to make a plain chart on climate change when they can create an engaging AI-generated video animation, with far less effort and way more impact?</p>
+
+    <p>When we say learning AI, we don’t mean writing code or diving deep into technical complexities. The goal is simple: learn to use readily available tools that harness AI to transform how students think, create, analyze, and present their work.</p>
+
+    <p>Let’s look at the curriculum now.</p>
+
+    <h2>CURRICULUM</h2>
+
+    <p>The guiding principle behind an AI-based curriculum should rest on 3 prongs — Conscience, Competence, and Creativity.</p>
+
+    <ul>
+      <li class="compact"><strong>Deepen conscience toward society and nation</strong></li>
+      <li class="compact"><strong>Sharpen problem-solving competency</strong></li>
+      <li class="compact"><strong>Amplify creativity to make presentations stand out</strong></li>
+    </ul>
+
+    <p>These are the three prongs of our AI Trident.</p>
+
+    <div class="img-center">
+      <img src="ai-trident.jpg" alt="AI Trident Diagram">
+    </div>
+
+    <p>In this article, I will highlight an example project that incorporates all three prongs.</p>
+
+    <p>Consider this:</p>
+
+    <p>My brother attends a posh school in South Delhi, where most students come from affluent backgrounds. What’s unique about Delhi is how urban slums often coexist right next to upscale residential colonies — these settlements provide essential human labor that supports elite lifestyles.</p>
+
+    <p>These urban slums face a multitude of problems, with erratic water supply being one of the foremost.</p>
+
+    <p>The school assigns 9th-grade students a holiday homework project focused on this issue. Each student is tasked with preparing a report on the water supply crisis in nearby slum areas, recommending actionable steps that society can take. Each student is allocated a slum dwelling in proximity to their residence to encourage firsthand observation and community engagement.</p>
+
+    <p>We will use this example throughout the article.</p>
+
+    <h2>CONSCIENCE</h2>
+
+    <p>School projects often nudge students toward broad issues like climate change and women’s safety. But with AI, we can shift the lens closer to home. Local issues — once overlooked — become powerful learning opportunities, as research, survey design, and data analysis are now just a prompt away.</p>
+
+    <p>In our example, students can use the following prompt on ChatGPT:</p>
+
+    <p><strong>PROMPT:</strong> <em>I want to design a questionnaire regarding the water supply issue in an urban slum in Delhi. What are the things I should focus on?</em></p>
+
+    <p><strong>ChatGPT's RESPONSE:</strong> It provides guiding principles along with a sample questionnaire, which I asked to be turned into a poster, shown below.</p>
+
+    <div class="img-center">
+      <img src="questionnaire-poster.jpg" alt="Sample Questionnaire Poster">
+    </div>
+
+    <p>The above can be digitized on Google Forms, allowing students to record answers and collate responses in minutes!</p>
+
+    <h2>COMPETENCE</h2>
+
+    <p>Let me throw in a cliché: “Data is the new oil.” If data is oil, kids must learn to refine it.</p>
+
+    <p>Teaching data analysis may seem tough, but with tools like ChatGPT, kids can analyze data in plain English.</p>
+
+    <p>For example, kids collect the questionnaire responses and collate them like shown here:</p>
+
+    <div class="img-center">
+      <img src="data-collection.jpg" alt="Data Collection Table">
+    </div>
+
+    <p>They can then prompt ChatGPT:</p>
+
+    <p><strong>PROMPT:</strong> <em>Based on the data, give me the top 5 insights and analysis. Also, make a pie chart of the primary sources of water.</em></p>
+
+    <p><strong>ChatGPT's RESPONSE:</strong> It gave the top 5 insights and a pie chart.</p>
+
+    <div class="img-center">
+      <img src="insights-piechart.jpg" alt="Insights Pie Chart">
+    </div>
+
+    <p>Notably, a large portion is labeled 'Other' because students missed including water tankers as an option — a valuable lesson in survey design!</p>
+
+    <p>Additionally, using Google Gemini’s research capabilities, kids can augment their survey quickly:</p>
+
+    <p><strong>PROMPT:</strong> <em>I want to research the water crisis in Delhi’s Urban Slums and its effect on lives and livelihoods. Include data and facts.</em></p>
+
+    <p><strong>ChatGPT's RESPONSE:</strong> It generated a report with key facts and data.</p>
+
+    <p>Building these skills sharpens critical thinking and problem-solving, laying the foundation for independent learning.</p>
+
+    <h2>CREATIVITY</h2>
+
+    <p>A hundred years ago, students used charts to present ideas. Sadly, this format has remained unchanged in many developing countries.</p>
+
+    <div class="img-center">
+      <img src="classroom-100years.jpg" alt="Old Classroom Teaching Chart">
+    </div>
+
+    <p>Charts serve as good non-screen modes of learning, but relying solely on them reflects a lack of progress.</p>
+
+    <p>Today, students can express their ideas in richer, more engaging formats.</p>
+
+    <p>For instance, instead of traditional charts, students could design a website to showcase their project.</p>
+
+    <p><strong>PROMPT:</strong> <em>I want to design a homepage as a student project submission on the topic “Water Supply Crisis in Delhi’s Urban Slums.” Please generate a Figma-style mockup.</em></p>
+
+    <p><strong>ChatGPT's RESPONSE:</strong></p>
+
+    <div class="img-center">
+      <img src="homepage-mockup.jpg" alt="Website Mockup for Student Project">
+    </div>
+
+    <p>Advanced tools like Google’s Vertex Studio can help students even create videos to embed in their websites.</p>
+
+    <p>Even if the output needs to be static, tools like ChatGPT can make them more appealing.</p>
+
+    <p>For example, create a comic-style representation:</p>
+
+    <p><strong>PROMPT:</strong> <em>Create a comic-style layout showing the effects of poor-quality water supply on children in urban slums.</em></p>
+
+    <p><strong>ChatGPT's RESPONSE:</strong></p>
+
+    <div class="img-center">
+      <img src="comic-layout.jpg" alt="Comic Style Layout on Water Crisis">
+    </div>
+
+    <p>Creativity remains a human trait, but AI boosts students' imaginations — offering more ways to remix and innovate.</p>
+
+    <h2>CONCLUSION</h2>
+
+    <p>The AI Trident — Conscience, Competence, and Creativity — leads to AI-augmented learning.</p>
+
+    <p>While many fear that AI might dull thinking, the opposite is true: AI amplifies human thought, empowering students to explore new areas.</p>
+
+    <p><strong>To truly harness AI’s potential, schools must introduce a dedicated AI curriculum, covering:</strong></p>
+
+    <ul>
+      <li class="compact"><strong>Fundamentals of AI systems</strong></li>
+      <li class="compact"><strong>Prompt engineering</strong></li>
+      <li class="compact"><strong>Iteration techniques</strong></li>
+      <li class="compact"><strong>Overview of available tools</strong></li>
+    </ul>
+
+    <p>Just like we once taught kids how to use the Internet or PowerPoint, it’s time to teach them to collaborate with AI.</p>
+
+    <p>At the end of the day, the human remains the master.</p>
+
+    <p>As the iconic line from <em>Koi Mil Gaya</em> goes:</p>
+
+    <p><em>“Computer ne insaan ko nahi banaya hai … insaan ne computer ko banaya hai … is liye joh dimaag kar sakta hai, woh aapka computer nahi kar sakta hai."</em></p>
+
+    <p>The story of AI is no different — it’s not here to replace human thought, but to elevate it. In the hands of curious students, AI becomes a thinking partner — one that helps them analyze, imagine, and express in ways we couldn’t have imagined a decade ago.</p>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
