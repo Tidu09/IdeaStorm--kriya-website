@@ -88,6 +88,15 @@
   gap: 6px;
   color: white; /* or your desired color */
 }
+.country-code {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#whatsapp {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
   @media (min-width: 576px) {
     .kriya-logo {
@@ -386,9 +395,13 @@
     <option value="School">School</option>
   </select>
 </div>
-          <div class="mb-3 input-group">
-          <select class="form-select" id="countryCode" required></select>
-          <input type="text" class="form-control" id="whatsapp" placeholder="Mobile" required>
+          <div class="mb-3">
+          <div class="input-group">
+            <select class="form-select country-code" id="countryCode" required style="max-width: 130px;">
+              <!-- Options dynamically filled here -->
+            </select>
+            <input type="text" class="form-control" id="whatsapp" placeholder="WhatsApp Number" required>
+          </div>
         </div>
           <div class="mb-3">
             <input type="email" class="form-control" id="email" placeholder="Email (Optional)">
@@ -461,22 +474,23 @@ document.getElementById('getInTouchForm').addEventListener('submit', async funct
 
 // Country code dropdown population
 async function loadCountryCodes() {
-  const response = await fetch('assets/CountryCodes.json'); // Change this path to your JSON file
+  const response = await fetch('/path/to/countryCodes.json'); // Adjust your path
   const countryCodes = await response.json();
 
   const countryCodeSelect = document.getElementById('countryCode');
-countryCodes.forEach(c => {
-  const option = document.createElement('option');
-  option.value = c.dial_code;
-  option.textContent = `${c.name} (${c.dial_code})`;
+  countryCodes.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.dial_code;
+    option.textContent = `${c.name} (${c.dial_code})`; 
 
-  // ✅ If India, make it selected by default
-  if (c.name === "India") {
-    option.selected = true;
-  }
+    // ✅ Set India as default selected
+    if (c.name === "India") {
+      option.selected = true;
+    }
 
-  countryCodeSelect.appendChild(option);
-});
+    countryCodeSelect.appendChild(option);
+  });
+
   // Initialize Choices.js after options are loaded
   new Choices('#countryCode', {
     searchEnabled: true,
