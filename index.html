@@ -465,13 +465,18 @@ async function loadCountryCodes() {
   const countryCodes = await response.json();
 
   const countryCodeSelect = document.getElementById('countryCode');
-  countryCodes.forEach(c => {
-    const option = document.createElement('option');
-    option.value = c.dial_code;
-    option.textContent = `${c.name} (${c.dial_code})`; 
-    countryCodeSelect.appendChild(option);
-  });
+countryCodes.forEach(c => {
+  const option = document.createElement('option');
+  option.value = c.dial_code;
+  option.textContent = `${c.name} (${c.dial_code})`;
 
+  // ✅ If India, make it selected by default
+  if (c.name === "India") {
+    option.selected = true;
+  }
+
+  countryCodeSelect.appendChild(option);
+});
   // Initialize Choices.js after options are loaded
   new Choices('#countryCode', {
     searchEnabled: true,
