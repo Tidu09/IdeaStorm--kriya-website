@@ -481,8 +481,7 @@ async function loadCountryCodes() {
   countryCodes.forEach(c => {
     const option = document.createElement('option');
     option.value = c.dial_code;
-    // ✅ Only Emoji and Dial Code
-    option.textContent = `${countryCodeToEmoji(c.code)} ${c.dial_code}`;
+    option.textContent = `${c.name} (${c.dial_code})`; 
 
     // ✅ Set India as default selected
     if (c.name === "India") {
@@ -498,14 +497,6 @@ async function loadCountryCodes() {
     itemSelectText: '',
     placeholderValue: 'Search country...',
   });
-}
-
-function countryCodeToEmoji(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split('')
-    .map(char => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
 }
 
 // Call it on page load
