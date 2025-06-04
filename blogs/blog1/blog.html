@@ -9,66 +9,82 @@
 <style>
   body {
     font-family: 'Rubik', sans-serif;
-    padding: 30px;
+    padding: 20px;
     line-height: 1.8;
     background-color: #f9f9f9;
-    color: #333;
+    color: #444; /* Softer color for eyes */
   }
   h1, h2, p, li {
-    font-family: inherit; /* Uniform Rubik font */
+    font-family: inherit;
   }
   h1 {
     color: #265098;
-    margin-top: 60px;
-    margin-bottom: 20px;
-    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
   }
   h2 {
-    color: #444;
-    margin-top: 40px;
-    margin-bottom: 10px;
-    font-size: 1.75rem;
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
     font-weight: 600;
   }
   p, li {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
   }
-  p {
-    margin-bottom: 16px;
-  }
-  p.compact {
-    margin-bottom: 8px;
+  p.compact, li.compact {
+    margin-bottom: 0.5rem;
   }
   ul {
-    padding-left: 1.5rem; /* Indent bullets */
-    margin-bottom: 16px;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
     list-style-type: disc;
   }
   ul li {
-    margin-bottom: 12px; /* Default margin between list items */
+    margin-bottom: 0.75rem;
   }
   ul li.compact {
-    margin-bottom: 6px; /* Smaller margin for compact list item */
+    margin-bottom: 0.5rem;
   }
   .img-center {
     text-align: center;
-    margin: 30px 0;
+    margin: 2rem 0;
   }
   .img-center img {
     max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
   .container {
-    max-width: 800px;
+    max-width: 720px; /* narrower for easier reading */
     margin: auto;
-    background: white;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border-radius: 12px;
   }
+  
+  /* Responsive typography and spacing */
+  @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+    }
+    p, li {
+      font-size: 1rem;
+    }
+  }
 </style>
+
 
 </head>
 <body>
@@ -155,10 +171,6 @@
       document.getElementById('fullBlogContent').innerHTML = "<p>Failed to load blog content.</p>";
     });
 </script>
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
