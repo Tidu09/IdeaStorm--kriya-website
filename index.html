@@ -474,7 +474,7 @@ document.getElementById('getInTouchForm').addEventListener('submit', async funct
 
 // Country code dropdown population
 async function loadCountryCodes() {
-  const response = await fetch('/assets/countryCodes.json'); // Adjust your path
+  const response = await fetch('/assets/CountryCodes.json'); // Adjust your path
   const countryCodes = await response.json();
 
   const countryCodeSelect = document.getElementById('countryCode');
