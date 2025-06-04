@@ -71,6 +71,21 @@
 .kriya-logo {
     height: 80px; /* mobile default */
   }
+  .link-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 16px; /* Spacing between links */
+}
+
+.link-group a {
+  text-decoration: underline;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white; /* or your desired color */
+}
 
   @media (min-width: 576px) {
     .kriya-logo {
@@ -119,10 +134,10 @@
       <p class="fs-5 fw-semibold">
         <em>We provide a hands-on STEM curriculum for ages <strong>11+</strong></em>
       </p>
-    <p class="mt-2">
-      <a href="/kits.html" class="text-white text-decoration-underline fs-5 me-4">🔍 Preview our Kits</a>
-      <a href="/blogs.html" class="text-white text-decoration-underline fs-5">📝 Read our Blogs</a>
-    </p>
+<div class="link-group">
+  <a href="/kits.html">🔍 Preview our Kits</a>
+  <a href="/blogs.html">📝 Read our Blogs</a>
+</div>
     </div>
   </div>
 </section>
