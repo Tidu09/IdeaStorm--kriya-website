@@ -123,33 +123,33 @@ async function loadBlogs() {
       const text = await response.text();
       const { title, subtitle, firstParagraph, fullContent } = parseBlogContent(text);
 
-        const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
-        const blogPage = `blogs/${blogName}/blog.html`;
-        const coverImage = `blogs/${blogName}/cover.jpg`;
+      const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
+      const blogPage = `blogs/${blogName}/blog.html`;
+      const coverImage = `blogs/${blogName}/cover.jpg`;
+      const blogNumber = (blogFiles.indexOf(file) + 1).toString().padStart(2, '0'); // 01, 02...
 
-
-        const cardHTML = `
+      const cardHTML = `
         <div class="col-md-4">
-            <div class="blog-card" onclick="this.classList.toggle('flipped')">
+          <div class="blog-card" onclick="this.classList.toggle('flipped')">
             <div class="blog-inner">
-                <div class="blog-front">
-                <div class="badge-box">Blog</div>
+              <div class="blog-front">
+                <div class="badge-box">#${blogNumber}</div>
                 <img src="${coverImage}" alt="${title}" loading="lazy">
                 <h5 class="fw-bold">${title}</h5>
                 <p class="text-muted">${subtitle}</p>
-                <button class="btn btn-kriya mt-auto">READ MORE ↗</button>
-                </div>
-                <div class="blog-back">
+                <button class="btn btn-kriya mt-auto">READ MORE</button>
+              </div>
+              <div class="blog-back">
                 <h5>${title}</h5>
                 <div class="blog-content">
-                    <p>${firstParagraph}</p>
+                  <p>${firstParagraph}</p>
                 </div>
                 <a href="${blogPage}" target="_blank" class="btn btn-light mt-auto">READ FULL BLOG ↗</a>
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        `;
+      `;
 
       container.insertAdjacentHTML('beforeend', cardHTML);
     } catch (error) {
@@ -157,6 +157,7 @@ async function loadBlogs() {
     }
   }
 }
+
 
 loadBlogs();
 
