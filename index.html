@@ -6,6 +6,8 @@
   <title>Kriya</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
   <style>
     body {
@@ -123,7 +125,7 @@
       <div class="col-md-4 text-center">
         <h1 class="fw-bold">Make Kids Smart</h1>
         <p class="fs-5">Ensure your kid is a cut above</p>
-        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
+        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a>
         <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline fs-5">or watch how it works</a></p>
       </div>
       <div class="col-md-4 text-center">
@@ -364,6 +366,128 @@
 </div>
 
 
+<div class="modal fade" id="getInTouchModal" tabindex="-1" aria-labelledby="getInTouchLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="getInTouchLabel">Get in Touch</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="getInTouchForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="name" placeholder="Name" required>
+          </div>
+         <div class="mb-3">
+  <select class="form-select" id="role" required>
+    <option value="">Select: Parent, Kid or School</option>
+    <option value="Parent">Parent</option>
+    <option value="Kid">Kid</option>
+    <option value="School">School</option>
+  </select>
+</div>
+          <div class="mb-3 input-group">
+          <select class="form-select" id="countryCode" required></select>
+          <input type="text" class="form-control" id="whatsapp" placeholder="Mobile" required>
+        </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email (Optional)">
+          </div>
+          <button id="submitBtn" type="submit" class="btn btn-primary w-100">
+        <span id="btnText">Submit</span>
+        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Form submission logic
+document.getElementById('getInTouchForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+
+  const name = document.getElementById('name').value.trim();
+  const role = document.getElementById('role').value;
+  const countryCode = document.getElementById('countryCode').value;
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const email = document.getElementById('email').value.trim() || "Not provided";
+
+  const fullWhatsappNumber = `${countryCode} ${whatsapp}`;
+
+  // Show loading spinner on submit
+  submitBtn.disabled = true;
+  btnText.textContent = "Submitting...";
+  btnSpinner.classList.remove('d-none');
+
+  const formData = {
+    name: name,
+    role: role,
+    whatsapp: fullWhatsappNumber,
+    email: email
+  };
+
+  try {
+    const response = await fetch('/api/log-to-get-in-touch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      alert('Thank you! We will get in touch soon.');
+      var modal = bootstrap.Modal.getInstance(document.getElementById('getInTouchModal'));
+      modal.hide();
+      document.getElementById('getInTouchForm').reset(); // Clear the form fields
+    } else {
+      alert('Failed to submit. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  } finally {
+    // Restore button
+    submitBtn.disabled = false;
+    btnText.textContent = "Submit";
+    btnSpinner.classList.add('d-none');
+  }
+});
+
+// Country code dropdown population
+async function loadCountryCodes() {
+  const response = await fetch('/api/CountryCodes.json'); // Change this path to your JSON file
+  const countryCodes = await response.json();
+
+  const countryCodeSelect = document.getElementById('countryCode');
+  countryCodes.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.dial_code;
+    option.textContent = `${c.name} (${c.dial_code})`; 
+    countryCodeSelect.appendChild(option);
+  });
+
+  // Initialize Choices.js after options are loaded
+  new Choices('#countryCode', {
+    searchEnabled: true,
+    itemSelectText: '',
+    placeholderValue: 'Search country...',
+  });
+}
+
+// Call it on page load
+loadCountryCodes();
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Choices.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
 </body>
 </html>
