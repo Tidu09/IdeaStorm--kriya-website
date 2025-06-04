@@ -22,7 +22,7 @@
     color: #265098;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
-    font-size: 2rem; /* Smaller */
+    font-size: 2rem;
     font-weight: 700;
   }
 
@@ -30,7 +30,7 @@
     color: #333;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    font-size: 1.5rem; /* Smaller */
+    font-size: 1.5rem;
     font-weight: 600;
   }
 
@@ -70,7 +70,7 @@
   }
 
   .container {
-    max-width: 650px; /* Much better for reading */
+    max-width: 900px; /* Wider container on desktop */
     margin: auto;
     background: #ffffff;
     padding: 2rem;
@@ -79,13 +79,14 @@
   }
 
   /* Mobile responsiveness */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     body {
       padding: 12px;
     }
 
     .container {
       padding: 1.5rem;
+      max-width: 95%; /* Fluid width on mobile */
     }
 
     h1 {
@@ -101,8 +102,6 @@
     }
   }
 </style>
-
-
 
 </head>
 <body>
