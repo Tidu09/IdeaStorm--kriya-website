@@ -104,6 +104,41 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+#kitPreviewModal .modal-dialog {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.btn-outline-dark {
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.carousel-wrapper img {
+  max-height: 300px;
+  object-fit: contain;
+}
+
+/* You mentioned this extra block */
+.carousel-image {
+  height: 275px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.carousel-controls {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Responsive tweak for mobile */
+@media (max-width: 768px) {
+  .carousel-wrapper img {
+    max-height: 200px;
+  }
+}
 
   @media (min-width: 576px) {
     .kriya-logo {
