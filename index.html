@@ -153,7 +153,8 @@
         <em>We provide a hands-on STEM curriculum for ages <strong>11+</strong></em>
       </p>
 <div class="link-group">
-  <a href="/kits.html">🔍 Preview our Kits</a>
+  <!-- <a href="/kits.html">🔍 Preview our Kits</a> -->
+  <a href="#" data-bs-toggle="modal" data-bs-target="#kitPreviewModal">🔍 Look Inside</a>
   <a href="/blogs.html">📝 Read our Blogs</a>
 </div>
     </div>
@@ -245,9 +246,10 @@
       </div>
     </div>
     <div class="text-center mt-4">
-      <a href="#" class="btn btn-kriya btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#orderModal">
+      <!-- <a href="#" class="btn btn-kriya btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#orderModal">
         Get Your Trial Kit
-      </a>
+      </a> -->
+      <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
     
       <p class="fw-bold m-0">
         Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
@@ -333,7 +335,8 @@
   <div class="container">
     <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
     <p class="lead">Watch them go from bored to brilliant</p>
-    <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a>
+    <!-- <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a> -->
+     <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
     <p class="fw-bold m-0 mt-3">
       Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
     </p>
@@ -422,6 +425,54 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="kitPreviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-white text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">👀 What’s Inside the Kit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper mb-3">
+          <div id="kitModalCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/kit1.jpg" class="d-block w-100 img-fluid" alt="Kit 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit2.jpg" class="d-block w-100 img-fluid" alt="Kit 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit3.png" class="d-block w-100 img-fluid" alt="Kit 3">
+              </div>
+            </div>
+          </div>
+
+          <!-- Black Arrows Below Carousel -->
+          <div class="text-center mt-3">
+            <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
+              ← Prev
+            </button>
+            <button class="btn btn-outline-dark" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- Kit Text -->
+        <div class="px-3 text-start">
+          <h5 id="modal-kit-title"><strong>Loading...</strong></h5>
+          <p id="modal-kit-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
 // Form submission logic
