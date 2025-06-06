@@ -562,6 +562,16 @@ loadCountryCodes();
 </script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const kitTitle = "What’s Inside the Trial Kit?";
+  const kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
+
+  document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+  document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+});
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Choices.js JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
