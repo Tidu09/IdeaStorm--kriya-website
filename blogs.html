@@ -128,7 +128,8 @@ async function loadBlogs() {
       const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
       const blogPage = `blogs/${blogName}/blog.html`;
       const coverImage = `blogs/${blogName}/cover.jpg`;
-      const blogNumber = (blogFiles.indexOf(file) + 1).toString().padStart(2, '0'); // 01, 02...
+      const totalBlogs = blogFiles.length;
+      const blogNumber = (totalBlogs - blogFiles.indexOf(file)).toString().padStart(2, '0');
 
       const cardHTML = `
         <div class="col-md-4">
