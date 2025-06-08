@@ -13,7 +13,7 @@
     .kriya-blue { background-color: #265098; color: white; }
     .blog-card {
       perspective: 1000px;
-      /* height: 360px; */
+      height: 360px;
       cursor: pointer;
     }
     .blog-inner {
@@ -73,6 +73,11 @@
     .btn-kriya:hover {
       background-color: #a87d5e;
     }
+    @media (max-width: 576px) {
+  .blog-card {
+    min-height: 420px; /* More breathing space on mobile */
+  }
+}
   </style>
 </head>
 
