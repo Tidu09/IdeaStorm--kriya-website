@@ -150,13 +150,16 @@
 /* Responsive tweak for mobile */
 @media (max-width: 576px) {
   header .container {
-    flex-direction: column;
-    align-items: flex-start; /* logo at top left */
+    flex-direction: unset; /* reset flex settings */
     position: relative;
-    height: 150px; /* control header height */
+    height: 150px; /* header height */
+    padding: 0; /* remove extra container padding */
   }
 
   .kriya-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     height: 60px;
   }
 
@@ -168,7 +171,7 @@
   }
 
   .slogan p {
-    font-size: 1.5rem; /* increase font size */
+    font-size: 1.5rem; /* slightly bigger slogan */
     margin: 0;
     line-height: 1.2;
   }
