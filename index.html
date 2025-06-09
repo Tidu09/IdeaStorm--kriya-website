@@ -148,29 +148,44 @@
   }
 
 /* Responsive tweak for mobile */
+@media (max-width: 576px) {
+  header .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .slogan p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  .kriya-logo {
+    height: 60px; /* even smaller for extra small devices */
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .kriya-logo {
+    height: 60px; /* small devices (tablets) */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .kriya-logo {
+    height: 100px; /* medium devices (desktops) */
+}}
+
+@media (min-width: 1200px) {
+  .kriya-logo {
+    height: 120px; /* large devices (large desktops) */
+  }
+}
+
 @media (max-width: 768px) {
   .carousel-wrapper img {
     max-height: 200px;
   }
 }
-
-  @media (min-width: 576px) {
-    .kriya-logo {
-      height: 60px; /* tablets and small screens */
-    }
-  }
-
-  @media (min-width: 768px) {
-    .kriya-logo {
-      height: 100px; /* medium desktops */
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .kriya-logo {
-      height: 120px; /* large desktops */
-    }
-  }
 
   </style>
 </head>
