@@ -150,31 +150,32 @@
 /* Responsive tweak for mobile */
 @media (max-width: 576px) {
   header .container {
-    flex-direction: unset; /* reset flex settings */
     position: relative;
-    height: 100px; /* header height */
-    padding: 0; /* remove extra container padding */
+    height: 90px; /* reduce height further */
+    padding: 0 !important; /* force remove padding */
+    margin: 0 auto;
+    max-width: 100%; /* make it full width */
   }
 
   .kriya-logo {
     position: absolute;
-    top: 3px;
+    top: 2px; /* pin to very top */
     left: 10px;
-    height: 60px;
+    height: 48px; /* slightly smaller logo */
   }
 
   .slogan {
     position: absolute;
-    bottom: 5px;
+    bottom: 2px; /* pin to very bottom */
     right: 10px;
     text-align: right;
   }
 
   .slogan p {
-  font-size: 1.2rem; /* was 1.5rem, now tighter */
-  margin: 0;
-  line-height: 1.2;
-}
+    font-size: 1.1rem; /* fine-tune smaller */
+    margin: 0;
+    line-height: 1.1;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
