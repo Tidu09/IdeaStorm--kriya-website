@@ -14,91 +14,121 @@
 
 
   <style>
-    body {
-      font-family: 'Rubik', sans-serif;
-      color: #333;
-    }
-    .kriya-blue {
-      background-color: #265098;
-      color: white;
-    }
-    .kriya-gold {
-      color: #bc9670;
-    }
-    .btn-kriya {
-      background-color: #bc9670;
-      color: white;
-      border: none;
-    }
-    .btn-kriya:hover {
-      background-color: #a87d5e;
-    }
-    .section-padding {
-      padding: 60px 0;
-    }
-    .section-title {
-      font-weight: bold;
-      font-size: 2rem;
-      margin-bottom: 30px;
-    }
-    .step-box {
-      background-color: #f8f9fa;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .step-box img {
-      margin-bottom: 15px;
-    }
-    .comparison-img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 30px;
-    }
-    .icon-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    .icon-list li::before {
-      content: "\2716";
-      color: red;
-      display: inline-block;
-      width: 1.5em;
-      margin-right: 0.5em;
-    }
-    .icon-list.tick li::before {
-      content: "\2714";
-      color: green;
-    }
-    .transform-arrow svg {
+ body {
+  font-family: 'Rubik', sans-serif;
+  color: #333;
+}
+
+/* Main Sections */
+.kriya-blue {
+  background-color: #0066CC; /* Lighter, friendly blue */
+  color: white;
+}
+
+/* Accent Color */
+.kriya-gold {
+  color: #00C897; /* Vibrant teal highlight */
+}
+
+/* Buttons */
+.btn-kriya {
+  background-color: #FF6600; /* Vibrant orange */
+  color: white;
+  border: none;
+}
+
+.btn-kriya:hover {
+  background-color: #CC5200; /* Deeper orange on hover */
+}
+
+/* General Section Padding */
+.section-padding {
+  padding: 60px 0;
+}
+
+/* Section Titles */
+.section-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Step Box Section (Problems/How we Help) */
+.step-box {
+  background-color: #f0f8ff; /* Very pale blue */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.step-box img {
+  margin-bottom: 15px;
+}
+
+/* Comparison Image */
+.comparison-img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 30px;
+}
+
+/* Icon List (❌ and ✅ points) */
+.icon-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.icon-list li::before {
+  content: "\2716";
+  color: red;
+  display: inline-block;
+  width: 1.5em;
+  margin-right: 0.5em;
+}
+
+.icon-list.tick li::before {
+  content: "\2714";
+  color: green;
+}
+
+/* Arrow Section */
+.transform-arrow svg {
   max-width: 100%;
 }
+
+/* Logo */
 .kriya-logo {
-    height: 80px; /* mobile default */
-  }
-  .link-group {
+  height: 80px; /* Default for mobile */
+}
+
+/* Link Group */
+.link-group {
   display: flex;
   justify-content: center;
   flex-wrap: wrap; /* Allow wrapping on small screens */
   gap: 16px; /* Spacing between links */
 }
 
+/* Link Group Links */
 .link-group a {
   text-decoration: underline;
   font-size: 1.2rem;
   display: flex;
   align-items: center;
   gap: 6px;
-  color: white; /* or your desired color */
+  color: white; /* Good on blue */
 }
+
+/* Country Code and Input Styling */
 .country-code {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .choices__inner {
   height: calc(2.375rem + 2px); /* Bootstrap default height for form-control */
-  padding: 0.375rem 0.75rem;    /* Same padding as Bootstrap inputs */
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -108,22 +138,26 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+/* Modal Dialog */
 #kitPreviewModal .modal-dialog {
   max-width: 900px;
   margin: 2rem auto;
 }
 
+/* Button Outline */
 .btn-outline-dark {
   min-width: 100px;
   font-weight: 500;
 }
 
+/* Carousel Images */
 .carousel-wrapper img {
   max-height: 300px;
   object-fit: contain;
 }
 
-/* You mentioned this extra block */
+/* Extra Carousel Image */
 .carousel-image {
   height: 275px;
   width: auto;
@@ -132,20 +166,55 @@
   display: block;
 }
 
+/* Carousel Controls */
 .carousel-controls {
   text-align: center;
   margin-top: 0.5rem;
 }
 
- .slogan p {
-    font-family: 'Orbitron', sans-serif;
-    color: orange;
-    font-weight: 700;
-    margin: 0;
-    text-align: right;
-    font-size: 1.5rem; /* slightly larger */
-    letter-spacing: 1px; /* more futuristic look */
+/* Slogan */
+.slogan p {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(45deg, #FF6600, #FF3399); /* Gradient: Orange → Pink */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  margin: 0;
+  text-align: right;
+  font-size: 1.5rem; /* Slightly larger */
+  letter-spacing: 1px; /* Futuristic look */
+}
+
+/* Responsive Tweak for Mobile */
+@media (max-width: 576px) {
+  header .container {
+    position: relative;
+    height: 90px; /* Reduce header height */
+    padding: 0 !important;
+    margin: 0 auto;
+    max-width: 100%;
   }
+
+  .kriya-logo {
+    position: absolute;
+    top: 2px; /* Move to very top */
+    left: 10px;
+    height: 55px; /* Slightly smaller logo */
+  }
+
+  .slogan {
+    position: absolute;
+    bottom: 2px; /* Move to very bottom */
+    right: 10px;
+    text-align: right;
+  }
+
+  .slogan p {
+    font-size: 1.1rem; /* Fine-tuned smaller */
+    margin: 0;
+    line-height: 1.1;
+  }
+}
 
 /* Responsive tweak for mobile */
 @media (max-width: 576px) {
