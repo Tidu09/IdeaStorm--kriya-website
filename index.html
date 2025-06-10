@@ -230,19 +230,16 @@ body {
 .image-wrapper {
   position: relative;
   width: 100%;
-  height: auto;
+  padding-top: 66.66%; /* 16:9 ratio (adjust if needed) */
   overflow: hidden;
 }
-
 .comparison-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
-  pointer-events: none;
-  transition: filter 0.2s ease, clip-path 0.2s ease;
-  filter: blur(0px); /* Reset default blur */
+  height: 100%;  /* force it to fill the padded area */
+  object-fit: cover;
 }
 
 .left-image {
