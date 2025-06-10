@@ -3,179 +3,702 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blogs</title>
+  <title>Kriya</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <link rel="icon" href="images/kriya_logo_favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+
+
   <style>
-    body {
-      font-family: 'Rubik', sans-serif;
-      background: #f9f9f9;
-    }
- .kriya-blue {
-  background-color: #FF6500; /* Orange background now */
-  color: #e0e0e0;;
+body {
+  font-family: 'Rubik', sans-serif;
+  color: #333;
 }
 
-    .blog-card {
-      perspective: 1000px;
-      height: 360px;
-      cursor: pointer;
-    }
-    .blog-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-    .blog-card.flipped .blog-inner {
-      transform: rotateY(180deg);
-    }
-    .blog-front, .blog-back {
-      position: absolute;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-    }
-    .blog-front img {
-      max-height: 180px;
-      width: auto;
-      object-fit: contain;
-      margin: 2rem 0 1rem 0;
-    }
-    .blog-back {
-      transform: rotateY(180deg);
-      background-color: #333;
-      color: white;
-      text-align: left;
-    }
-    .blog-back h5 {
-      margin-top: 1rem;
-    }
-    .badge-box {
-      position: absolute;
-      top: 3px;
-      background-color:#0066CC;
-      color: white;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-weight: bold;
-    }
-    .btn-kriya {
-      background-color:#0066CC;
-      color: white;
-      /* #e0e0e0; */
-      border: none;
-    }
-    .btn-kriya:hover {
-      background-color:  #004999;
-    }
-    @media (max-width: 576px) {
-  .blog-card {
-    min-height: 400px; /* More breathing space on mobile */
+/* Main Sections */
+.kriya-blue {
+  background-color: #FF6500; /* Orange background now */
+  color: white;
+}
+
+/* Accent Color */
+.kriya-gold {
+  color: #6A0DAD; /* Vibrant teal highlight */
+}
+
+/* Buttons */
+.btn-kriya {
+  background-color: #0066CC; /* Fresh blue button */
+  color: white;
+  border: none;
+}
+
+.btn-kriya:hover {
+  background-color: #004999; /* Deeper blue on hover */
+}
+
+/* General Section Padding */
+.section-padding {
+  padding: 60px 0;
+}
+
+/* Section Titles */
+.section-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Step Box Section (Problems/How we Help) */
+.step-box {
+  background-color: #fff7f0; /* Very light warm orange */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.step-box img {
+  margin-bottom: 15px;
+}
+
+/* Comparison Image */
+.comparison-img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 30px;
+}
+
+/* Icon List (❌ and ✅ points) */
+.icon-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.icon-list li::before {
+  content: "\2716";
+  color: red;
+  display: inline-block;
+  width: 1.5em;
+  margin-right: 0.5em;
+}
+
+.icon-list.tick li::before {
+  content: "\2714";
+  color: green;
+}
+
+/* Arrow Section */
+.transform-arrow svg {
+  max-width: 100%;
+}
+
+/* Logo */
+.kriya-logo {
+  height: 80px; /* Default for mobile */
+}
+
+/* Link Group */
+.link-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Link Group Links */
+.link-group a {
+  text-decoration: underline;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white; /* Good contrast on orange */
+}
+
+/* Country Code and Input Styling */
+.country-code {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.choices__inner {
+  height: calc(2.375rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#whatsapp {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Modal Dialog */
+#kitPreviewModal .modal-dialog {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+/* Button Outline */
+.btn-outline-dark {
+  min-width: 100px;
+  font-weight: 500;
+}
+
+/* Carousel Images */
+.carousel-wrapper img {
+  max-height: 300px;
+  object-fit: contain;
+}
+
+/* Extra Carousel Image */
+.carousel-image {
+  height: 275px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.slogan p {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(45deg, #FF6500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  margin: 0;
+  text-align: right;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.custom-header {
+   background-color: #2C2C2C; /* Darker, richer orange gradient */
+}
+
+
+/* Responsive tweak for mobile */
+@media (max-width: 576px) {
+  header .container {
+    position: relative;
+    height: 80px; /* reduce height further */
+    padding: 0 !important; /* force remove padding */
+    margin: 0 auto;
+    max-width: 100%; /* make it full width */
+  }
+
+  .kriya-logo {
+    position: absolute;
+    top: 2px; /* pin to very top */
+    left: 10px;
+    height: 55px; /* slightly smaller logo */
+  }
+
+  .slogan {
+    position: absolute;
+    bottom: 2px; /* pin to very bottom */
+    right: 10px;
+    text-align: right;
+  }
+
+  .slogan p {
+    font-size: 1.1rem; /* fine-tune smaller */
+    margin: 0;
+    line-height: 1.1;
   }
 }
-  </style>
-</head>
 
-<body>
-  <div class="container py-5">
-    <h2 class="text-center fw-bold mb-4" style="color:  #265098;">Explore Our Blogs</h2>
-    <div id="blogsContainer" class="row g-4 justify-content-center">
-      <!-- Dynamic blogs will come here -->
-    </div>
-  </div>
-
-<script>
-  const blogFiles = [
-  'blogs/blog3/blog.txt',
-  'blogs/blog2/blog.txt',
-   'blogs/blog1/blog.txt'
-];
-
-function parseBlogContent(text) {
-  const lines = text.split('\n').map(line => line.trim());
-  let title = '', subtitle = '', fullContent = '', firstParagraph = '', paragraphCaptured = false;
-
-  lines.forEach(line => {
-    if (line.startsWith('#KIT1')) {
-      title = line.replace('#KIT1', '').trim();
-    } else if (line.startsWith('#KIT2')) {
-      subtitle = line.replace('#KIT2', '').trim();
-    } else if (line.startsWith('#IMG')) {
-      const imgSrc = line.replace('#IMG', '').trim();
-      fullContent += `<img src="${imgSrc}" alt="Blog image" loading="lazy" style="max-width: 100%; margin: 10px 0;">`;
-    } else if (line.length > 0) {
-      if (!paragraphCaptured) {
-        firstParagraph = line;
-        paragraphCaptured = true;
-      }
-      fullContent += `<p>${line}</p>`;
-    }
-  });
-
-  return { title, subtitle, firstParagraph, fullContent };
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .kriya-logo {
+    height: 60px; /* small devices (tablets) */
+  }
 }
 
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .kriya-logo {
+    height: 100px; /* medium devices (desktops) */
+}}
 
-async function loadBlogs() {
-  const container = document.getElementById('blogsContainer');
+@media (min-width: 1200px) {
+  .kriya-logo {
+    height: 120px; /* large devices (large desktops) */
+  }
+}
 
-  for (let file of blogFiles) {
-    try {
-      const response = await fetch(file);
-      const text = await response.text();
-      const { title, subtitle, firstParagraph, fullContent } = parseBlogContent(text);
+@media (max-width: 768px) {
+  .carousel-wrapper img {
+    max-height: 200px;
+  }
+}
 
-      const blogName = file.split('/')[1]; // extract blog1 from blogs/blog1/blog.txt
-      const blogPage = `blogs/${blogName}/blog.html`;
-      const coverImage = `blogs/${blogName}/cover.jpg`;
-      const totalBlogs = blogFiles.length;
-      const blogNumber = (totalBlogs - blogFiles.indexOf(file)).toString().padStart(2, '0');
+  </style>
+</head>
+<body>
+<header class="py-3 border-bottom custom-header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <img src="images/kriya-logo.png" alt="Kriya Logo" class="kriya-logo">
+    <div class="slogan">
+      <p>Designed by Us<br>Built by You</p>
+    </div>
+  </div>
+</header>
 
-      const cardHTML = `
-        <div class="col-md-4">
-          <div class="blog-card" onclick="this.classList.toggle('flipped')">
-            <div class="blog-inner">
-              <div class="blog-front">
-                <div class="badge-box">#${blogNumber}</div>
-                <img src="${coverImage}" alt="${title}" loading="lazy">
-                <h5 class="fw-bold">${title}</h5>
-                <p class="text-muted">${subtitle}</p>
-                <button class="btn btn-kriya mt-auto">READ MORE</button>
+<!-- Hero Section -->
+<section class="kriya-blue py-5">
+  <div class="container">
+    <div class="row align-items-center text-white">
+      <div class="col-md-4 text-center mb-4 mb-md-0">
+        <img src="images/hero-kid-boy.png" alt="Boy with STEM kit" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-4 text-center">
+        <h1 class="fw-bold">Make Kids Smart</h1>
+        <p class="fs-5">Ensure your kid is a cut above</p>
+        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a>
+        <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline fs-5">or watch how it works</a></p>
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="images/hero-kid-girl.png" alt="Girl with STEM kit" class="img-fluid rounded shadow">
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <p class="fs-5 fw-semibold">
+        <em>We provide a hands-on STEM curriculum for ages <strong>11+</strong></em>
+      </p>
+<div class="link-group">
+  <!-- <a href="/kits.html">🔍 Preview our Kits</a> -->
+  <a href="#" data-bs-toggle="modal" data-bs-target="#kitPreviewModal">🔍 Look Inside</a>
+  <a href="/blogs.html">📝 Read our Blogs</a>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem Section -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row justify-content-center align-items-start text-center text-md-start">
+      
+      <div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
+        <div class="w-100" style="max-width: 600px;">
+          <h2 class="section-title text-danger fw-bold mb-3">Problems Kids Face</h2>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start mb-2 ">
+              <span class="text-danger me-2">❌</span>
+              <span>≈ 70% screen time is wasted</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>No guidance for new-age skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Outdated school curriculum</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Lack of peer inspiration</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 d-flex justify-content-center">
+        <div class="w-100" style="max-width: 600px;">
+          <h2 class="section-title text-success fw-bold mb-3">How We Help</h2>
+          <ul class="list-unstyled fs-6 ps-0 text-center">
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Turn screen time into skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>6-kit plan for structured learning</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Coding, Mechatronics and AI</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Creative community of peers</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Guide Section -->
+<section class="py-3 bg-light text-center">
+  <div class="container">
+    <em class="fs-4">Finding meaningful activities for your child can be tough. That’s why over <strong>100+ families</strong>  have trusted Kriya to bring creativity home.</em>
+  </div>
+</section>
+
+<!-- Getting Started Section -->
+<section id="get-started" class="section-padding text-center">
+  <div class="container">
+    <h2 class="section-title">Getting Started is Easy</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 step-box">
+        <img src="images/step1-box.png" alt="Step 1 Icon" width="80">
+        <h5 class="fw-bold">Get 1<sup>st</sup> kit as trial</h5>
+      </div>
+      <div class="col-md-4 step-box">
+        <img src="images/step2-explore.png" alt="Step 2 Icon" width="80">
+        <h5 class="fw-bold">Kid explores and builds</h5>
+      </div>
+      <div class="col-md-4 step-box">
+        <img src="images/step3-subscribe.png" alt="Step 3 Icon" width="80">
+        <h5 class="fw-bold">Kid enrolls to keep up the creativity</h5>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <!-- <a href="#" class="btn btn-kriya btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#orderModal">
+        Get Your Trial Kit
+      </a> -->
+      <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
+    
+      <p class="fw-bold m-0">
+        Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
+      </p>
+    </div>
+    <p class="mt-2 fst-italic">and begin proactive parenting !</p>
+  </div>
+</section>
+
+<!-- Success vs Failure Section -->
+<section class="section-padding bg-light text-center">
+  <div class="container">
+    <h2 class="section-title mb-5">What’s at Stake?</h2>
+
+    <!-- Shared wrapper for alignment -->
+    <div class="text-and-image-wrapper mx-auto" style="max-width: 880px;">
+      <div class="row text-md-start justify-content-between">
+        <!-- Without Kriya -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h4 class="text-danger"><strong>WITHOUT KRIYA</strong></h4>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Passive screen time continues</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Missed early learning opportunities</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Creativity goes untapped</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- With Kriya -->
+        <div class="col-md-6">
+          <h4 class="text-success"><strong>WITH KRIYA</strong></h4>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start">
+              <span class="text-success me-2">✅</span>
+              <span>Your child builds real-world skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Hands-on learning experiences</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Boosted creativity and confidence</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Centered image with matched width -->
+      <div class="mt-5 text-center">
+        <img src="images/success-vs-failure.png" alt="Comparison image" class="img-fluid comparison-img" style="max-width: 100%;">
+      </div>
+
+      <!-- Arrow -->
+      <div class="transform-arrow mt-4 d-flex justify-content-center">
+        <svg width="100%" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10"
+              refX="0" refY="5" orient="auto">
+              <polygon points="0 0, 10 5, 0 10" fill="#0d6efd" />
+            </marker>
+          </defs>
+          <line x1="0" y1="30" x2="280" y2="30" stroke="#0d6efd" stroke-width="4" marker-end="url(#arrowhead)" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Call to Action -->
+<section id="subscribe" class="kriya-blue text-center py-5">
+  <div class="container">
+    <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
+    <p class="lead">Watch them go from bored to brilliant</p>
+    <!-- <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a> -->
+     <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
+    <p class="fw-bold m-0 mt-3">
+      Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <div class="mb-2">
+      <a href="/policy/privacy-policy.html" class="text-white text-decoration-none me-3">Privacy Policy</a>
+      <a href="/policy/terms-and-conditions.html" class="text-white text-decoration-none me-3">Terms & Conditions</a>
+      <a href="/policy/cancellation-and-refund.html" class="text-white text-decoration-none me-3">Cancellation & Refund</a>
+      <a href="/policy/shipping-and-delivery.html" class="text-white text-decoration-none me-3">Shipping & Delivery</a>
+      <a href="/policy/contact.html" class="text-white text-decoration-none">Contact Us</a>
+    </div>
+    <p class="mb-0">&copy; 2025 Kriya | Made with ❤️ in India</p>
+  </div>
+</footer>
+
+
+<!-- Order Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="orderModalLabel">Where would you like to order from?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-column align-items-center gap-3">
+          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
+            <a href="https://amazon.in" target="_blank" class="btn btn-outline-secondary text-center w-100">
+              Order from Amazon<br>
+              <span style="font-size: 0.8rem; font-style: italic; color: #888;">a little bit costlier</span>
+            </a>
+            <span class="fw-semibold">or</span>
+            <a href="checkout.html" target="_blank" class="btn btn-kriya text-white w-100">
+              Order from Kriya
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="getInTouchModal" tabindex="-1" aria-labelledby="getInTouchLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="getInTouchLabel">Get in Touch</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="getInTouchForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="name" placeholder="Name" required>
+          </div>
+         <div class="mb-3">
+  <select class="form-select" id="role" required>
+    <option value="">Who we gonna talk to ?</option>
+    <option value="Parent">Parent</option>
+    <option value="Kid">Kid</option>
+    <option value="School">School</option>
+  </select>
+</div>
+          <div class="mb-3">
+          <div class="input-group">
+            <select class="form-select country-code" id="countryCode" required style="max-width: 130px;">
+              <!-- Options dynamically filled here -->
+            </select>
+            <input type="text" class="form-control" id="whatsapp" placeholder="Phone Number" required>
+          </div>
+        </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email (Optional)">
+          </div>
+          <button id="submitBtn" type="submit" class="btn btn-primary w-100">
+        <span id="btnText">Submit</span>
+        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="kitPreviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-white text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">👀 What’s Inside the Kit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper mb-3">
+          <div id="kitModalCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/kit1.jpg" class="d-block w-100 img-fluid" alt="Kit 1">
               </div>
-              <div class="blog-back">
-                <h5>${title}</h5>
-                <div class="blog-content">
-                  <p>${firstParagraph}</p>
-                </div>
-                <a href="${blogPage}" target="_blank" class="btn btn-light mt-auto">READ FULL BLOG ↗</a>
+              <div class="carousel-item">
+                <img src="images/kit2.jpg" class="d-block w-100 img-fluid" alt="Kit 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit3.png" class="d-block w-100 img-fluid" alt="Kit 3">
               </div>
             </div>
           </div>
-        </div>
-      `;
 
-      container.insertAdjacentHTML('beforeend', cardHTML);
-    } catch (error) {
-      console.error('Error loading blog:', file, error);
+          <!-- Black Arrows Below Carousel -->
+          <div class="text-center mt-3">
+            <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
+              ← Prev
+            </button>
+            <button class="btn btn-outline-dark" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- Kit Text -->
+        <div class="px-3 text-start">
+          <h5 id="modal-kit-title"><strong>Loading...</strong></h5>
+          <p id="modal-kit-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Form submission logic
+document.getElementById('getInTouchForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+
+  const name = document.getElementById('name').value.trim();
+  const role = document.getElementById('role').value;
+  const countryCode = document.getElementById('countryCode').value;
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const email = document.getElementById('email').value.trim() || "Not provided";
+
+  const fullWhatsappNumber = `${countryCode} ${whatsapp}`;
+
+  // Show loading spinner on submit
+  submitBtn.disabled = true;
+  btnText.textContent = "Submitting...";
+  btnSpinner.classList.remove('d-none');
+
+  const formData = {
+    name: name,
+    role: role,
+    whatsapp: fullWhatsappNumber,
+    email: email
+  };
+
+  try {
+    const response = await fetch('/api/log-to-get-in-touch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      alert('Thank you! We will get in touch soon.');
+      var modal = bootstrap.Modal.getInstance(document.getElementById('getInTouchModal'));
+      modal.hide();
+      document.getElementById('getInTouchForm').reset(); // Clear the form fields
+    } else {
+      alert('Failed to submit. Please try again.');
     }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  } finally {
+    // Restore button
+    submitBtn.disabled = false;
+    btnText.textContent = "Submit";
+    btnSpinner.classList.add('d-none');
   }
+});
+
+// Country code dropdown population
+async function loadCountryCodes() {
+  const response = await fetch('/assets/CountryCodes.json'); // Adjust your path
+  const countryCodes = await response.json();
+
+  const countryCodeSelect = document.getElementById('countryCode');
+  countryCodes.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.dial_code;
+    option.textContent = `${c.name} (${c.dial_code})`; 
+
+    // ✅ Set India as default selected
+    if (c.name === "India") {
+      option.selected = true;
+    }
+
+    countryCodeSelect.appendChild(option);
+  });
+
+  // Initialize Choices.js after options are loaded
+  new Choices('#countryCode', {
+    searchEnabled: true,
+    itemSelectText: '',
+    placeholderValue: 'Search country...',
+  });
 }
 
+// Call it on page load
+loadCountryCodes();
+</script>
 
-loadBlogs();
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const kitTitle = "What’s Inside the Trial Kit?";
+  const kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
+
+  document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+  document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+});
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Choices.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
 </body>
 </html>
