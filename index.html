@@ -222,16 +222,21 @@ body {
 
 .dual-image-wrapper {
   display: flex;
-  max-width: 600px;
-  aspect-ratio: 3 / 4;
+  width: 1524px;       /* 762 + 762 */
+  height: 1024px;      /* Original height */
   overflow: hidden;
+  margin: auto;
 }
 
 .side-image {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
+  width: 762px;
+  height: 1024px;
+  object-fit: cover;  /* Ensures image fills without shrinking */
   transition: filter 0.3s ease;
+}
+.comparison-slider {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .slider-container {
