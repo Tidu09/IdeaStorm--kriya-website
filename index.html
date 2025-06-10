@@ -853,7 +853,14 @@ document.addEventListener("DOMContentLoaded", () => {
     rightImage.style.filter = `blur(${(100 - value) / 100 * maxBlur}px)`;
   }
 
-     if (value === 100 && !hasModalPopped) {
+  slider.addEventListener("input", () => {
+    updateBlur(parseInt(slider.value));
+  });
+
+  // Initialize
+  updateBlur(parseInt(slider.value));
+
+       if (value === 100 && !hasModalPopped) {
       // Clear any previous timeout if the slider is already at 100
       if (modalTimeoutId) {
         clearTimeout(modalTimeoutId);
@@ -871,14 +878,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       hasModalPopped = false; // Reset the flag
     }
-  
 
-  slider.addEventListener("input", () => {
-    updateBlur(parseInt(slider.value));
-  });
 
-  // Initialize
-  updateBlur(parseInt(slider.value));
 });
 </script>
 
