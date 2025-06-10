@@ -240,8 +240,10 @@ body {
 }
 
 .slider-container {
-  text-align: center;
-  margin-top: 10px;
+  display: flex; /* Make it a flex container */
+  align-items: center; /* Vertically align items in the middle */
+  justify-content: center; /* Horizontally center the group of items */
+  margin-top: 10px; /* Keep your existing margin */
 }
 
 .slider {
@@ -251,6 +253,13 @@ body {
   background: #ccc;
   -webkit-appearance: none;
   outline: none;
+}
+.slider-label {
+  white-space: nowrap; /* Prevent text from wrapping */
+  font-size: 0.9rem; /* Adjust font size as needed */
+  color: #FF6500; /* Adjust color as needed */
+  /* If you want it a bit bolder */
+  font-weight: bold;
 }
 
 
@@ -282,17 +291,38 @@ body {
     flex-direction: column;
     width: 100%;
     height: auto;
+    /* Reduce vertical padding/margin if the parent has any */
+    margin-bottom: 1rem; /* Adjust as needed, or remove if parent handles spacing */
   }
 
   .side-image {
     width: 100%;
-    height: auto;
-    max-height: 70vh; /* prevent excessive height */
-    object-fit: contain;
+    max-height: 45vh; /* Significantly reduced to fit in one screen */
+    height: auto; /* Allow natural aspect ratio */
+    object-fit: contain; /* Ensures the whole image is visible */
+    /* Add some margin between images if needed, or if they stack directly */
+    margin-bottom: 0.5rem; /* Small gap between stacked images */
   }
 
   .slider-container {
-    margin-top: 1rem;
+    /* If you want the label and slider to stack vertically on tiny screens */
+    flex-direction: column;
+    /* Reduce overall vertical space if needed */
+    margin-top: 0.5rem; /* Smaller margin for mobile */
+    margin-bottom: 0.5rem;
+  }
+
+  .slider-label {
+    /* If stacking, remove horizontal margin and add vertical margin */
+    margin-right: 0;
+    margin-bottom: 0.5rem; /* Space below the label when stacked */
+    font-size: 0.8rem; /* Slightly smaller text for mobile */
+  }
+
+  .slider {
+    width: 80%; /* Make slider take up a percentage of the screen width */
+    max-width: 250px; /* Prevent it from becoming too wide on slightly larger mobiles */
+    height: 4px; /* Make it thinner */
   }
 }
 
@@ -490,7 +520,7 @@ body {
     <img src="images/success-vs-failure_right.png" class="side-image right-image" alt="Success">
   </div>
   <div class="slider-container mt-3">
-    <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
+      <span class="slider-label me-2">Slide me</span> <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
   </div>
 </div>
       <!-- Arrow
