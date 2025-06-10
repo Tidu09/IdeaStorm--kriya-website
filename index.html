@@ -220,18 +220,18 @@ body {
   }
 }
 
-
 .comparison-slider {
   position: relative;
   width: 100%;
   max-width: 800px;
-  overflow: hidden;
+  margin: auto;
 }
 
 .image-wrapper {
   position: relative;
   width: 100%;
   height: auto;
+  overflow: hidden;
 }
 
 .comparison-image {
@@ -240,26 +240,32 @@ body {
   left: 0;
   width: 100%;
   height: auto;
-  filter: blur(5px);
-  transition: filter 0.2s ease;
   pointer-events: none;
+  transition: filter 0.2s ease, clip-path 0.2s ease;
+  filter: blur(0px); /* Reset default blur */
 }
 
 .left-image {
   z-index: 1;
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
 .right-image {
   z-index: 2;
-  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .slider {
-  position: relative;
-  width: 100%;
-  margin-top: 220px;
-  z-index: 3;
+  width: 300px;
+  height: 6px;
+  background: #ccc;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
 }
 
 
@@ -474,15 +480,16 @@ body {
       </div>
 
       <!-- Centered image with matched width -->
-     <div class="comparison-slider" style="position: relative; max-width: 100%; margin: auto;">
-      <div class="image-wrapper">
-        <img src="images/success-vs-failure.png" class="comparison-image left-image">
-        <img src="images/success-vs-failure.png" class="comparison-image right-image">
-      </div>
-      <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
-    </div>
-
-      <!-- Arrow -->
+     <div class="comparison-slider mx-auto">
+  <div class="image-wrapper">
+    <img src="images/success-vs-failure.png" class="comparison-image left-image">
+    <img src="images/success-vs-failure.png" class="comparison-image right-image">
+  </div>
+  <div class="slider-container mt-3">
+    <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
+  </div>
+</div>
+      <!-- Arrow
       <div class="transform-arrow mt-4 d-flex justify-content-center">
         <svg width="100%" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -496,7 +503,7 @@ body {
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 
@@ -748,16 +755,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const leftImage = document.querySelector(".left-image");
   const rightImage = document.querySelector(".right-image");
 
+  const maxBlur = 12; // Higher blur
+
+  // On input, dynamically update blur + clip
   slider.addEventListener("input", () => {
     const value = parseInt(slider.value);
     const mid = value / 100;
 
-    leftImage.style.clipPath = `polygon(0 0, ${100 - value}% 0, ${100 - value}% 100%, 0 100%)`;
-    rightImage.style.clipPath = `polygon(${100 - value}% 0, 100% 0, 100% 100%, ${100 - value}% 100%)`;
+    // Right image fades from blur to clear (as slider goes right)
+    rightImage.style.filter = `blur(${(100 - value) / 100 * maxBlur}px)`;
+    leftImage.style.filter = `blur(${value / 100 * maxBlur}px)`;
 
-    leftImage.style.filter = `blur(${(value / 100) * 5}px)`;
-    rightImage.style.filter = `blur(${(100 - value) / 100 * 5}px)`;
+    // Clip regions update for smooth transition (optional)
+    rightImage.style.clipPath = `polygon(${value}% 0, 100% 0, 100% 100%, ${value}% 100%)`;
+    leftImage.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0 100%)`;
   });
+
+  // Trigger initial state
+  slider.dispatchEvent(new Event("input"));
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
