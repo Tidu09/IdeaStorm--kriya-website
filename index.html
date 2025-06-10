@@ -722,6 +722,23 @@ body {
   </div>
 </div>
 
+<div class="modal fade" id="trialKitModal" tabindex="-1" aria-labelledby="trialKitModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trialKitModalLabel">See the Transformation?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="lead">Make it Real for Your Child!</p>
+        <p>Unlock a world of creativity and hands-on learning with our trial kit.</p>
+        <img src="images/kriya_logo_favicon.png" alt="Kriya Logo" style="max-width: 80px; margin-bottom: 1rem;">
+        <a href="checkout.html" class="btn btn-kriya btn-lg mt-3 w-75">Get Your Trial Kit Now!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
 // Form submission logic
@@ -827,18 +844,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const leftImage = document.querySelector(".left-image");
   const rightImage = document.querySelector(".right-image");
 
+  const trialKitModal = new bootstrap.Modal(document.getElementById('trialKitModal'));
+  let hasModalPopped = false;
+
   const maxBlur = 12;
 
   function updateBlur(value) {
     leftImage.style.filter = `blur(${value / 100 * maxBlur}px)`;
     rightImage.style.filter = `blur(${(100 - value) / 100 * maxBlur}px)`;
+
+    leftImage.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0 100%)`;
+    rightImage.style.clipPath = `polygon(${value}% 0, 100% 0, 100% 100%, ${value}% 100%)`;
+
+    if (value === 100 && !hasModalPopped) {
+      trialKitModal.show();
+      hasModalPopped = true;
+    } else if (value < 100 && hasModalPopped) {
+      hasModalPopped = false;
+    }
   }
 
   slider.addEventListener("input", () => {
     updateBlur(parseInt(slider.value));
   });
 
-  // Initialize
   updateBlur(parseInt(slider.value));
 });
 </script>
