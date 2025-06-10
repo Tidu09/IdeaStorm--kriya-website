@@ -845,6 +845,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const rightImage = document.querySelector(".right-image");
   const trialKitModal = new bootstrap.Modal(document.getElementById('trialKitModal'));
   let hasModalPopped = false;
+  let modalTimeoutId = null; // Declare modalTimeoutId here
+
 
   const maxBlur = 12;
 
