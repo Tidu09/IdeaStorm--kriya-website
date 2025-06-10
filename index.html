@@ -843,7 +843,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const slider = document.getElementById("sliderControl");
   const leftImage = document.querySelector(".left-image");
   const rightImage = document.querySelector(".right-image");
-
   const trialKitModal = new bootstrap.Modal(document.getElementById('trialKitModal'));
   let hasModalPopped = false;
 
@@ -852,22 +851,33 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateBlur(value) {
     leftImage.style.filter = `blur(${value / 100 * maxBlur}px)`;
     rightImage.style.filter = `blur(${(100 - value) / 100 * maxBlur}px)`;
-
-    leftImage.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0 100%)`;
-    rightImage.style.clipPath = `polygon(${value}% 0, 100% 0, 100% 100%, ${value}% 100%)`;
-
-    if (value === 100 && !hasModalPopped) {
-      trialKitModal.show();
-      hasModalPopped = true;
-    } else if (value < 100 && hasModalPopped) {
-      hasModalPopped = false;
-    }
   }
+
+     if (value === 100 && !hasModalPopped) {
+      // Clear any previous timeout if the slider is already at 100
+      if (modalTimeoutId) {
+        clearTimeout(modalTimeoutId);
+      }
+      // Set a new timeout for 2 seconds (2000 milliseconds)
+      modalTimeoutId = setTimeout(() => {
+        trialKitModal.show();
+        hasModalPopped = true; // Set flag only after showing the modal
+      }, 2000); // 2-second delay
+    } else if (value < 100) {
+      // Clear the timeout if the slider moves away from 100
+      if (modalTimeoutId) {
+        clearTimeout(modalTimeoutId);
+        modalTimeoutId = null; // Reset the timeout ID
+      }
+      hasModalPopped = false; // Reset the flag
+    }
+  
 
   slider.addEventListener("input", () => {
     updateBlur(parseInt(slider.value));
   });
 
+  // Initialize
   updateBlur(parseInt(slider.value));
 });
 </script>
