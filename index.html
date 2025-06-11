@@ -174,14 +174,15 @@ body {
 
 .slogan-text {
   font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(45deg, #FF6500, #FFD700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-weight: 700;
   font-size: 1.7rem;
   letter-spacing: 1px;
-  margin: 0;
   line-height: 1.2;
+  margin: 0;
+  background: linear-gradient(45deg, #FF6500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* Important for background-clip to work */
 }
 
 
@@ -577,7 +578,7 @@ body {
 </section>
 
 
-<!-- Call to Action -->
+
 <!-- Call to Action -->
 <section id="subscribe" class="kriya-blue text-center py-5">
   <div class="container">
@@ -591,10 +592,10 @@ body {
     </p>
 
     <!-- ✨ Slogan moved here -->
-    <div>
-      <p class="slogan-text mb-0">Designed by Us</p>
-      <p class="slogan-text">Built by You</p>
-    </div>
+  <div class="text-center">
+  <span class="slogan-text">Designed by Us</span><br>
+  <span class="slogan-text">Built by You</span>
+</div>
   </div>
 </section>
 
