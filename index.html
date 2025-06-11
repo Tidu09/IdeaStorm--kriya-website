@@ -102,6 +102,9 @@ body {
   height: 80px; /* Default for mobile */
 }
 
+.brain-gear-logo {
+  height: 60px;
+}
 /* Link Group */
 .link-group {
   display: flex;
@@ -201,21 +204,12 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
     max-width: 100%; /* make it full width */
   }
 
-  .kriya-logo {
-    position: absolute;
-    top: 2px; /* pin to very top */
-    left: 10px;
-    height: 55px; /* slightly smaller logo */
+   .kriya-logo {
+    height: 55px;
   }
 
-
-  .brain-gear-logo {
-    position: absolute;
-    bottom: 2px;
-    right: 10px;
+    .brain-gear-logo {
     height: 45px;
-    margin-top: 0;
-    float: none;
   }
 
   .slogan {
@@ -311,16 +305,38 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   .kriya-logo {
     height: 60px; /* small devices (tablets) */
   }
+    .brain-gear-logo {
+    height: 45px;
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1199.98px) {
   .kriya-logo {
     height: 100px; /* medium devices (desktops) */
-}}
+}
+  .brain-gear-logo {
+    height: 45px;
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
+  }
+}
 
 @media (min-width: 1200px) {
   .kriya-logo {
     height: 120px; /* large devices (large desktops) */
+  }
+    .brain-gear-logo {
+    height: 45px;
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
   }
 }
 
