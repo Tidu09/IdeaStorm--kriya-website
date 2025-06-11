@@ -172,17 +172,18 @@ body {
   margin-top: 0.5rem;
 }
 
-.slogan p {
+.slogan-text {
   font-family: 'Orbitron', sans-serif;
   background: linear-gradient(45deg, #FF6500, #FFD700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
-  margin: 0;
-  text-align: right;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   letter-spacing: 1px;
+  margin: 0;
+  line-height: 1.2;
 }
+
 
 .custom-header {
    background-color: #2C2C2C; /* Darker, richer orange gradient */
@@ -577,20 +578,26 @@ body {
 
 
 <!-- Call to Action -->
+<!-- Call to Action -->
 <section id="subscribe" class="kriya-blue text-center py-5">
   <div class="container">
     <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
-    <!-- <a href="#" class="btn btn-kriya btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#orderModal">Get Your Trial Kit</a> -->
-     <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
+    <p class="lead">Watch them go from bored to brilliant</p>
 
-    <p class="fw-bold m-0 mt-3">
+    <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
+
+    <p class="fw-bold mt-3 mb-4">
       Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
     </p>
-  <div class="slogan">
-      <p>Designed by Kriya<br>Built by You</p>
-  </div>
+
+    <!-- ✨ Slogan moved here -->
+    <div>
+      <p class="slogan-text mb-0">Designed by Us</p>
+      <p class="slogan-text">Built by You</p>
+    </div>
   </div>
 </section>
+
 
 <!-- Footer -->
 <footer class="bg-dark text-white py-4">
