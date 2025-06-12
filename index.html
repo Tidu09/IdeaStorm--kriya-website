@@ -322,6 +322,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   header .container {
     padding: 0 10px; /* tighter spacing for small screens */
   }
+
 }
 
 @media (min-width: 768px) and (max-width: 1199.98px) {
@@ -340,6 +341,44 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   header .container {
     padding: 0 10px; /* tighter spacing for small screens */
   }
+
+  
+  .dual-image-wrapper {
+  display: flex;
+  width: 419.1px;       /* 762 + 762 */
+  height: 281.6px;      /* Original height */
+  overflow: hidden;
+  margin: auto;
+}
+
+.side-image {
+  width: 209.55px;
+  height: 281.6px;
+  object-fit: cover;  /* Ensures image fills without shrinking */
+  transition: filter 0.3s ease;
+}
+.comparison-slider {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.slider-container {
+  display: flex; /* Make it a flex container */
+  align-items: center; /* Vertically align items in the middle */
+  justify-content: center; /* Horizontally center the group of items */
+  margin-top: 10px; /* Keep your existing margin */
+}
+
+/* Existing .slider styles */
+.slider {
+  width: 300px; /* Or 80% for mobile as per previous discussion */
+  height: 6px;
+  background: #ccc;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none; /* Crucial for custom styling */
+  appearance: none; /* Standard property */
+}
 }
 
 @media (min-width: 1200px) {
