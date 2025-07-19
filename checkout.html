@@ -70,6 +70,9 @@
 </style>
 </head>
 <body>
+
+<body style="display:none;">
+
   <div class="container">
     <div class="checkout-box">
       <div class="text-center mb-4">
@@ -130,7 +133,28 @@
 
 
   <script>
+
+
     const urlParams = new URLSearchParams(window.location.search);
+    const invite = urlParams.get('invite');
+
+    if (!invite) {
+      window.location.href = 'enter-invite.html';
+    } else {
+      fetch(`/api/validate-invite?code=${invite}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.valid) {
+            window.location.href = 'enter-invite.html';
+          } else {
+            document.body.style.display = '';
+          }
+        })
+        .catch(() => {
+          window.location.href = 'enter-invite.html';
+        });
+    }
+
     const selectedPlan = urlParams.get("plan") || "trial";
 
     let amount = 99900;
