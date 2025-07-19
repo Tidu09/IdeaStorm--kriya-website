@@ -1,0 +1,17 @@
+<input id="inviteCode" placeholder="Enter your invite code">
+<button id="proceedBtn">Proceed</button>
+
+<script>
+document.getElementById('proceedBtn').onclick = async () => {
+  const code = document.getElementById('inviteCode').value.trim();
+  const res = await fetch(`/api/validate-invite?code=${code}`);
+  const data = await res.json();
+  if (data.valid) {
+    // Redirect based on plan (optional)
+    window.location.href = `checkout.html?invite=${code}`;
+    // or let user pick plan AFTER validation
+  } else {
+    alert("Invalid invite code.");
+  }
+};
+</script>
