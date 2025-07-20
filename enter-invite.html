@@ -48,6 +48,15 @@
     <p class="text-muted mt-3 small">Haven't received a code? <a href="/index.html" class="kriya-gold">Get in Touch</a></p>
 
     <div id="error-msg" class="text-danger mt-2" style="display:none;"></div>
+
+<div id="loading-spinner" class="text-primary mt-3" style="display:none;">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Validating...</span>
+  </div>
+  <p class="mt-2">Validating your invite code...</p>
+</div>
+
+
   </div>
 </div>
 
@@ -55,31 +64,39 @@
 document.getElementById('validateBtn').onclick = async () => {
   const code = document.getElementById('inviteCode').value.trim();
   const errorMsg = document.getElementById('error-msg');
+  const spinner = document.getElementById('loading-spinner');
+
   if (!code) {
     errorMsg.textContent = 'Please enter a code.';
     errorMsg.style.display = 'block';
     return;
   }
 
+  spinner.style.display = 'block';
+  errorMsg.style.display = 'none';
+
   try {
     const res = await fetch(`/api/validate-invite?code=${code}`);
     const data = await res.json();
 
     if (data.valid) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const plan = urlParams.get('plan') || 'trial';
+      const urlParams = new URLSearchParams(window.location.search);
+      const plan = urlParams.get('plan') || 'trial';
 
-  sessionStorage.setItem('inviteCode', code);
-  window.location.href = `checkout.html?invite=${code}&plan=${plan}`;
-} else {
+      sessionStorage.setItem('inviteCode', code);
+      window.location.href = `checkout.html?invite=${code}&plan=${plan}`;
+    } else {
       errorMsg.textContent = 'Invalid or expired invite code.';
       errorMsg.style.display = 'block';
+      spinner.style.display = 'none';
     }
   } catch (err) {
     errorMsg.textContent = 'Something went wrong. Please try again later.';
     errorMsg.style.display = 'block';
+    spinner.style.display = 'none';
   }
 };
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
