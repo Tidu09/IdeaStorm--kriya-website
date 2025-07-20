@@ -97,8 +97,20 @@ if (!result.shipment_id) {
 }
 
 const shipmentId = result.shipment_id;
-
-
+if (data.invite) {
+  await fetch("https://kriyaedu.com/api/mark-invite-used", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      code: data.invite,
+      usedBy: `${data.name} (${data.email})`,
+      plan: data.plan
+    })
+  });
+} else {
+  console.log("⚠️ No invite code provided. Skipping invite marking.");
+}
+    
 // const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
 //   method: "POST",
 //   headers: {
