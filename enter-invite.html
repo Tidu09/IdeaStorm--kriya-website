@@ -66,8 +66,12 @@ document.getElementById('validateBtn').onclick = async () => {
     const data = await res.json();
 
     if (data.valid) {
-      window.location.href = `subscription.html?invite=${code}`;
-    } else {
+  const urlParams = new URLSearchParams(window.location.search);
+  const plan = urlParams.get('plan') || 'trial';
+
+  sessionStorage.setItem('inviteCode', code);
+  window.location.href = `checkout.html?invite=${code}&plan=${plan}`;
+} else {
       errorMsg.textContent = 'Invalid or expired invite code.';
       errorMsg.style.display = 'block';
     }
