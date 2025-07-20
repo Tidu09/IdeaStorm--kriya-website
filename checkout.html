@@ -223,6 +223,8 @@
       .then(options => {
   options.handler = function (response) {
     document.getElementById("loading-overlay").classList.add("loading-visible");
+    const invite = new URLSearchParams(window.location.search).get('invite') || sessionStorage.getItem('inviteCode');
+
 
     const orderData = {
       payment_id: response.razorpay_payment_id || response.razorpay_subscription_id,
@@ -230,6 +232,7 @@
       name: document.getElementById("name").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
+      invite: invite,
       address: {
         house: document.getElementById("house").value,
         building: document.getElementById("building").value,
