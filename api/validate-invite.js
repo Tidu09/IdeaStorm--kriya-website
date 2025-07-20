@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
       return res.status(400).json({ valid: false, error: "Invite code is required" });
     }
 
-    const range = "Invites!A2:B";  // A = Invite Code, B = Status
+   const range = 'Sheet1!A2:B';  // A = Invite Code, B = Status
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
       range
