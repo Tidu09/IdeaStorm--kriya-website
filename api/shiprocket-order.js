@@ -19,6 +19,9 @@ async function fetchShiprocketToken() {
   }
 
   const json = await resp.json();
+
+  console.log("🚀 Shiprocket token:", json.token); // 👈 print token here
+
   cachedToken = json.token;
   const ttlMs = (json.expires_in ?? 3600) * 1000;
   tokenExpiryMs = Date.now() + ttlMs - 60_000; // refresh 1 min early
