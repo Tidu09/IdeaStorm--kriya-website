@@ -4,7 +4,7 @@ let cachedToken = null;
 let tokenExpiryMs = 0;
 
 async function fetchShiprocketToken() {
-  const resp = await fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
+  const resp = await fetch("https://apiv1.shiprocket.in/v1/external/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
