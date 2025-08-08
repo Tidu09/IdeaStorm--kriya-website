@@ -3,39 +3,38 @@ const nodemailer = require('nodemailer');
 let cachedToken = null;
 let tokenExpiryMs = 0;
 
-let SHIPROCKET_TOKEN = process.env.SHIPROCKET_HARDCODED_TOKEN;
 
-// async function fetchShiprocketToken() {
-//   const resp = await fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({
-//       email: process.env.SHIPROCKET_EMAIL,     // set in .env
-//       password: process.env.SHIPROCKET_PASSWORD // set in .env
-//     })
-//   });
+async function fetchShiprocketToken() {
+  const resp = await fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: process.env.SHIPROCKET_EMAIL,     // set in .env
+      password: process.env.SHIPROCKET_PASSWORD // set in .env
+    })
+  });
 
-//   if (!resp.ok) {
-//     const t = await resp.text();
-//     throw new Error(`Auth failed: ${t}`);
-//   }
+  if (!resp.ok) {
+    const t = await resp.text();
+    throw new Error(`Auth failed: ${t}`);
+  }
 
-//   const json = await resp.json();
+  const json = await resp.json();
 
-//   console.log("🚀 Shiprocket token:", json.token); // 👈 print token here
+  console.log("🚀 Shiprocket token:", json.token); // 👈 print token here
 
-//   cachedToken = json.token;
-//   const ttlMs = (json.expires_in ?? 3600) * 1000;
-//   tokenExpiryMs = Date.now() + ttlMs - 60_000; // refresh 1 min early
-//   return cachedToken;
-// }
+  cachedToken = json.token;
+  const ttlMs = (json.expires_in ?? 3600) * 1000;
+  tokenExpiryMs = Date.now() + ttlMs - 60_000; // refresh 1 min early
+  return cachedToken;
+}
 
-// async function getShiprocketToken() {
-//   if (cachedToken && Date.now() < tokenExpiryMs) {
-//     return cachedToken;
-//   }
-//   return fetchShiprocketToken();
-// }
+async function getShiprocketToken() {
+  if (cachedToken && Date.now() < tokenExpiryMs) {
+    return cachedToken;
+  }
+  return fetchShiprocketToken();
+}
 
 module.exports = async function handler(req, res) {
   const allowedOrigin = "https://kriyaedu.com";
@@ -61,7 +60,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  // let SHIPROCKET_TOKEN = await getShiprocketToken();
+  let SHIPROCKET_TOKEN = await getShiprocketToken();
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
 
