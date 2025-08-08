@@ -4,7 +4,7 @@ let cachedToken = null;
 let tokenExpiryMs = 0;
 
 async function fetchShiprocketToken() {
-  const resp = await fetch("https://apiv1.shiprocket.in/v1/external/auth/login", {
+  const resp = await fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -114,13 +114,6 @@ module.exports = async function handler(req, res) {
     }
 
 const result = await response.json();
-
-// Check if HTTP failed
-if (!response.ok) {
-  const errorText = await response.text();
-  console.log("❌ Shiprocket API Error:", errorText);
-  throw new Error("Shiprocket API failed");
-}
 
 // Check if shipment_id exists (order was created)
 if (!result.shipment_id) {
