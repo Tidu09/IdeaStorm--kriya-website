@@ -69,7 +69,7 @@
   }
 </style>
 </head>
-<body>
+
 
 <body style="display:none;">
 
@@ -331,6 +331,43 @@
 
 
   </script>
+<!-- 
+  <gmpx-api-loader key="YOUR_API_KEY"></gmpx-api-loader>
+
+<script type="module">
+  import "@googlemaps/extended-component-library/place_autocomplete.js";
+
+  const input = document.getElementById("house");
+
+  const el = document.createElement("gmpx-place-autocomplete");
+  el.setAttribute("for", "house");
+  el.setAttribute("autocompleteoptions", JSON.stringify({ types: ["address"] }));
+  input.parentNode.insertBefore(el, input);
+
+  input.addEventListener("gmpx-placechange", (e) => {
+    const place = e.detail.place;
+    if (!place) return;
+
+    const parts = (place.formattedAddress || "").split(",");
+    document.getElementById("house").value     = parts[0]?.trim() || "";
+    document.getElementById("building").value  = parts[1]?.trim() || "";
+    document.getElementById("locality").value  = parts[2]?.trim() || "";
+
+    for (const c of place.addressComponents || []) {
+      if (c.types?.includes("administrative_area_level_2")) {
+        document.getElementById("city").value = c.longText || c.shortText || "";
+      }
+      if (c.types?.includes("postal_code")) {
+        document.getElementById("pincode").value = c.longText || c.shortText || "";
+      }
+      if (c.types?.includes("administrative_area_level_1")) {
+        document.getElementById("state").value = c.longText || c.shortText || "";
+      }
+    }
+  });
+</script> -->
+
+
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFP3rGbRCt4isGIoIaOlg_oS2namjPnS4&libraries=places&callback=initAutocomplete"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
@@ -445,7 +482,6 @@
     </div>
   </div>
 </div>
-
 
 </body>
 </html>
