@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  let SHIPROCKET_TOKEN = await getShiprocketToken();
+  // let SHIPROCKET_TOKEN = await getShiprocketToken();
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
 
