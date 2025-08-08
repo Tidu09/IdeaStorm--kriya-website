@@ -4,7 +4,7 @@ let cachedToken = null;
 let tokenExpiryMs = 0;
 
 async function fetchShiprocketToken() {
-  const resp = await fetch("https://apiv1.shiprocket.in/v1/external/auth/login", {
+  const resp = await fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -49,6 +49,14 @@ module.exports = async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Check if required environment variables are set
+  if (!process.env.SHIPROCKET_EMAIL || !process.env.SHIPROCKET_PASSWORD) {
+    console.error("❌ SHIPROCKET_EMAIL or SHIPROCKET_PASSWORD environment variables are not set");
+    return res.status(500).json({ 
+      error: "Shiprocket configuration error: Email or password not found. Please check your environment variables." 
+    });
   }
 
   let SHIPROCKET_TOKEN = await getShiprocketToken();
@@ -113,139 +121,67 @@ module.exports = async function handler(req, res) {
     if (!response.ok) {
       const errorText = await response.text();
       console.log("❌ Shiprocket Response:", errorText);
-      throw new Error(errorText || "Shiprocket API failed");
+      console.log("🔑 Token being used:", SHIPROCKET_TOKEN ? "Token exists" : "No token");
+      console.log("📡 Response status:", response.status);
+      console.log("📡 Response headers:", Object.fromEntries(response.headers.entries()));
+      
+      if (response.status === 403) {
+        throw new Error("Shiprocket authentication failed. Please check your credentials and ensure they have the required permissions.");
+      } else if (response.status === 401) {
+        throw new Error("Shiprocket credentials are invalid. Please check your email and password.");
+      } else {
+        throw new Error(`Shiprocket API failed with status ${response.status}: ${errorText}`);
+      }
     }
 
-const result = await response.json();
+    const result = await response.json();
 
-// Check if shipment_id exists (order was created)
-if (!result.shipment_id) {
-  console.log("⚠️ Order created, but no shipment_id found:", JSON.stringify(result, null, 2));
-  throw new Error("Shiprocket order creation failed: shipment_id missing");
-}
+    // Check if shipment_id exists (order was created)
+    if (!result.shipment_id) {
+      console.log("⚠️ Order created, but no shipment_id found:", JSON.stringify(result, null, 2));
+      throw new Error("Shiprocket order creation failed: shipment_id missing");
+    }
 
-const shipmentId = result.shipment_id;
-if (data.invite) {
-  await fetch("https://kriyaedu.com/api/mark-invite-used", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      code: data.invite,
-      usedBy: `${data.name} (${data.email})`,
-      plan: data.plan
-    })
-  });
-} else {
-  console.log("⚠️ No invite code provided. Skipping invite marking.");
-}
+    const shipmentId = result.shipment_id;
     
-// const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
-//   method: "POST",
-//   headers: {
-//     "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
-//     "Content-Type": "application/json"
-//   },
-//   body: JSON.stringify({ shipment_id: shipmentId })
-// });
+    if (data.invite) {
+      await fetch("https://kriyaedu.com/api/mark-invite-used", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: data.invite,
+          usedBy: `${data.name} (${data.email})`,
+          plan: data.plan
+        })
+      });
+    } else {
+      console.log("⚠️ No invite code provided. Skipping invite marking.");
+    }
+    
+    // Send email notification
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
+      },
+    });
 
-// const assignResult = await assignRes.json();
+    await transporter.sendMail({
+      from: 'Kriya <ideastorm.technologies@gmail.com>',
+      to: 'ideastorm.technologies@gmail.com',
+      subject: `New Order Created - Shipment #${shipmentId}`,
+      text: `A new order has been created with shipment ID ${shipmentId}.\n\nCustomer: ${data.name} (${data.email})\nPlan: ${data.plan}\nAmount: ₹${price}`,
+    });
 
-// const awbCode = assignResult.response?.data?.awb_code || null;
-// const courierName = assignResult.response?.data?.courier_name || null;
-
-// if (!assignRes.ok || !awbCode) {
-//   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
-//   throw new Error("AWB assignment failed");
-// }
-
-//     await fetch("https://apiv2.shiprocket.in/v1/external/courier/generate/pickup", {
-//   method: "POST",
-//   headers: {
-//     Authorization: `Bearer ${SHIPROCKET_TOKEN}`,
-//     "Content-Type": "application/json"
-//   },
-//   body: JSON.stringify({ shipment_id: shipmentId })
-// });
-
-//     // Fetch the shipping label
-//     const labelRes = await fetch(
-//       `https://apiv2.shiprocket.in/v1/external/courier/generate/label?shipment_id=${shipmentId}`,
-//       {
-//         method: 'GET',
-//         headers: {
-//           Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-//         }
-//       }
-//     );
-
-//     const labelBuffer = await labelRes.arrayBuffer();
-
-//     const invoiceRes = await fetch(
-//   `https://apiv2.shiprocket.in/v1/external/courier/generate/invoice?shipment_id=${shipmentId}`,
-//   {
-//     method: "GET",
-//     headers: {
-//       Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-//     }
-//   }
-// );
-
-// const invoiceBuffer = await invoiceRes.arrayBuffer();
-
-//     const manifestRes = await fetch(
-//   `https://apiv2.shiprocket.in/v1/external/manifests/generate?shipment_id=${shipmentId}`,
-//   {
-//     method: "GET",
-//     headers: {
-//       Authorization: `Bearer ${SHIPROCKET_TOKEN}`
-//     }
-//   }
-// );
-
-// const manifestBuffer = await manifestRes.arrayBuffer();
-
-    // Send email with label
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: EMAIL_USER,
-    pass:EMAIL_PASS,
-  },
-});
-
-await transporter.sendMail({
-  from: 'Kriya <ideastorm.technologies@gmail.com>',
-  to: 'ideastorm.technologies@gmail.com',
-  subject: `Shipping Label - Shipment #${shipmentId}`,
-  text: `Attached is the shipping label for shipment ID ${shipmentId}.`,
-//  attachments: [
-//   {
-//     filename: `Label-${shipmentId}.pdf`,
-//     content: Buffer.from(labelBuffer),
-//     contentType: 'application/pdf'
-//   },
-//   {
-//     filename: `Invoice-${shipmentId}.pdf`,
-//     content: Buffer.from(invoiceBuffer),
-//     contentType: 'application/pdf'
-//   },
-//   {
-//     filename: `Manifest-${shipmentId}.pdf`,
-//     content: Buffer.from(manifestBuffer),
-//     contentType: 'application/pdf'
-//   }
-// ]
-});
-
-return res.status(200).json({
-  success: true,
-  tracking: {
-    shipment_id: shipmentId,
-    // awb_code: awbCode,
-    // courier_name: courierName
-  }
-});
+    return res.status(200).json({
+      success: true,
+      tracking: {
+        shipment_id: shipmentId,
+      }
+    });
   } catch (error) {
+    console.error("❌ Shiprocket error:", error);
     return res.status(500).json({ error: error.message });
   }
 };
