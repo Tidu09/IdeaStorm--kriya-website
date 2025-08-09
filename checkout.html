@@ -204,7 +204,7 @@
       fetch("/api/create-subscription", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, selectedPlan })
+      body: JSON.stringify({ name, email, phone, selectedPlan, amount})
     })
       .then(async res => {
         const contentType = res.headers.get("content-type");
@@ -485,5 +485,6 @@
 
 </body>
 </html>
+
 
 
