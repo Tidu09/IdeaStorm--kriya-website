@@ -35,7 +35,6 @@ async function getShiprocketToken() {
   }
   return fetchShiprocketToken();
 }
-
 module.exports = async function handler(req, res) {
   const allowedOrigin = "https://kriyaedu.com";
 
@@ -52,7 +51,6 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Check if required environment variables are set
   if (!process.env.SHIPROCKET_EMAIL || !process.env.SHIPROCKET_PASSWORD) {
     console.error("❌ SHIPROCKET_EMAIL or SHIPROCKET_PASSWORD environment variables are not set");
     return res.status(500).json({ 
@@ -107,104 +105,100 @@ module.exports = async function handler(req, res) {
     weight: 1
   };
 
- try {
-  console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
+  try {
+    console.log("🚚 SHIPROCKET PAYLOAD", JSON.stringify(payload, null, 2));
 
-  const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${SHIPROCKET_TOKEN}`
-    },
-    body: JSON.stringify(payload)
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.log("❌ Shiprocket Response:", errorText);
-    console.log("🔑 Token being used:", SHIPROCKET_TOKEN ? "Token exists" : "No token");
-    console.log("📡 Response status:", response.status);
-    console.log("📡 Response headers:", Object.fromEntries(response.headers.entries()));
-    
-    if (response.status === 403) {
-      throw new Error("Shiprocket authentication failed. Please check your credentials and ensure they have the required permissions.");
-    } else if (response.status === 401) {
-      throw new Error("Shiprocket credentials are invalid. Please check your email and password.");
-    } else {
-      throw new Error(`Shiprocket API failed with status ${response.status}: ${errorText}`);
-    }
-  }
-
-  const result = await response.json();
-
-  if (!result.shipment_id) {
-    console.log("⚠️ Order created, but no shipment_id found:", JSON.stringify(result, null, 2));
-    throw new Error("Shiprocket order creation failed: shipment_id missing");
-  }
-
-  const shipmentId = result.shipment_id;
-
-  // ➡️ New AWB generation code starts here
-  const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ shipment_id: shipmentId })
-  });
-
-  const assignResult = await assignRes.json();
-  const awbCode = assignResult.response?.data?.awb_code || null;
-  const courierName = assignResult.response?.data?.courier_name || null;
-
-  if (!assignRes.ok || !awbCode) {
-    console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
-    // Note: You might not want to fail the whole order here, but for now, we will.
-    throw new Error("AWB assignment failed");
-  }
-  // ➡️ New AWB generation code ends here
-
-  if (data.invite) {
-    await fetch("https://kriyaedu.com/api/mark-invite-used", {
+    const response = await fetch("https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        code: data.invite,
-        usedBy: `${data.name} (${data.email})`,
-        plan: data.plan
-      })
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${SHIPROCKET_TOKEN}`
+      },
+      body: JSON.stringify(payload)
     });
-  } else {
-    console.log("⚠️ No invite code provided. Skipping invite marking.");
-  }
-  
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: EMAIL_USER,
-      pass: EMAIL_PASS,
-    },
-  });
 
-  await transporter.sendMail({
-    from: 'Kriya <ideastorm.technologies@gmail.com>',
-    to: 'ideastorm.technologies@gmail.com',
-    // Updated subject and text to include AWB
-    subject: `New Order with AWB ${awbCode} - Shipment #${shipmentId}`,
-    text: `A new order has been created with shipment ID ${shipmentId}.\n\nCourier: ${courierName}\nAWB/Tracking #: ${awbCode}\n\nCustomer: ${data.name} (${data.email})\nPlan: ${data.plan}\nAmount: ₹${price}`,
-  });
-
-  // Updated the response to include the new tracking info
-  return res.status(200).json({
-    success: true,
-    tracking: {
-      shipment_id: shipmentId,
-      awb_code: awbCode,
-      courier_name: courierName
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log("❌ Shiprocket Response:", errorText);
+      console.log("🔑 Token being used:", SHIPROCKET_TOKEN ? "Token exists" : "No token");
+      console.log("📡 Response status:", response.status);
+      console.log("📡 Response headers:", Object.fromEntries(response.headers.entries()));
+      
+      if (response.status === 403) {
+        throw new Error("Shiprocket authentication failed. Please check your credentials and ensure they have the required permissions.");
+      } else if (response.status === 401) {
+        throw new Error("Shiprocket credentials are invalid. Please check your email and password.");
+      } else {
+        throw new Error(`Shiprocket API failed with status ${response.status}: ${errorText}`);
+      }
     }
-  });
-} catch (error) {
-  console.error("❌ Shiprocket error:", error);
-  return res.status(500).json({ error: error.message });
-}
+
+    const result = await response.json();
+
+    if (!result.shipment_id) {
+      console.log("⚠️ Order created, but no shipment_id found:", JSON.stringify(result, null, 2));
+      throw new Error("Shiprocket order creation failed: shipment_id missing");
+    }
+
+    const shipmentId = result.shipment_id;
+
+    const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ shipment_id: shipmentId })
+    });
+
+    const assignResult = await assignRes.json();
+    const awbCode = assignResult.response?.data?.awb_code || null;
+    const courierName = assignResult.response?.data?.courier_name || null;
+
+    if (!assignRes.ok || !awbCode) {
+      console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
+      throw new Error("AWB assignment failed");
+    }
+
+    if (data.invite) {
+      await fetch("https://kriyaedu.com/api/mark-invite-used", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: data.invite,
+          usedBy: `${data.name} (${data.email})`,
+          plan: data.plan
+        })
+      });
+    } else {
+      console.log("⚠️ No invite code provided. Skipping invite marking.");
+    }
+    
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: 'Kriya <ideastorm.technologies@gmail.com>',
+      to: 'ideastorm.technologies@gmail.com',
+      subject: `New Order with AWB ${awbCode} - Shipment #${shipmentId}`,
+      text: `A new order has been created with shipment ID ${shipmentId}.\n\nCourier: ${courierName}\nAWB/Tracking #: ${awbCode}\n\nCustomer: ${data.name} (${data.email})\nPlan: ${data.plan}\nAmount: ₹${price}`,
+    });
+
+    return res.status(200).json({
+      success: true,
+      tracking: {
+        shipment_id: shipmentId,
+        awb_code: awbCode,
+        courier_name: courierName
+      }
+    });
+  } catch (error) {
+    console.error("❌ Shiprocket error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}; // ⬅️ This was the missing closing brace
