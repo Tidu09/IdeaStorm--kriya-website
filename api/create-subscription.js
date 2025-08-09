@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
 
-  const { name, email, phone, selectedPlan } = req.body;
+  const { name, email, phone, selectedPlan,amount } = req.body;
 
   const key = process.env.RAZORPAY_KEY;
   const secret = process.env.RAZORPAY_SECRET;
@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
       options.description = "Monthly Subscription – Autopay Enabled";
 
     } else {
-      const amount = selectedPlan === "trial" ? 99900 : 1450000;
+      // const amount = selectedPlan === "trial" ? 99900 : 1450000;
 
       const orderRes = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
