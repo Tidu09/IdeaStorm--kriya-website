@@ -313,7 +313,31 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   font-weight: bold;
 }
 
+.input-group .choices {
+  /* This targets the container created by Choices.js.
+    flex: 0 0 130px; means:
+    - Don't grow (0)
+    - Don't shrink (0)
+    - Set the base width to 130px 
+  */
+  flex: 0 0 130px;
+}
 
+.choices__inner {
+  /*
+    This ensures the dropdown's inner content has the correct
+    border radius to seamlessly join the next input.
+  */
+  border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+#whatsapp {
+  /* This ensures the phone number input has the correct
+    border radius on its left side.
+  */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .kriya-logo {
@@ -778,7 +802,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 </div>
           <div class="mb-3">
           <div class="input-group">
-            <select class="form-select country-code" id="countryCode" required style="max-width: 130px;">
+            <select class="form-select country-code" id="countryCode" required> </select>
               <!-- Options dynamically filled here -->
             </select>
             <input type="text" class="form-control" id="whatsapp" placeholder="Phone Number" required>
@@ -1015,5 +1039,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
 
