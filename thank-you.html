@@ -54,19 +54,20 @@
       document.getElementById('tracking-id').innerText = 'Unavailable';
     }
 
-    const paymentId = sessionStorage.getItem("payment_id");
+//     const paymentId = sessionStorage.getItem("payment_id");
 
-if (paymentId) {
-  const cloudName = "das1rgfrb"; // 👈 Replace with your Cloudinary cloud name
-  const receiptUrl = `https://res.cloudinary.com/${cloudName}/raw/upload/receipts/receipt-${paymentId}.pdf`;
+// if (paymentId) {
+//   const cloudName = "das1rgfrb"; // 👈 Replace with your Cloudinary cloud name
+//   const receiptUrl = `https://res.cloudinary.com/${cloudName}/raw/upload/receipts/receipt-${paymentId}.pdf`;
 
-  const btn = document.getElementById("download-receipt-btn");
-  btn.href = receiptUrl;
-  btn.style.display = "inline-block";
-} else {
-  // Optional fallback
-  document.getElementById("download-receipt-btn").style.display = "none";
-}
+//   const btn = document.getElementById("download-receipt-btn");
+//   btn.href = receiptUrl;
+//   btn.style.display = "inline-block";
+// } else {
+//   // Optional fallback
+//   document.getElementById("download-receipt-btn").style.display = "none";
+// }
+
   </script>
 </body>
 </html>
