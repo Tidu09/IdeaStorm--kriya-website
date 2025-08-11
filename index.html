@@ -1,1164 +1,1041 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kriya</title>
-    <!-- Include Bootstrap CSS for modern design -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kriya – Hands-on Learning for Kids</title>
+  <meta name="description" content="India's best STEM kits & robotics kits for kids 11+. Build circuits, code robots & explore hands-on learning with Kriya’s fun DIY projects.">
+  <meta property="og:title" content="STEM Kits in India | Kriya">
+  <meta property="og:description" content="Explore Kriya's hands-on STEM kits for kids 11+. Build electronics, code AI projects, and boost creativity.">
+  <meta property="og:image" content="https://kriyaedu.com/images/kriya-logo.png"> <!-- Replace if different image preferred -->
+  <meta property="og:url" content="https://kriyaedu.com">
+  <meta property="og:type" content="website">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 
-
-    <!-- Code Mirror -->
-    <!-- ✅ CodeMirror Core -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
-
-    <!-- ✅ Syntax Highlighting for C++ (Required for ESP8266 Code) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/clike/clike.min.js"></script>
-
-    <!-- ✅ Bracket Matching and Auto-Completion -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/edit/matchbrackets.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/edit/closebrackets.min.js"></script>
-
-    <!-- ✅ Code Hinting / Autocomplete -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/hint/show-hint.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/hint/anyword-hint.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/hint/javascript-hint.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/hint/show-hint.min.css">
-
-    <!-- ✅ Search / Find Functionality -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/search/search.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/search/searchcursor.min.js"></script>
-
-    <!-- ✅ Optional: Code Folding for Better Readability -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/fold/foldcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/fold/foldgutter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/fold/brace-fold.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/fold/foldgutter.min.css">
-
-    <!-- ✅ Commenting Support -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/comment/comment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/comment/continuecomment.min.js"></script>
+  <!-- Choices.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <link rel="icon" href="images/kriya_logo_favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/monokai.min.css">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0; /* Remove default margin */
-            display: flex;
-            flex-direction: column;
-        }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            padding: 20px;
-            background-color: #121212; /* 🖤 FULL BLACK background */
-            color: #e0e0e0; /* Make default text white for visibility */
-            overflow: hidden;
-        }
-
-        h1 {
-            color: #000080;
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            font-size: 1rem;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            text-align: left;
-            margin-left: 0px;
-        }
-
-        h3_pop {
-            display: block; /* Ensure it behaves like a block element */
-            font-size: 1.5rem; /* Large font for primary headings */
-            font-weight: bold;
-            color: #007bff; /* Blue for primary headings */
-            margin-bottom: 10px;
-        }
-
-        p_details {
-            display: block; /* Ensure it behaves like a block element */
-            font-size: 1rem; /* Large font for primary headings */
-            font-weight: bold;
-            color: #1809e6; /* Blue for primary headings */
-            margin-bottom: 10px;
-        }
-
-        p_pop {
-            display: block; /* Ensure it behaves like a block element */
-            font-size: 1.2rem; /* Slightly smaller font for secondary headings */
-            font-weight: bold;
-            color: #6c757d; /* Gray for secondary headings */
-            margin-bottom: 8px;
-        }
-
-        p_normal {
-            display: block; /* Ensure it behaves like a block element */
-            font-size: 1rem; /* Normal text size */
-            color: #495057; /* Subtle gray for normal text */
-            margin-bottom: 10px;
-        }
-
-        textarea {
-            resize: none;
-        }
-
-        #editor {
-            background-color: #ECDFCC;
-            color: #212529;
-            border: 1px solid #ced4da;
-            padding: 10px;
-            border-radius: 5px;
-            height: 400px;
-            overflow-y: auto;
-        }
-
-        #output, #serialOutput {
-            max-height: 200px;
-            overflow-y: auto;
-            overflow-x: auto; 
-            border: 1px solid #ced4da;
-            padding: 10px;
-            background: #e0e0e0;
-            white-space: pre-wrap;
-            border-radius: 5px;
-        }
-
-             #build-output, #build-serialOutput {
-            max-height: 200px;
-            overflow-y: auto;
-            overflow-x: auto; 
-            border: 1px solid #ced4da;
-            padding: 10px;
-            background: #e0e0e0;
-            white-space: pre-wrap;
-            border-radius: 5px;
-        }
-
-        .btn-custom {
-            margin: 5px;
-            padding: 5px 10px;
-            font-size: 14px;
-        }
-
-        .dropdown-container {
-            display: flex;
-            gap: 10px;
-        }
-
-       footer {
-            position: absolute;
-            bottom: 20px; /* ⬅️ Distance from bottom */
-            width: 100%;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #e0e0e0;
-        }
-
-            .top-right-buttons {
-            display: flex;
-            justify-content: flex-start; /* 👈 Align buttons to the left */
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-            background: #121212;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 45%;
-            margin: 0 0 5px 0;  /* 👈 Left-aligned margin */
-                }
-
-        .output-buttons, .serial-buttons {
-            display: flex;
-            gap: 5px;
-        }
-        input, textarea, pre {
-          background-color: #e0e0e0; /* 👈 Inputs and textareas */
-            color: #212529; /* Text dark, still readable */
-        }
-
-        /* Optional: Add a slight border to separate from black bg */
-        input, textarea, pre {
-            border: 1px solid #555555; /* Dark gray border */
-        }
-
-        label {
-            font-weight: 500;
-            color: #495057;
-        }
-        .tab-pane:not(.active) {
-        pointer-events: none;
-        user-select: none;
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-        }
-html, body, .container-fluid {
-    height: 100%;
-    min-height: 0;
+  <style>
+body {
+  font-family: 'Rubik', sans-serif;
+  color: #333;
 }
 
-
-
-#editor-section .main-content,
-#build-code-section .main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: calc(100vh - 180px);  /* adjust offset if needed */
-    min-height: 0;
+/* Main Sections */
+.kriya-blue {
+  background-color: #FF6500; /* Orange background now */
+  color: white;
 }
 
-#editor-section .editor-container,
-#build-code-section .editor-container {
-    width: 95%;
-    flex: 6.5;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
+/* Accent Color */
+.kriya-gold {
+  color: #6A0DAD; /* Vibrant teal highlight */
 }
 
-#editor-section .output-panel,
-#build-code-section .output-panel {
-    width: 95%;
-    flex: 3.5;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
+/* Buttons */
+.btn-kriya {
+  background-color: #0066CC; /* Fresh blue button */
+  color: white;
+  border: none;
 }
 
-#editor {
-    flex-grow: 1;
-    min-height: 0;
+.btn-kriya:hover {
+  background-color: #004999; /* Deeper blue on hover */
 }
 
-#editor-section .combinedOutput,
-#build-code-section .combinedOutput {
-    flex-grow: 1;
-    min-height: 0;
-    background: #e0e0e0;
-    padding: 10px;
-    border-radius: 5px;
-    overflow: auto;
-    white-space: pre-wrap;
+/* General Section Padding */
+.section-padding {
+  padding: 60px 0;
 }
 
-
-#editor-section .CodeMirror,
-#build-code-section .CodeMirror {
-    font-size: 13.5px !important;
+/* Section Titles */
+.section-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
-
-#leaderboard-section {
-    height: auto !important;
-    min-height: auto !important;
-    overflow: visible !important;
-    display: block !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+/* Step Box Section (Problems/How we Help) */
+.step-box {
+  background-color: #fff7f0; /* Very light warm orange */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-
-
-#challenge-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.step-box img {
+  margin-bottom: 15px;
 }
 
-#challenge-editor + .CodeMirror {
-    width: 60% !important;
-    max-width: 60% !important;
-    min-width: 60% !important;
-    height: 400px !important;  /* fixed height */
-    display: block !important;
-}
-        .navigation-container {
-            display: flex;
-            justify-content: space-between; /* Spread buttons to left and right */
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .file-name-display {
-            flex-grow: 1;
-            text-align: center; /* Center-align the file name */
-            font-weight: bold; /* Make the file name stand out */
-            color: #e0e0e0; /* Gray color for better visibility */
-            font-size: 16px; /* Slightly larger font size */
-        }
-
-        .fullscreen-editor {
-            position: fixed;
-            top: 40px; /* Adjust this value to move the editor down */
-            left: 0;
-            width: 100% !important; /* Allow fullscreen expansion */
-            height: 100vh !important;
-            /* height: 100%; */
-            height: calc(100vh - 40px) !important ; /*Adjust to maintain correct height */
-            background: #f0f0f0;
-            z-index: 9999;
-            padding: 20px;
-            overflow: hidden;
-
-        }
-
-        .btn-primary {
-    background-color: #FF6500; /* 🟠 Nice orange */
-    border-color: #FF6500;
-    color: #ffffff;
+/* Comparison Image */
+.comparison-img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 30px;
 }
 
-.btn-primary:hover {
-    background-color: #e65c00; /* Darker orange on hover */
-    border-color: #e65c00;
+/* Icon List (❌ and ✅ points) */
+.icon-list {
+  list-style: none;
+  padding-left: 0;
 }
 
-
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            cursor: pointer;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 14px;
-            z-index: 10000;
-        }
-
-        .popup {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -20%);
-            background: white;
-            border: 1px solid #ced4da;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            z-index: 1000;
-            display: none; /* Hidden by default */
-            width: 300px;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        #tutorialPopup {
-            position: fixed;
-            top: 20%; /* Adjust popup position */
-            left: 50%;
-            transform: translate(-50%, -10%);
-            background: white;
-            border: 1px solid #ced4da;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            z-index: 1000;
-            width: 50%; /* Adjusted width */
-            max-height: 70%; /* Adjusted height */
-            overflow-y: auto; /* Enable scrolling for long content */
-            border-radius: 8px; /* Rounded corners */
-            text-align: left; /* Align all content to the left */
-        }
-
-        #popupContent h3_pop {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #1809e6; /* Blue for headings */
-            margin-bottom: 10px;
-        }
-
-        #popupContent p_details {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #1809e6; /* Blue for headings */
-            margin-bottom: 10px;
-        }
-
-        #popupContent p_pop {
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #3b3d3f; /* Gray for secondary headings */
-            margin-bottom: 8px;
-        }
-
-        #popupContent p_normal {
-            font-size: 0.85rem;
-            color: #3b3d3f; /* Gray for normal text */
-            margin-bottom: 10px;
-        }
-
-        #popupContent {
-            font-size: 1rem; /* Adjust content size if needed */
-        }
-
-        #waap_btn {
-            position: fixed;
-            bottom: 70px;
-            right: 26px;
-            z-index: 500; /* Lower z-index so it doesn't interfere */
-        }
-
-        #infoButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 500; /* Lower z-index so it doesn't interfere */
-        }
-      
-        .g_id_signin {
-            display: flex;
-            align-items: center;
-            height: 40px;
-            width: auto;
-        }
-
-        /* Profile container styles */
-        .profile-container {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            visibility: visible;
-            object-fit: cover;
-                    }
-
-        /* Profile photo styles */
-        .profile-photo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Makes the image circular */
-            border: 2px solid #ddd; /* Adds a subtle border */
-            object-fit: cover; /* Ensures the image fills the circle */
-            display: inline-block;
-
-                }
-
-        /* Dropdown styles */
-        .profile-dropdown {
-            display: none; /* Hidden by default */
-            position: absolute;
-            top: 60px;
-            right: 0;
-            background: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            min-width: 200px; /* Set width for the dropdown */
-            z-index: 1000;
-            font-size: 14px;
-            color: #333;
-        }
-
-        /* Dropdown text styles */
-        .profile-dropdown p {
-            margin: 0;
-            padding: 5px 0;
-            font-weight: 500;
-            color: #555;
-        }
-
-
-        /* Hover effect for dropdown items */
-        .logout-button {
-            display: block; /* Ensure it appears on a new line */
-            background: #f44336;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin-top: 10px; /* Adds space above the button */
-            text-align: center;
-            width: 100%; /* Full width of dropdown */
-            font-size: 14px;
-        }
-
-        .logout-button:hover {
-            background: #d32f2f;
-        }
-
-    #challenge-container {
-        display: flex;
-        flex-direction: column; /* Align everything in a vertical stack */
-        gap: 20px;
-        width: 100%;
-    }
-
-    /* Challenge Dropdown Styling */
-    #challenge-dropdown {
-        width: 50%;
-        max-width: 400px;
-    }
-
-    /* Challenge Details & Code Editor */
-    #challenge-content {
-        display: flex;
-        flex-direction: column; /* Stack content vertically */
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    /* CodeMirror Styling */
-    .CodeMirror {
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    background: #ECDFCC !important;
-    border-radius: 8px;
-    border: 1px solid #555555;
-    padding: 10px;
-  
-}
-    .CodeMirror-hints {
-    z-index: 99999 !important;
-}
-/* CodeMirror gutter (line numbers background) */
-.CodeMirror-gutters {
-    background-color: #ECDFCC !important;
-    border-right: 1px solid #bbb;
+.icon-list li::before {
+  content: "\2716";
+  color: red;
+  display: inline-block;
+  width: 1.5em;
+  margin-right: 0.5em;
 }
 
-/* ===== Scrollbar Styling ===== */
-
-/* Works on Chrome, Edge, Safari */
-.CodeMirror ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+.icon-list.tick li::before {
+  content: "\2714";
+  color: green;
 }
 
-/* Track (background of scrollbar) */
-.CodeMirror ::-webkit-scrollbar-track {
-    background: #ECDFCC; /* Same creamy color */
+/* Arrow Section */
+.transform-arrow svg {
+  max-width: 100%;
 }
 
-/* Thumb (the draggable part) */
-.CodeMirror ::-webkit-scrollbar-thumb {
-    background: #aaa; /* Light gray thumb */
-    border-radius: 8px;
+/* Logo */
+/* .kriya-logo {
+  height: 80px; 
 }
 
-/* Thumb hover effect */
-.CodeMirror ::-webkit-scrollbar-thumb:hover {
-    background: #888; /* Darker on hover */
-}
-
-/* Firefox-specific Scrollbar */
-.CodeMirror {
-    scrollbar-width: thin;
-    scrollbar-color: #aaa #ECDFCC; /* thumb track */
-}
-
-
-
-#leaderboard-body td {
-    color: #e0e0e0; /* Light text for all table data cells */
-}
-
-#leaderboard-body tr.rank-1 {
-    background-color: #fff3cd;
-    font-weight: bold;
-}
-
-#leaderboard-body tr.rank-2 {
-    background-color: #d1ecf1;
-    font-weight: bold;
-}
-
-#leaderboard-body tr.rank-3 {
-    background-color: #f8d7da;
-    font-weight: bold;
-}
-
-#leaderboard-body tr.rank-1 td,
-#leaderboard-body tr.rank-2 td,
-#leaderboard-body tr.rank-3 td {
-    color: #212529; /* Keep text dark for top 3 background rows */
-}
-
-#leaderboard-loading {
-    display: none;
-    text-align: center;
-}
-
-#leaderboard-loading .spinner-border {
-    margin-top: 10px;
-}
-
-#leaderboard-fallback {
-    text-align: center;
-    color: #e0e0e0;
-}
-
-#leaderboard-section {
-    font-family: 'Roboto', sans-serif;
-
-}
-#leaderboard-section label {
-    color: #e0e0e0; /* Light gray or any color you want */
-}
-
-
-
-    /* Submit Button */
-    #submitCode {
-        margin-top: 10px; /* Space below the code editor */
-        align-self: flex-start; /* Align button to left */
-    }
-
-.leaderboard-scroll-container {
-  max-height: 300px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.leaderboard-table thead th {
-  position: sticky;
-  top: 0;
-  background: #e0e0e0;
-  z-index: 1;
-}
-.kriya-heading {
-    font-family: 'Stardos Stencil', sans-serif;
-}
-
-#sidebarMenu {
-  position: fixed;
-  top: 0;               /* already set */
-  height: 100vh;
-  width: 200px;
-  left: -250px;         /* default hidden */
-  background-color: #212529; /* match navbar */
-  z-index: 1040;
-  transition: left 0.3s;
-  padding-top: 70px;    /* NEW: pushes items down to align with black strip */
-}
-.rank-1 {
-  background-color: #fceeb5 !important; /* light yellow */
-}
-
-.rank-2 {
-  background-color: #d2f4f5  !important; /* light blue */
-}
-
-.rank-3 {
-  background-color: #f8d2d2  !important; /* light red */
-}
-
-.carousel-inner img {
-  max-height: 80vh;
-  object-fit: contain;
-  width: auto;
-  margin: auto;
-  cursor: zoom-in;
-  transition: transform 0.3s ease;
-  display: none;
-}
-
-
-.carousel-inner img.zoomed {
-  transform: scale(2.5);
-  cursor: zoom-out;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  display: none; /* Hide default Bootstrap arrows */
-}
-
-.custom-carousel-arrow {
-  position: absolute;
-  top: 50%;
-  width: 38px;
-  height: 38px;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-.custom-carousel-arrow:hover {
-  opacity: 1;
-}
-.custom-carousel-arrow.left {
-  left: 10px;
-  transform: translateY(-50%) rotate(-45deg); /* ← Left arrow (reverse direction) */
-}
-.custom-carousel-arrow.right {
-  right: 10px;
-  transform: translateY(-50%) rotate(135deg); /* → Right arrow (original) */
-}
-.build-hardware.zoomed,
-.build-electronics.zoomed {
-  transform: scale(2);
-  transition: transform 0.3s ease;
-  cursor: zoom-out;
-}
-
-.build-hardware,
-.build-electronics {
-  transition: transform 0.3s ease;
-  cursor: zoom-in;
-}
-
-.close-carousel-btn {
-    position: absolute;
-    top: 10px;
-    right: -5px;
-    z-index: 10;
-    padding: 0;
-    font-size: 1.5rem;
-    border: none;
-    background: transparent;
-    color: white;
-    cursor: pointer;
-}
-.close-carousel-btn:hover {
-    color: #ccc; /* Optional: slight dim on hover */
-}
-
-.editor-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.level-tabs {
-    display: flex;
-    border-bottom: 1px solid transparent;
-}
-
-.level-tab {
-    background: #e0e0e0;
-    border: 1px solid #ccc;
-    border-bottom: none;
-    padding: 5px 12px;
-    cursor: pointer;
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-right: 5px;
-}
-
-.level-tab.active {
-    background: #fff;
-    border-color: #ccc;
-    color: #FF6500;
-}
-
-    </style>
-</head>
-<body>
-
-    
-    <div id="mobilePrompt" style="display: none; text-align: center; padding: 20px; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 10px; margin: 20px auto; max-width: 400px; z-index: 99999;">
-        <p style="font-size: 1.2em; color: #495057;">Hi Champion! The IDE works best on a desktop, please try there.</p>
-        <p></p>
-        <p style="font-size: 1.2em; color: #c30f27;">Meanwhile</p>
-        <p style="font-size: 1em; color: #007bff; margin-bottom: 20px;">Join our community on WhatsApp:</p>
-        <img id="communityButton" src="whatsapp_logo.png" alt="WhatsApp Button" style="cursor: pointer; width: 40px; height: 40px;">
-    </div>
-
-
-    <div class="container-fluid px-4">
-
-<button id="sidebarToggle"
-        style="position: absolute; top: 28px; left: 10px; z-index: 1050;
-               background-color: #222831; color: white; border: none; padding: 8px; border-radius: 6px;">
-  <i class="bi bi-list"></i>
-</button>
-
-<div id="sidebarMenu">
-  <ul class="nav flex-column ps-3">
-    <li class="nav-item"><a href="#" class="nav-link text-white" data-target="editor-section">Playground</a></li>
-    <li class="nav-item">
-  <a href="#buildSubmenu" class="nav-link text-white" data-bs-toggle="collapse" aria-expanded="false">Build</a>
-  <ul class="collapse list-unstyled ps-3" id="buildSubmenu">
-    <li><a href="#" class="nav-link text-white" data-target="hardware-section">Hardware</a></li>
-    <li><a href="#" class="nav-link text-white" data-target="electronics-section">Electronics</a></li>
-    <li><a href="#" class="nav-link text-white" data-target="build-code-section">Code</a></li>
-    
-  </ul>
-</li>
-  <li class="nav-item"><a href="#" class="nav-link text-white" data-target="challenges-section">Challenges</a></li>
-  <li class="nav-item"><a href="#" class="nav-link text-white" data-target="leaderboard-section">Leaderboard</a></li>
-
-  </ul>
-</div>
-
-<div class="container-fluid d-flex flex-column" style="height: 100%;">
-
-    <!-- 🔁 TOP BAR START -->
-<nav class="navbar px-3 justify-content-between align-items-center"
-     style="background-color: #222831; color: white; border-radius:5px;">
-
-    <span class="kriya-heading" style="color:#FF6500;font-size:2rem;">
-        KRIYA STATION
-    </span>
-
-    <div class="d-flex align-items-center gap-3">
-        <!-- project selector -->
-        <select id="project-dropdown"
-                class="form-select form-select-sm"
-                style="height:38px;min-width:180px;"></select>
-
-        <!-- settings gear -->
-        <button id="settingsButton"
-                class="btn btn-outline-light btn-sm"
-                style="height:38px;">
-            <i class="bi bi-gear-fill"></i>
-        </button>
-
-        <!-- Google Sign-In (moved here) -->
-        <div id="google-signin-container" style="display:flex;">
-            <div id="g_id_onload"
-                 data-context="signin"
-                 data-callback="handleCredentialResponse"
-                 data-auto_prompt="false"></div>
-
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-shape="rectangular"
-                 data-theme="outline"
-                 data-text="signin"
-                 data-size="medium"
-                 data-logo_alignment="center"></div>
-        </div>
-    </div>
-</nav>
-
-
-
-        <div class="tab-content">
-            <!-- Editor Tab -->
-            <div class="tab-pane fade show active" id="editor-section">        
-                
-
-        <div class="top-right-buttons justify-content-between">
-    <div class="d-flex gap-2 align-items-center">
-        <button id="compile" class="btn btn-primary btn-custom">Compile Code</button>
-        <button id="upload" class="btn btn-primary btn-custom">Upload Code</button>
-
-        <div id="portsButtonContainer">
-            <button id="portsButton" class="btn btn-primary btn-custom">Ports</button>
-        </div>
-
-        <div id="portsContainer" class="d-none d-flex align-items-center gap-2">
-            <select id="portsDropdown" class="form-select">
-                <option value="">Select Port</option>
-            </select>
-            <button id="refreshPorts" class="btn btn-outline-secondary btn-sm" title="Refresh Ports">🔄</button>
-        </div>
-    </div>
-
-
-</div>
-
-        <div class="main-content">
-            <div class="editor-container">
-                <img id="expandEditor" src="arrow.png" alt="Expand" style="cursor: pointer; width: 40px; height: 40px;">
-                <div id="tutorial-tabs" class="level-tabs mb-2" style="max-width: 90%; flex-wrap: wrap;"></div>
-                <textarea id="editor" class="form-control mb-3"></textarea>
-            </div>
-
-                  <div class="output-panel d-flex flex-column">
-  <div class="d-flex gap-2 mb-2 flex-wrap align-items-center">
-    <button class="clearOutput btn btn-secondary btn-sm" style="min-width: 120px;">Clear Output</button>
-
-    <div class="serialMonitorControls d-flex gap-2" style="display: none;">
-      <button class="toggleSerial btn btn-success btn-sm" style="min-width: 120px;">Start Serial</button>
-      <input type="text" class="serialWriteInput form-control" placeholder="Enter serial command..." style="max-width:300px;">
-      <button class="sendSerialBtn btn btn-primary btn-sm" style="min-width: 80px;">Send</button>
-    </div>
-  </div>
-<pre class="combinedOutput" style="flex-grow: 1; background: #e0e0e0; padding: 10px; border-radius: 5px; overflow: auto; white-space: pre-wrap;"></pre>
-</div>
-
-          <div id="tutorialPopup" class="popup">
-        <div id="popupContent"></div>
-        <button id="closePopup" class="btn btn-secondary">Close</button>
-    </div>
-
-    <img id="waap_btn" src="whatsapp_logo.png" alt="Button Logo" style="cursor: pointer; width: 40px; height: 40px;">
-    <button id="infoButton" class="btn btn-info">Info</button>
-
-    </div>
-
-  
-
-    <!-- Include Bootstrap Bundle with Popper.js -->
-
-
-</div>
-        <div class="tab-content">
-
-<!-- Hardware Section -->
-<div class="tab-pane fade" id="hardware-section">    
-    <div id="pageLoader" style="
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #121212;
+.brain-gear-logo {
+  height: 100px;
+} */
+/* Link Group */
+.link-group {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Link Group Links */
+.link-group a {
+  text-decoration: underline;
+  font-size: 1.2rem;
+  display: flex;
   align-items: center;
-  z-index: 99999;">
-  <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-  <div class="container mt-4">
-    <div id="buildProcessContainer" class="container mt-4">
-  <div id="buildCarouselContainer"></div>
-</div>
-  </div>
-</div>
+  gap: 6px;
+  color: white; /* Good contrast on orange */
+}
 
-<!-- Electronics Section -->
-<div class="tab-pane fade" id="electronics-section">
+/* Country Code and Input Styling */
+.country-code {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
-  <div id="electronicsLoader" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #121212;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;">
-    <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
+.choices__inner {
+  height: calc(2.375rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
-  <div class="container mt-4">
-    <div id="electronicsProcessContainer" class="container mt-4">
-      <div id="electronicsCarouselContainer"></div>
-    </div>
-  </div>
+#whatsapp {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-</div>
+/* Modal Dialog */
+#kitPreviewModal .modal-dialog {
+  max-width: 900px;
+  margin: 2rem auto;
+}
 
-<!-- Build → Code Section (duplicate of Editor) -->
-<div class="tab-pane fade" id="build-code-section">
-  <div class="top-right-buttons">
-    <button id="build-compile" class="btn btn-primary btn-custom">Compile Code</button>
-    <button id="build-upload" class="btn btn-primary btn-custom">Upload Code</button>
-    <div id="build-portsButtonContainer">
-      <button id="build-portsButton" class="btn btn-primary btn-custom">Ports</button>
-    </div>
+/* Button Outline */
+.btn-outline-dark {
+  min-width: 100px;
+  font-weight: 500;
+}
 
-    <div id="build-portsContainer" class="d-none d-flex align-items-center gap-2">
-      <select id="build-portsDropdown" class="form-select">
-        <option value="">Select Port</option>
-      </select>
-      <button id="build-refreshPorts" class="btn btn-outline-secondary btn-sm" title="Refresh Ports">🔄</button>
-    </div>
-  </div>
+/* Carousel Images */
+.carousel-wrapper img {
+  max-height: 300px;
+  object-fit: contain;
+}
 
-  <div class="main-content">
-    <div class="editor-container">
-      <img id="build-expandEditor" src="arrow.png" alt="Expand" style="cursor: pointer; width: 40px; height: 40px;">
-      <div id="build-level-tabs" class="level-tabs">
-    <button class="level-tab active" data-level="1">Level 1</button>
-    <button class="level-tab" data-level="2">Level 2</button>
-    <button class="level-tab" data-level="3">Level 3</button>
-</div>
-      <button id="build-backButton" class="back-button" style="display: none;">← Back</button>
-      <textarea id="build-editor" class="form-control mb-3"></textarea>
-    </div>
+/* Extra Carousel Image */
+.carousel-image {
+  height: 275px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
 
-                       <div class="output-panel d-flex flex-column">
-  <div class="d-flex gap-2 mb-2 flex-wrap align-items-center">
-    <button class="clearOutput btn btn-secondary btn-sm" style="min-width: 120px;">Clear Output</button>
+/* Carousel Controls */
+.carousel-controls {
+  text-align: center;
+  margin-top: 0.5rem;
+}
 
-    <div class="serialMonitorControls d-flex gap-2" style="display: none;">
-      <button class="toggleSerial btn btn-success btn-sm" style="min-width: 120px;">Start Serial</button>
-      <input type="text" class="serialWriteInput form-control" placeholder="Enter serial command..." style="max-width:300px;">
-      <button class="sendSerialBtn btn btn-primary btn-sm" style="min-width: 80px;">Send</button>
-    </div>
-  </div>
-<pre class="combinedOutput" style="flex-grow: 1; background: #e0e0e0; padding: 10px; border-radius: 5px; overflow: auto; white-space: pre-wrap;"></pre>
-</div>
+.slogan-text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 0;
+background: linear-gradient(45deg, #FFD700, #00FFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* Important for background-clip to work */
+}
 
-  </div>
+
+.custom-header {
+   background-color: #2C2C2C; /* Darker, richer orange gradient */
+}
+
+
+/* Responsive tweak for mobile */
+@media (max-width: 576px) {
+  header .container {
+    position: relative;
+    height: 80px; /* reduce height further */
+    padding: 0 !important; /* force remove padding */
+    margin: 0 auto;
+    max-width: 100%; /* make it full width */
+  }
+
+   .kriya-logo {
+    height: 55px;
+  }
+
+    .brain-gear-logo {
+    height: 55px;
+  }
   
+  .logo-wrapper,
+  .brain-wrapper {
+    padding: 0 10px; /* Add horizontal spacing around each logo */
+  }
 
+  .slogan {
+    position: absolute;
+    bottom: 2px; /* pin to very bottom */
+    right: 10px;
+    text-align: right;
+  }
+
+  .slogan p {
+    font-size: 0.9rem; /* fine-tune smaller */
+    margin: 0;
+    line-height: 1.1;
+  }
+}
+
+.dual-image-wrapper {
+  display: flex;
+  width: 838.2px;       /* 762 + 762 */
+  height: 563.2px;      /* Original height */
+  overflow: hidden;
+  margin: auto;
+}
+
+.side-image {
+  width: 419.1px;
+  height: 563.2px;
+  object-fit: cover;  /* Ensures image fills without shrinking */
+  transition: filter 0.3s ease;
+}
+.comparison-slider {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.slider-container {
+  display: flex; /* Make it a flex container */
+  align-items: center; /* Vertically align items in the middle */
+  justify-content: center; /* Horizontally center the group of items */
+  margin-top: 10px; /* Keep your existing margin */
+}
+
+/* Existing .slider styles */
+.slider {
+  width: 300px; /* Or 80% for mobile as per previous discussion */
+  height: 6px;
+  background: #ccc;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none; /* Crucial for custom styling */
+  appearance: none; /* Standard property */
+}
+
+/* Custom Thumb Styles */
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  width: 30px; /* Adjust size of your image (e.g., 24px-48px) */
+  height: 30px; /* Keep width and height equal for a circle */
+  border-radius: 50%; /* Good practice to ensure roundness, even if image is already circular */
+  background: url('images/kriya_logo_slider.png') no-repeat center center; /* Your image path here */
+  background-size: cover; /* Ensures the image covers the thumb area */
+  cursor: grab; /* Indicates it's draggable */
+  margin-top: -9px; /* Adjust to vertically center the thumb over the track (for 30px thumb, 6px track) */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional: add a subtle shadow */
+}
+
+/* Mozilla Firefox */
+.slider::-moz-range-thumb {
+  width: 30px; /* Adjust size of your image */
+  height: 30px;
+  border-radius: 50%; /* Good practice */
+  background: url('path/to/your/custom-image.png') no-repeat center center; /* Your image path here */
+  background-size: cover;
+  cursor: grab;
+  /* Firefox often centers the thumb vertically by default, margin-top usually not needed */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional */
+}
+
+.slider-label {
+  white-space: nowrap; /* Prevent text from wrapping */
+  font-size: 1.4rem; /* Adjust font size as needed */
+  color: #FF6500; /* Adjust color as needed */
+  /* If you want it a bit bolder */
+  font-weight: bold;
+}
+
+.input-group .choices {
+  /* This targets the container created by Choices.js.
+    flex: 0 0 130px; means:
+    - Don't grow (0)
+    - Don't shrink (0)
+    - Set the base width to 130px 
+  */
+  flex: 0 0 130px;
+}
+
+.choices__inner {
+  /*
+    This ensures the dropdown's inner content has the correct
+    border radius to seamlessly join the next input.
+  */
+  border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+#whatsapp {
+  /* This ensures the phone number input has the correct
+    border radius on its left side.
+  */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .kriya-logo {
+    height: 60px; /* small devices (tablets) */
+  }
+    .brain-gear-logo {
+    height: 45px;
+  }
+  
+  .logo-wrapper,
+  .brain-wrapper {
+    padding: 0 10px; /* Add horizontal spacing around each logo */
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .kriya-logo {
+    height: 100px; /* medium devices (desktops) */
+}
+  .brain-gear-logo {
+    height: 75px;
+  }
+  
+  .logo-wrapper,
+  .brain-wrapper {
+    padding: 0 10px; /* Add horizontal spacing around each logo */
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
+  }
+
+  
+  .dual-image-wrapper {
+  display: flex;
+  width: 502.92px;       /* 762 + 762 */
+  height: 337.92px;      /* Original height */
+  overflow: hidden;
+  margin: auto;
+}
+
+.side-image {
+  width: 251.46px;
+  height: 337.92px;
+  object-fit: cover;  /* Ensures image fills without shrinking */
+  transition: filter 0.3s ease;
+}
+.comparison-slider {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.slider-container {
+  display: flex; /* Make it a flex container */
+  align-items: center; /* Vertically align items in the middle */
+  justify-content: center; /* Horizontally center the group of items */
+  margin-top: 10px; /* Keep your existing margin */
+}
+
+/* Existing .slider styles */
+.slider {
+  width: 200px; /* Or 80% for mobile as per previous discussion */
+  height: 6px;
+  background: #ccc;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none; /* Crucial for custom styling */
+  appearance: none; /* Standard property */
+}
+}
+
+@media (min-width: 1200px) {
+  .kriya-logo {
+    height: 120px; /* large devices (large desktops) */
+  }
+    .brain-gear-logo {
+    height: 120px;
+  }
+
+  .logo-wrapper,
+  .brain-wrapper {
+    padding: 0 10px; /* Add horizontal spacing around each logo */
+  }
+
+  header .container {
+    padding: 0 10px; /* tighter spacing for small screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-wrapper img {
+    max-height: 200px;
+  }
+}
+@media (max-width: 768px) {
+  .dual-image-wrapper {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    /* Reduce vertical padding/margin if the parent has any */
+    margin-bottom: 1rem; /* Adjust as needed, or remove if parent handles spacing */
+  }
+
+  .side-image {
+    width: 100%;
+    max-height: 40vh; /* Significantly reduced to fit in one screen */
+    height: auto; /* Allow natural aspect ratio */
+    object-fit: contain; /* Ensures the whole image is visible */
+    /* Add some margin between images if needed, or if they stack directly */
+    margin-bottom: 0.5rem; /* Small gap between stacked images */
+  }
+
+  .slider-container {
+    /* If you want the label and slider to stack vertically on tiny screens */
+    flex-direction: column;
+    /* Reduce overall vertical space if needed */
+    margin-top: 0.5rem; /* Smaller margin for mobile */
+    margin-bottom: 0.5rem;
+  }
+
+  .slider-label {
+    /* If stacking, remove horizontal margin and add vertical margin */
+    margin-right: 0;
+    margin-bottom: 0.5rem; /* Space below the label when stacked */
+    font-size: 1.3rem; /* Slightly smaller text for mobile */
+  }
+
+  .slider {
+    width: 80%; /* Make slider take up a percentage of the screen width */
+    max-width: 250px; /* Prevent it from becoming too wide on slightly larger mobiles */
+    height: 4px; /* Make it thinner */
+  }
+  .slider::-webkit-slider-thumb,
+  .slider::-moz-range-thumb {
+    width: 24px; /* Example: Slightly smaller thumb for mobile */
+    height: 24px;
+    margin-top: -8px; /* Adjust if thumb size changes (e.g., for 24px thumb, 6px track) */
+  }
+}
+
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Kriya",
+  "url": "https://kriyaedu.com",
+  "logo": "https://kriyaedu.com/images/kriya-logo.png",
+  "description": "Kriya provides hands-on STEM kits for kids in India aged 11+, covering electronics, coding, and AI.",
+  "sameAs": [
+    "https://www.instagram.com/kriyaedu",
+    "https://www.linkedin.com/company/kriyaedus"
+  ]
+}
+</script>
+  
+</head>
+<body>
+<header class="py-3 border-bottom custom-header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="logo-wrapper">
+      <img src="images/kriya-logo.png" alt="Kriya Logo" class="kriya-logo">
+    </div>
+    <div class="brain-wrapper">
+      <img src="images/brain.png" alt="Brain Gear Logo" class="brain-gear-logo">
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="kriya-blue py-5">
+  <div class="container">
+    <div class="row align-items-center text-white">
+      <div class="col-md-4 text-center mb-4 mb-md-0">
+        <img src="images/hero-kid-boy.jpeg" alt="Boy with STEM kit" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-4 text-center">
+        <h1 class="fw-bold">Make Kids Smart</h1>
+        <p class="fs-5">Ensure your kid is a cut above</p>
+        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a>
+        <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline fs-5">or watch how it works</a></p>
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="images/hero-kid-girl.jpeg" alt="Girl with STEM kit" class="img-fluid rounded shadow">
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <p class="fs-5 fw-semibold">
+        <em>We provide a hands-on STEM curriculum for ages <strong>11+</strong></em>
+      </p>
+<div class="link-group">
+  <!-- <a href="/kits.html">🔍 Preview our Kits</a> -->
+  <a href="#" data-bs-toggle="modal" data-bs-target="#kitPreviewModal">🔍 Look Inside</a>
+  <a href="/blogs.html">📝 Read our Blogs</a>
+ <a href="https://station.kriyaedu.com" target="_blank" rel="noopener noreferrer">  💻Kriya Station </a>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem Section -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row justify-content-center align-items-start text-center text-md-start">
+      
+      <div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
+        <div class="w-100" style="max-width: 600px;">
+          <h2 class="section-title text-danger fw-bold mb-3">Problems Kids Face</h2>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start mb-2 ">
+              <span class="text-danger me-2">❌</span>
+              <span>≈ 70% screen time is wasted</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>No guidance for new-age skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Outdated school curriculum</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Lack of peer inspiration</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 d-flex justify-content-center">
+        <div class="w-100" style="max-width: 600px;">
+          <h2 class="section-title text-success fw-bold mb-3">How We Help</h2>
+          <ul class="list-unstyled fs-6 ps-0 text-center">
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Turn screen time into skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>6-kit plan for structured learning</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Coding, Mechatronics and AI</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Creative community of peers</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Guide Section -->
+<section class="py-3 bg-light text-center">
+  <div class="container">
+    <em class="fs-4">Finding meaningful activities for your child can be tough. That’s why over <strong>100+ families</strong>  have trusted Kriya to bring creativity home.</em>
+  </div>
+</section>
+
+<!-- Getting Started Section -->
+<section id="get-started" class="section-padding text-center">
+  <div class="container">
+    <h2 class="section-title">Getting Started is Easy</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 step-box">
+        <img src="images/step1-box.png" alt="Step 1 Icon" width="80">
+        <h5 class="fw-bold">Get 1<sup>st</sup> kit as trial</h5>
+      </div>
+      <div class="col-md-4 step-box">
+        <img src="images/step2-explore.png" alt="Step 2 Icon" width="80">
+        <h5 class="fw-bold">Kid explores and builds</h5>
+      </div>
+      <div class="col-md-4 step-box">
+        <img src="images/step3-subscribe.png" alt="Step 3 Icon" width="80">
+        <h5 class="fw-bold">Kid enrolls to keep up the creativity</h5>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <!-- <a href="#" class="btn btn-kriya btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#orderModal">
+        Get Your Trial Kit
+      </a> -->
+      <a href="enter-invite.html?plan=trial" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
     
-</div>
-</div>
-
-
-<div class="tab-pane fade" id="challenges-section">
-    <div id="challenge-container">
-        <!-- Challenge Dropdown -->
-        <select id="challenge-dropdown" class="form-select">
-            <option value="" disabled selected>Choose Challenge</option>
-        </select>
-
-        <!-- Challenge Details & Code Editor in a Single Column -->
-        <div id="challenge-content">
-            <div id="challenge-details" style="display: none;">
-                <h3 id="challenge-title"></h3>
-                <p id="challenge-description"></p>
-
-                <!-- Code Editor Below the Description -->
-                <textarea id="challenge-editor"></textarea>
-
-                <!-- Submit Button -->
-                <button id="submitCode" class="btn btn-success">Submit</button>
-
-                <!-- Submission Status -->
-                <div id="submission-status"></div>
-            </div>
-        </div>
+      <p class="fw-bold mt-3 m-0">
+        Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
+      </p>
     </div>
-</div>
+    <p class="mt-2 fst-italic">and begin proactive parenting !</p>
+  </div>
+</section>
 
+<!-- Success vs Failure Section -->
+<section class="section-padding bg-light text-center">
+  <div class="container">
+    <h2 class="section-title mb-5">What’s at Stake?</h2>
 
+    <!-- Shared wrapper for alignment -->
+    <div class="text-and-image-wrapper mx-auto" style="max-width: 880px;">
+      <div class="row text-md-start justify-content-between">
+        <!-- Without Kriya -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h4 class="text-danger"><strong>WITHOUT KRIYA</strong></h4>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Passive screen time continues</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Missed early learning opportunities</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-danger me-2">❌</span>
+              <span>Creativity goes untapped</span>
+            </li>
+          </ul>
+        </div>
 
-<div class="tab-pane fade" id="leaderboard-section">
-    <div class="container mt-4">
-        <h3>🏆 Leaderboard</h3>
-        <div class="row mb-3 align-items-end">
+        <!-- With Kriya -->
         <div class="col-md-6">
-            <label for="leaderboard-challenge">Select Challenge:</label>
-            <select id="leaderboard-challenge" class="form-select">
-            <option value="overall">Overall</option>
-            </select>
+          <h4 class="text-success"><strong>WITH KRIYA</strong></h4>
+          <ul class="list-unstyled fs-6 ps-0">
+            <li class="d-flex align-items-start">
+              <span class="text-success me-2">✅</span>
+              <span>Your child builds real-world skills</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Hands-on learning experiences</span>
+            </li>
+            <li class="d-flex align-items-start mb-2">
+              <span class="text-success me-2">✅</span>
+              <span>Boosted creativity and confidence</span>
+            </li>
+          </ul>
         </div>
-        <div class="col-md-6 d-flex justify-content-md-start justify-content-center mt-3 mt-md-0">
-            <button id="toggleCumulative" class="btn btn-outline-primary" data-mode="normal">
-            View Cumulative Ranking
-            </button>
-        </div>
-        </div>
+      </div>
 
-        <div id="leaderboard-loading" class="text-center my-3">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-
- 
-        <div class="leaderboard-scroll-container">
-        <table class="table table-striped leaderboard-table">
-            <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Email</th>
-                <th>Score</th>
-            </tr>
-            </thead>
-            <tbody id="leaderboard-body">
-            <tr id="leaderboard-fallback" style="display: none;">
-                <td colspan="3" class="text-center text-muted">No leaderboard data available.</td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
-
-        <div id="user-rank-section" class="mt-4" style="display: none;">
-            <h5>Your Rank:</h5>
-            <p><strong>Rank:</strong> <span id="user-rank"></span></p>
-            <p><strong>Score:</strong> <span id="user-score"></span></p>
-        </div>
-    </div>
+      <!-- Centered image with matched width -->
+ <div class="comparison-slider mx-auto">
+  <div class="dual-image-wrapper">
+    <img src="images/success-vs-failure_left.png" class="side-image left-image" alt="Failure">
+    <img src="images/success-vs-failure_right.png" class="side-image right-image" alt="Success">
+  </div>
+  <div class="slider-container mt-3">
+      <span class="slider-label me-2">Slide me</span> <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
+  </div>
 </div>
-
-
-
-<div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="whatsappModalLabel">Enter Your WhatsApp Number</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input type="tel" id="whatsappNumber" class="form-control" placeholder="Enter your 10-digit WhatsApp number">
-          <small class="text-muted">We'll use this for verification and communication.</small>
-          <div id="whatsappError" class="text-danger mt-2" style="display: none;">Please enter a valid number.</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="saveWhatsappNumber">Save</button>
-        </div>
+      <!-- Arrow
+      <div class="transform-arrow mt-4 d-flex justify-content-center">
+        <svg width="100%" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10"
+              refX="0" refY="5" orient="auto">
+              <polygon points="0 0, 10 5, 0 10" fill="#0d6efd" />
+            </marker>
+          </defs>
+          <line x1="0" y1="30" x2="280" y2="30" stroke="#0d6efd" stroke-width="4" marker-end="url(#arrowhead)" />
+        </svg>
       </div>
     </div>
   </div>
+ -->
 
-  <!-- ✅ Bootstrap Modal for Installing Library -->
-<div class="modal fade" id="libraryModal" tabindex="-1" aria-labelledby="libraryModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="libraryModalLabel">Install ESP Library</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="library-search" class="form-control" placeholder="Enter ESP Library Name...">
-                <div id="library-output" class="mt-2"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" onclick="installLibrary()">Install</button>
-            </div>
-        </div>
-    </div>
+</section>
+
+
+
+<!-- Call to Action -->
+<section id="subscribe" class="kriya-blue text-center py-5">
+  <div class="container">
+    <h2 class="fw-bold">Ready to See Your Kid Thrive?</h2>
+    <p class="lead">Watch them go from bored to brilliant</p>
+
+    <a href="enter-invite.html?plan=trial" class="btn btn-kriya btn-lg mt-2">Get Your Trial Kit</a>
+
+    <p class="fw-bold mt-3 mb-4">
+      Or skip the trial and <a href="subscription.html" class="kriya-gold">subscribe directly</a>
+    </p>
+
+    <!-- ✨ Slogan moved here -->
+  <div class="text-center">
+  <span class="slogan-text">Shaping Whats's Next</span><br>
 </div>
+  </div>
+</section>
 
-<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <div class="mb-2">
+      <a href="/policy/privacy-policy.html" class="text-white text-decoration-none me-3">Privacy Policy</a>
+      <a href="/policy/terms-and-conditions.html" class="text-white text-decoration-none me-3">Terms & Conditions</a>
+      <a href="/policy/cancellation-and-refund.html" class="text-white text-decoration-none me-3">Cancellation & Refund</a>
+      <a href="/policy/shipping-and-delivery.html" class="text-white text-decoration-none me-3">Shipping & Delivery</a>
+      <a href="/policy/contact.html" class="text-white text-decoration-none">Contact Us</a>
+    </div>
+    <p class="mb-0">&copy; 2025 Kriya | Made with ❤️ in India</p>
+  </div>
+</footer>
+
+
+<!-- Order Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="orderModalLabel">Where would you like to order from?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body d-flex flex-column gap-3">
-        <button class="btn btn-primary" id="installSetup">Install Setup</button>
-        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#libraryModal">Install Library</button>
-         <div>
-    <label for="baudRateDropdownSettings">Baud Rate</label>
-    <select id="baudRateDropdownSettings" class="form-select">
-      <option value="4800">4800</option>
-      <option value="9600"selected>9600</option>
-      <option value="19200">19200</option>
-      <option value="38400">38400</option>
-      <option value="57600">57600</option>
-      <option value="115200">115200</option>
-      <option value="230400">230400</option>
-      <option value="460800">460800</option>
-      <option value="921600">921600</option>
-    </select>
-  </div>
-
+      <div class="modal-body">
+        <div class="d-flex flex-column align-items-center gap-3">
+          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
+            <a href="https://amazon.in" target="_blank" class="btn btn-outline-secondary text-center w-100">
+              Order from Amazon<br>
+              <span style="font-size: 0.8rem; font-style: italic; color: #888;">a little bit costlier</span>
+            </a>
+            <span class="fw-semibold">or</span>
+            <a href="checkout.html" target="_blank" class="btn btn-kriya text-white w-100">
+              Order from Kriya
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<div class="modal fade" id="getInTouchModal" tabindex="-1" aria-labelledby="getInTouchLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="getInTouchLabel">Get in Touch</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="getInTouchForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="name" placeholder="Name" required>
+          </div>
+         <div class="mb-3">
+  <select class="form-select" id="role" required>
+    <option value="">Who we gonna talk to ?</option>
+    <option value="Parent">Parent</option>
+    <option value="Kid">Kid</option>
+    <option value="School">School</option>
+  </select>
+</div>
+          <div class="mb-3">
+          <div class="input-group">
+            <select class="form-select country-code" id="countryCode" required> </select>
+              <!-- Options dynamically filled here -->
+            </select>
+            <input type="text" class="form-control" id="whatsapp" placeholder="Whatsapp Number" required>
+          </div>
+        </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" placeholder="Email (Optional)">
+          </div>
+          <button id="submitBtn" type="submit" class="btn btn-primary w-100">
+        <span id="btnText">Submit</span>
+        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="kitPreviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-white text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">👀 What’s Inside the Kit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper mb-3">
+          <div id="kitModalCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/kit1.jpg" class="d-block w-100 img-fluid" alt="Kit 1">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit2.jpg" class="d-block w-100 img-fluid" alt="Kit 2">
+              </div>
+              <div class="carousel-item">
+                <img src="images/kit3.png" class="d-block w-100 img-fluid" alt="Kit 3">
+              </div>
+               <div class="carousel-item">
+                <img src="images/kit4.png" class="d-block w-100 img-fluid" alt="Kit 3">
+              </div>
+            </div>
+          </div>
+
+          <!-- Black Arrows Below Carousel -->
+          <div class="text-center mt-3">
+            <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="prev">
+              ← Prev
+            </button>
+            <button class="btn btn-outline-dark" type="button" data-bs-target="#kitModalCarousel" data-bs-slide="next">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- Kit Text -->
+        <div class="px-3 text-start">
+          <h5 id="modal-kit-title"><strong>Loading...</strong></h5>
+          <p id="modal-kit-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="trialKitModal" tabindex="-1" aria-labelledby="trialKitModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+<h5 class="modal-title" id="trialKitModalLabel" style="text-align: center; width: 100%;"><strong>SEE THE TRANSFORMATION?</strong> </h5>        
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="lead" style="color:  #FF6500;"><strong>MAKE IT A REALITY</strong></p>
+        <p>It always begins with a bold decision. Unlock a world of creativity and hands-on learning with our trial kit.</p>
+        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a>
+        <!-- <a href="checkout.html" class="btn btn-kriya btn-lg mt-3 w-75">Get Trial Kit Now!</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Form submission logic
+document.getElementById('getInTouchForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+
+  const name = document.getElementById('name').value.trim();
+  const role = document.getElementById('role').value;
+  const countryCode = document.getElementById('countryCode').value;
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const email = document.getElementById('email').value.trim() || "Not provided";
+
+  const fullWhatsappNumber = `${countryCode} ${whatsapp}`;
+
+  // Show loading spinner on submit
+  submitBtn.disabled = true;
+  btnText.textContent = "Submitting...";
+  btnSpinner.classList.remove('d-none');
+
+  const formData = {
+    name: name,
+    role: role,
+    whatsapp: fullWhatsappNumber,
+    email: email
+  };
+
+  try {
+    const response = await fetch('/api/log-to-get-in-touch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      alert('Thank you! We will get in touch soon.');
+      var modal = bootstrap.Modal.getInstance(document.getElementById('getInTouchModal'));
+      modal.hide();
+      document.getElementById('getInTouchForm').reset(); // Clear the form fields
+    } else {
+      alert('Failed to submit. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  } finally {
+    // Restore button
+    submitBtn.disabled = false;
+    btnText.textContent = "Submit";
+    btnSpinner.classList.add('d-none');
+  }
+});
+
+// Country code dropdown population
+async function loadCountryCodes() {
+  const response = await fetch('/assets/CountryCodes.json'); // Adjust your path
+  const countryCodes = await response.json();
+
+  const countryCodeSelect = document.getElementById('countryCode');
+  countryCodes.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.dial_code;
+    option.textContent = `${c.name} (${c.dial_code})`; 
+
+    // ✅ Set India as default selected
+    if (c.name === "India") {
+      option.selected = true;
+    }
+
+    countryCodeSelect.appendChild(option);
+  });
+
+  // Initialize Choices.js after options are loaded
+  new Choices('#countryCode', {
+    searchEnabled: true,
+    itemSelectText: '',
+    placeholderValue: 'Search country...',
+  });
+}
+
+// Call it on page load
+loadCountryCodes();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const kitTitle = "What’s Inside the Trial Kit?";
+  const kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
+
+  document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
+  document.getElementById("modal-kit-desc").innerHTML = kitDesc;
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.getElementById("sliderControl");
+  const leftImage = document.querySelector(".left-image");
+  const rightImage = document.querySelector(".right-image");
+  const trialKitModal = new bootstrap.Modal(document.getElementById('trialKitModal'));
+  let hasModalPopped = false;
+  let modalTimeoutId = null; // Declare modalTimeoutId here
+
+
+  const maxBlur = 12;
+
+  function updateBlur(value) {
+    leftImage.style.filter = `blur(${value / 100 * maxBlur}px)`;
+    rightImage.style.filter = `blur(${(100 - value) / 100 * maxBlur}px)`;
+     if (value === 100 && !hasModalPopped) {
+      // Clear any previous timeout to reset if slider is moved away and back
+      if (modalTimeoutId) {
+        clearTimeout(modalTimeoutId);
+      }
+      modalTimeoutId = setTimeout(() => {
+        trialKitModal.show();
+        hasModalPopped = true; // Set flag only after the modal is shown
+      }, 2000); // 2-second delay
+    } else if (value < 100) {
+      // If slider moves away from 100, clear the pending timeout and reset the flag
+      if (modalTimeoutId) {
+        clearTimeout(modalTimeoutId);
+        modalTimeoutId = null; // Clear the stored timeout ID
+      }
+      hasModalPopped = false; // Reset the flag
+    }
+
+  }
+
+  slider.addEventListener("input", () => {
+    updateBlur(parseInt(slider.value));
+  });
+
+  // Initialize
+  updateBlur(parseInt(slider.value));
+
+
+});
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<script src="script.js"></script>
+<!-- Choices.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
 </body>
 </html>
