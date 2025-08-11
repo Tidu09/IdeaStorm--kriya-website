@@ -182,11 +182,44 @@ module.exports = async function handler(req, res) {
       },
     });
 
+// Customer Confirmation Email with Logo
     await transporter.sendMail({
       from: 'Kriya <ideastorm.technologies@gmail.com>',
-      to: 'ideastorm.technologies@gmail.com',
-      subject: `New Order with AWB ${awbCode} - Shipment #${shipmentId}`,
-      text: `A new order has been created with shipment ID ${shipmentId}.\n\nCourier: ${courierName}\nAWB/Tracking #: ${awbCode}\n\nCustomer: ${data.name} (${data.email})\nPlan: ${data.plan}\nAmount: ₹${price}`,
+      to: data.email,
+      subject: `Your Kriya Order #${data.payment_id} has been shipped!`,
+
+      // The plain text version cannot display images, so it remains unchanged.
+      text: `Hi ${data.name},\n\n` +
+            `Great news! Your Kriya STEM Kit (${data.plan} plan) is on its way.\n\n` +
+            `You can track your shipment using the details below:\n` +
+            `Courier: ${courierName}\n` +
+            `Tracking Number: ${awbCode}\n\n` +
+            `While you wait, check out Kriya Station (where you will be having fun): https://station.kriyaedu.com/\n\n` +
+            `We're so excited for you to begin your learning adventure!\n\n` +
+            `Thanks for your order,\n` +
+            `The Kriya Team`,
+
+      // HTML version with the logo at the top
+      html: `
+        <div style="font-family: sans-serif; line-height: 1.6;">
+          <img 
+            src="https://your-website.com/path/to/your-logo.png" 
+            alt="Kriya Logo" 
+            style="width: 150px; height: auto; margin-bottom: 20px;"
+          >
+          
+          <p>Hi ${data.name},</p>
+          <p>Great news! Your Kriya STEM Kit (<strong>${data.plan} plan</strong>) is on its way.</p>
+          <p>You can track your shipment using the details below:</p>
+          <ul>
+            <li><strong>Courier:</strong> ${courierName}</li>
+            <li><strong>Tracking Number:</strong> ${awbCode}</li>
+          </ul>
+          <p>While you wait, check out <strong>Kriya Station</strong> (where you will be having fun): <a href="https://station.kriyaedu.com/" target="_blank">https://station.kriyaedu.com/</a></p>
+          <p>We are so excited for you to begin your learning adventure!</p>
+          <p>Thanks for your order,<br>The Kriya Team</p>
+        </div>
+      `
     });
 
     return res.status(200).json({
