@@ -203,9 +203,9 @@ module.exports = async function handler(req, res) {
       html: `
         <div style="font-family: sans-serif; line-height: 1.6;">
           <img 
-            src="https://your-website.com/path/to/your-logo.png" 
+            src="https://kriyaedu.com/images/logo-email.png" 
             alt="Kriya Logo" 
-            style="width: 150px; height: auto; margin-bottom: 20px;"
+            style="width: 200px; height: auto; margin-bottom: 20px;"
           >
           
           <p>Hi ${data.name},</p>
