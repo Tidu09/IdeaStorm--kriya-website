@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
 
   const data = req.body;
 
-  let price = 10;
+  let price = 2800;
   if (data.plan === "monthly") price = 1350;
   else if (data.plan === "annual") price = 14500;
 
