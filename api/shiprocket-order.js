@@ -216,6 +216,7 @@ module.exports = async function handler(req, res) {
             <li><strong>Tracking Number:</strong> ${awbCode}</li>
           </ul>
           <p>While you wait, check out <strong>Kriya Station</strong> (where you will be having fun): <a href="https://station.kriyaedu.com/" target="_blank">https://station.kriyaedu.com/</a></p>
+          <p>Also, Join our <strong> WhatsApp community </strong> <a href="https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk" target="_blank">https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk</a></p>
           <p>We are so excited for you to begin your learning adventure!</p>
           <p>Thanks for your order,<br>The Kriya Team</p>
         </div>
