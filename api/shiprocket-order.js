@@ -151,9 +151,9 @@ module.exports = async function handler(req, res) {
     //   body: JSON.stringify({ shipment_id: shipmentId })
     // });
 
-    // const assignResult = await assignRes.json();
-    // const awbCode = assignResult.response?.data?.awb_code || null;
-    // const courierName = assignResult.response?.data?.courier_name || null;
+    const assignResult = await assignRes.json();
+    const awbCode = assignResult.response?.data?.awb_code || null;
+    const courierName = assignResult.response?.data?.courier_name || null;
 
     // if (!assignRes.ok || !awbCode) {
     //   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
@@ -262,4 +262,4 @@ module.exports = async function handler(req, res) {
     console.error("❌ Shiprocket error:", error);
     return res.status(500).json({ error: error.message });
   }
-}; // ⬅️ This was the missing closing brace
+}; 
