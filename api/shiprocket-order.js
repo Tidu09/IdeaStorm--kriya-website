@@ -142,23 +142,23 @@ module.exports = async function handler(req, res) {
 
     const shipmentId = result.shipment_id;
 
-    const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ shipment_id: shipmentId })
-    });
+    // const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
+    //   method: "POST",
+    //   headers: {
+    //     "Authorization": `Bearer ${SHIPROCKET_TOKEN}`,
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({ shipment_id: shipmentId })
+    // });
 
-    const assignResult = await assignRes.json();
-    const awbCode = assignResult.response?.data?.awb_code || null;
-    const courierName = assignResult.response?.data?.courier_name || null;
+    // const assignResult = await assignRes.json();
+    // const awbCode = assignResult.response?.data?.awb_code || null;
+    // const courierName = assignResult.response?.data?.courier_name || null;
 
-    if (!assignRes.ok || !awbCode) {
-      console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
-      throw new Error("AWB assignment failed");
-    }
+    // if (!assignRes.ok || !awbCode) {
+    //   console.log("❌ Failed to assign AWB:", JSON.stringify(assignResult, null, 2));
+    //   throw new Error("AWB assignment failed");
+    // }
 
     if (data.invite) {
       await fetch("https://kriyaedu.com/api/mark-invite-used", {
@@ -189,11 +189,19 @@ module.exports = async function handler(req, res) {
       subject: `Your Kriya Order #${data.payment_id} has been shipped!`,
 
       // The plain text version cannot display images, so it remains unchanged.
-      text: `Hi ${data.name},\n\n` +
+      // text: `Hi ${data.name},\n\n` +
+      //       `Great news! Your Kriya STEM Kit (${data.plan} plan) is on its way.\n\n` +
+      //       `You can track your shipment using the details below:\n` +
+      //       `Courier: ${courierName}\n` +
+      //       `Tracking Number: ${awbCode}\n\n` +
+      //       `While you wait, check out Kriya Station (where you will be having fun): https://station.kriyaedu.com/\n\n` +
+      //       `We're so excited for you to begin your learning adventure!\n\n` +
+      //       `Thanks for your order,\n` +
+      //       `The Kriya Team`,
+
+            text: `Hi ${data.name},\n\n` +
             `Great news! Your Kriya STEM Kit (${data.plan} plan) is on its way.\n\n` +
-            `You can track your shipment using the details below:\n` +
-            `Courier: ${courierName}\n` +
-            `Tracking Number: ${awbCode}\n\n` +
+            'We Shall Ship all orders from September 1. Thanks for preordering! \n'
             `While you wait, check out Kriya Station (where you will be having fun): https://station.kriyaedu.com/\n\n` +
             `We're so excited for you to begin your learning adventure!\n\n` +
             `Thanks for your order,\n` +
