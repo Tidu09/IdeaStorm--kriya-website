@@ -151,7 +151,7 @@ module.exports = async function handler(req, res) {
     //   body: JSON.stringify({ shipment_id: shipmentId })
     // });
 
-    const assignResult = await assignRes.json();
+    const assignResult = await assignRes.json() || null;
     const awbCode = assignResult.response?.data?.awb_code || null;
     const courierName = assignResult.response?.data?.courier_name || null;
 
