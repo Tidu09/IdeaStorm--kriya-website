@@ -141,7 +141,7 @@ module.exports = async function handler(req, res) {
     }
 
     const shipmentId = result.shipment_id;
-
+    let assignRes = null;
     // const assignRes = await fetch("https://apiv2.shiprocket.in/v1/external/courier/assign/awb", {
     //   method: "POST",
     //   headers: {
