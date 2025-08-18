@@ -208,7 +208,30 @@ module.exports = async function handler(req, res) {
             `The Kriya Team`,
 
       // HTML version with the logo at the top
-      html: `
+      // html: `
+      //   <div style="font-family: sans-serif; line-height: 1.6;">
+      //     <img 
+      //       src="https://kriyaedu.com/images/logo-email.png" 
+      //       alt="Kriya Logo" 
+      //       style="width: 200px; height: auto; margin-bottom: 20px;"
+      //     >
+          
+      //     <p>Hi ${data.name},</p>
+      //     <p>Great news! Your Kriya STEM Kit (<strong>${data.plan} plan</strong>) is on its way.</p>
+      //     <p>You can track your shipment using the details below:</p>
+      //     <ul>
+      //       <li><strong>Courier:</strong> ${courierName}</li>
+      //       <li><strong>Tracking Number:</strong> ${awbCode}</li>
+      //     </ul>
+      //     <p>While you wait, check out <strong>Kriya Station</strong> (where you will be having fun): <a href="https://station.kriyaedu.com/" target="_blank">https://station.kriyaedu.com/</a></p>
+      //     <p>Also, Join our <strong> WhatsApp community </strong> <a href="https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk" target="_blank">https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk</a></p>
+      //     <p>We are so excited for you to begin your learning adventure!</p>
+      //     <p>Thanks for your order,<br>The Kriya Team</p>
+      //   </div>
+      // `
+
+
+       html: `
         <div style="font-family: sans-serif; line-height: 1.6;">
           <img 
             src="https://kriyaedu.com/images/logo-email.png" 
@@ -218,11 +241,7 @@ module.exports = async function handler(req, res) {
           
           <p>Hi ${data.name},</p>
           <p>Great news! Your Kriya STEM Kit (<strong>${data.plan} plan</strong>) is on its way.</p>
-          <p>You can track your shipment using the details below:</p>
-          <ul>
-            <li><strong>Courier:</strong> ${courierName}</li>
-            <li><strong>Tracking Number:</strong> ${awbCode}</li>
-          </ul>
+          <p>We Shall Ship all orders from September 1. Thanks for preordering!</p>
           <p>While you wait, check out <strong>Kriya Station</strong> (where you will be having fun): <a href="https://station.kriyaedu.com/" target="_blank">https://station.kriyaedu.com/</a></p>
           <p>Also, Join our <strong> WhatsApp community </strong> <a href="https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk" target="_blank">https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk</a></p>
           <p>We are so excited for you to begin your learning adventure!</p>
