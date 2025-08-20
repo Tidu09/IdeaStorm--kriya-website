@@ -123,16 +123,21 @@
               <input type="text" class="form-control" id="pincode" required>
             </div>
             <div class="mb-4">
-              <label class="form-label">Selected Plan</label>
-              <p id="plan-label" class="fs-6 text-muted">Loading...</p>
-              <label class="form-label mt-2">Amount Payable</label>
-             <p class="fs-5">
-            <span style="text-decoration: line-through; color: #888;">₹3500</span> 
-            <span id="plan-amount" class="fw-bold ms-2" style="color: #FF6500;">Loading...</span>
-          </p>
-          <p class="fs-6 text-success fw-bold">Pre-Launch offer</p>
-          <p class="text-muted" style="font-size: 0.85rem;">Deliveries begin 1st September</p>
+            <label class="form-label">Selected Plan</label>
+            <p id="plan-label" class="fs-6 text-muted">Loading...</p>
+            <label class="form-label mt-2">Amount Payable</label>
+
+            <div id="offer-content">
+              <p class="fs-5">
+                <span style="text-decoration: line-through; color: #888;">₹3500</span> 
+                <span id="plan-amount" class="fw-bold ms-2" style="color: #FF6500;">Loading...</span>
+              </p>
+              <p class="fs-6 text-success fw-bold">Pre-Launch offer</p>
+              <p class="text-muted" style="font-size: 0.85rem;">Deliveries begin 1st September</p>
             </div>
+            
+            <p id="plan-amount-regular" class="fs-5 fw-bold" style="display: none;">Loading...</p>
+          </div>
             <button type="button" class="btn btn-kriya w-40  mx-auto d-block" id="rzp-button1"><strong>LETS GO !</strong> </button>
           </form>
         </div>
@@ -161,29 +166,47 @@
     //     });
     // }
 
-    const selectedPlan = urlParams.get("plan") || "trial";
+const selectedPlan = urlParams.get("plan") || "trial";
 
-    let amount = 280000;
-    //let amount = 1000;
-    let label = "Trial Kit";
-    let kitTitle = "What’s Inside the Trial Kit?";
-    let kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
+let amount;
+let label;
+let kitTitle = "What’s Inside the Trial Kit?";
+let kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
 
-    if (selectedPlan === "monthly") {
-      amount = 135000;
-      label = "Monthly Plan - Autopay Enabled";
-      kitTitle = "Glance inside the first kit";
-      kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
-    } else if (selectedPlan === "annual") {
-      amount = 1450000;
-      label = "Annual Plan - One-Time Payment";
-      kitTitle = "Glance inside the first kit";
-      kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
-    }
+const offerContent = document.getElementById("offer-content");
+const planAmountRegular = document.getElementById("plan-amount-regular");
 
-    document.getElementById("plan-label").innerText = label;
+if (selectedPlan === "trial") {
+  amount = 280000;
+  label = "Trial Kit";
+  offerContent.style.display = 'block';
+  planAmountRegular.style.display = 'none';
+} else if (selectedPlan === "monthly") {
+  amount = 135000;
+  label = "Monthly Plan - Autopay Enabled";
+  offerContent.style.display = 'none';
+  planAmountRegular.style.display = 'block';
+  kitTitle = "Glance inside the first kit";
+  kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
+} else if (selectedPlan === "annual") {
+  amount = 1450000;
+  label = "Annual Plan - One-Time Payment";
+  offerContent.style.display = 'none';
+  planAmountRegular.style.display = 'block';
+  kitTitle = "Glance inside the first kit";
+  kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
+}
+
+document.getElementById("plan-label").innerText = label;
+
+// Conditionally update the amount display
+if (selectedPlan === "trial") {
     document.getElementById("plan-amount").innerText = `₹${(amount / 100).toLocaleString()}`;
-    document.addEventListener("DOMContentLoaded", () => {
+} else {
+    document.getElementById("plan-amount-regular").innerText = `₹${(amount / 100).toLocaleString()}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
   document.getElementById("modal-kit-desc").innerHTML = kitDesc;
 });
@@ -492,3 +515,4 @@
 
 </body>
 </html>
+
