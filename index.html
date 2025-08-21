@@ -202,6 +202,20 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
    background-color: #2C2C2C; /* Darker, richer orange gradient */
 }
 
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* Responsive tweak for mobile */
 @media (max-width: 576px) {
@@ -652,60 +666,58 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
     <h2 class="section-title mb-5">What’s at Stake?</h2>
 
     <!-- Shared wrapper for alignment -->
-  <div class="row justify-content-center align-items-start text-center">
-    <div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
-        <div class="w-100" style="max-width: 600px;">
-            <h4 class="text-danger"><strong>WITHOUT KRIYA</strong></h4>
-            <div class="d-flex justify-content-center">
-                <ul class="list-unstyled fs-6 ps-0">
-                    <li class="d-flex align-items-start mb-2">
-                        <span class="text-danger me-2">❌</span>
-                        <span>Passive screen time continues</span>
-                    </li>
-                    <li class="d-flex align-items-start mb-2">
-                        <span class="text-danger me-2">❌</span>
-                        <span>Missed early learning opportunities</span>
-                    </li>
-                    <li class="d-flex align-items-start mb-2">
-                        <span class="text-danger me-2">❌</span>
-                        <span>Creativity goes untapped</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<div class="comparison-grid">
+  <div class="text-container text-center">
+    <h4 class="text-danger"><strong>WITHOUT KRIYA</strong></h4>
+    <div class="d-flex justify-content-center">
+      <ul class="list-unstyled fs-6 ps-0">
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-danger me-2">❌</span>
+          <span>Passive screen time continues</span>
+        </li>
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-danger me-2">❌</span>
+          <span>Missed early learning opportunities</span>
+        </li>
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-danger me-2">❌</span>
+          <span>Creativity goes untapped</span>
+        </li>
+      </ul>
     </div>
-
-    <div class="col-md-6 d-flex justify-content-center">
-        <div class="w-100" style="max-width: 600px;">
-            <h4 class="text-success"><strong>WITH KRIYA</strong></h4>
-            <div class="d-flex justify-content-center">
-                <ul class="list-unstyled fs-6 ps-0">
-                    <li class="d-flex align-items-start">
-                        <span class="text-success me-2">✅</span>
-                        <span>Your child builds real-world skills</span>
-                    </li>
-                    <li class="d-flex align-items-start mb-2">
-                        <span class="text-success me-2">✅</span>
-                        <span>Hands-on learning experiences</span>
-                    </li>
-                    <li class="d-flex align-items-start mb-2">
-                        <span class="text-success me-2">✅</span>
-                        <span>Boosted creativity and confidence</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-      <!-- Centered image with matched width -->
- <div class="comparison-slider mx-auto">
-  <div class="dual-image-wrapper">
-    <img src="images/success-vs-failure_left.png" class="side-image left-image" alt="Failure">
-    <img src="images/success-vs-failure_right.png" class="side-image right-image" alt="Success">
   </div>
-  <div class="slider-container mt-3">
-      <span class="slider-label me-2">Slide me</span> <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
+
+  <div class="text-container text-center">
+    <h4 class="text-success"><strong>WITH KRIYA</strong></h4>
+    <div class="d-flex justify-content-center">
+      <ul class="list-unstyled fs-6 ps-0">
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-success me-2">✅</span>
+          <span>Your child builds real-world skills</span>
+        </li>
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-success me-2">✅</span>
+          <span>Hands-on learning experiences</span>
+        </li>
+        <li class="d-flex align-items-start mb-2">
+          <span class="text-success me-2">✅</span>
+          <span>Boosted creativity and confidence</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="comparison-grid-image" style="grid-column: 1 / span 2;">
+    <div class="comparison-slider mx-auto">
+      <div class="dual-image-wrapper">
+        <img src="images/success-vs-failure_left.png" class="side-image left-image" alt="Failure">
+        <img src="images/success-vs-failure_right.png" class="side-image right-image" alt="Success">
+      </div>
+      <div class="slider-container mt-3">
+        <span class="slider-label me-2">Slide me</span>
+        <input type="range" min="0" max="100" value="0" class="slider" id="sliderControl">
+      </div>
+    </div>
   </div>
 </div>
       <!-- Arrow
