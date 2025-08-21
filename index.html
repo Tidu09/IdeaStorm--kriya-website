@@ -202,49 +202,6 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
    background-color: #2C2C2C; /* Darker, richer orange gradient */
 }
 
-.comparison-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "without-text with-text" "image-container image-container";
-  gap: 20px;
-  max-width: 880px;
-  margin: 0 auto;
-}
-
-.text-container-without {
-  grid-area: without-text;
-  text-align: center;
-}
-
-.text-container-with {
-  grid-area: with-text;
-  text-align: center;
-}
-
-.comparison-grid-image {
-  grid-area: image-container;
-}
-
-/* On mobile, stack everything vertically */
-@media (max-width: 768px) {
-  .comparison-grid {
-    grid-template-areas:
-      "without-text"
-      "with-text"
-      "image-container";
-  }
-}
-
-.no-wrap-mobile {
-  white-space: nowrap;
-}
-
-@media (min-width: 769px) {
-  .no-wrap-mobile {
-    white-space: initial; /* Reset on desktop */
-  }
-}
-
 
 /* Responsive tweak for mobile */
 @media (max-width: 576px) {
@@ -933,7 +890,8 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
       <div class="modal-body text-center">
         <p class="lead" style="color:  #FF6500;"><strong>MAKE IT A REALITY</strong></p>
         <p>It always begins with a bold decision. Unlock a world of creativity and hands-on learning with our kits</p>
-        <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a>
+        <!-- <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a> -->
+         <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your 1<sup>st</sup> Kit</a>
         <!-- <a href="checkout.html" class="btn btn-kriya btn-lg mt-3 w-75">Get Trial Kit Now!</a> -->
       </div>
     </div>
