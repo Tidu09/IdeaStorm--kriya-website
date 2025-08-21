@@ -210,30 +210,11 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   margin: 0 auto;
 }
 
-.text-container-without {
-  grid-area: without-text;
-  text-align: center;
-}
-
-.text-container-with {
-  grid-area: with-text;
-  text-align: center;
-}
-
-.comparison-grid-image {
-  grid-area: image-container;
-}
-
 @media (max-width: 768px) {
   .comparison-grid {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "without-text"
-      "with-text"
-      "image-container";
   }
 }
-
 
 
 /* Responsive tweak for mobile */
@@ -686,7 +667,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 
     <!-- Shared wrapper for alignment -->
 <div class="comparison-grid">
-  <div class="text-container-without">
+  <div class="text-container text-center">
     <h4 class="text-danger"><strong>WITHOUT KRIYA</strong></h4>
     <div class="d-flex justify-content-center">
       <ul class="list-unstyled fs-6 ps-0">
@@ -706,7 +687,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
     </div>
   </div>
 
-  <div class="text-container-with">
+  <div class="text-container text-center">
     <h4 class="text-success"><strong>WITH KRIYA</strong></h4>
     <div class="d-flex justify-content-center">
       <ul class="list-unstyled fs-6 ps-0">
