@@ -345,11 +345,13 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   box-shadow: none !important; /* Remove the shadow */
 }
 
-.first-video {
-  /* You can add your custom styles here, such as: */
-  border-radius: 5%;
-  width:450px; /* Example: A smaller width */
-  height: auto;
+@media (min-width: 768px) {
+  .first-video {
+    width: 550px; /* Or any other desired width */
+    height: auto;
+    object-fit: contain;
+    margin-left: -100px; /* Adjust this value to shift it left */
+  }
 }
 
 
