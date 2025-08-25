@@ -350,6 +350,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
     border-radius: 5%;
     width: 490px; /* Or any other desired width */
     height: auto;
+    opacity: 0.9s; /* Adjust for transparency */
     object-fit: contain;
     box-shadow: none !important; /* Remove the shadow */
     margin-left: -100px; /* Adjust this value to shift it left */
@@ -358,7 +359,10 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 }
 @media (max-width: 767px) {
   .first-video {
-     border-radius: 5%;
+    width: 100%; /* Makes the video take up the full width of its column */
+    border-radius: 5%;
+    height: auto;
+    object-fit: contain;
     opacity: 0.9s; /* Adjust for transparency */
     box-shadow: none !important; /* Remove the shadow */
   }
