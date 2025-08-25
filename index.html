@@ -347,13 +347,22 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 
 @media (min-width: 768px) {
   .first-video {
-    width: 550px; /* Or any other desired width */
+    border-radius: 5%;
+    width: 490px; /* Or any other desired width */
     height: auto;
     object-fit: contain;
+    box-shadow: none !important; /* Remove the shadow */
     margin-left: -100px; /* Adjust this value to shift it left */
   }
+  
 }
-
+@media (max-width: 767px) {
+  .first-video {
+     border-radius: 5%;
+    opacity: 0.9s; /* Adjust for transparency */
+    box-shadow: none !important; /* Remove the shadow */
+  }
+}
 
 
 @media (min-width: 576px) and (max-width: 767.98px) {
