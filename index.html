@@ -351,6 +351,14 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   border-radius: 50%;
 }
 
+@media (max-width: 767px) {
+  .hero-video {
+    height: 300px; /* Adjust this value as needed to match the desired height */
+    width: auto;
+    object-fit: contain;
+  }
+}
+
 @media (min-width: 576px) and (max-width: 767.98px) {
   .kriya-logo {
     height: 60px; /* small devices (tablets) */
@@ -1099,6 +1107,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (speedyVideo) {
       speedyVideo.playbackRate = 2.0; 
     }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const carousel = new bootstrap.Carousel(document.getElementById('videoCarousel'), {
+      interval: false, 
+      wrap: true
+    });
+
+    const videos = document.querySelectorAll('#videoCarousel video');
+
+    videos.forEach(video => {
+      video.addEventListener('ended', function() {
+        carousel.next();
+      });
+    });
   });
 </script>
 
