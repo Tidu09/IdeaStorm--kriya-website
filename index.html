@@ -1120,26 +1120,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const videos = document.querySelectorAll('#videoCarousel video');
     
-    // Add event listener to each video to advance the carousel when it ends
+    // Play the video of the new slide when it becomes active
+    carouselElement.addEventListener('slid.bs.carousel', function (event) {
+      const activeVideo = event.relatedTarget.querySelector('video');
+      if (activeVideo) {
+        // Stop any currently playing video
+        videos.forEach(video => video.pause());
+        
+        // Restart the new video
+        activeVideo.currentTime = 0; // Reset video to the beginning
+        activeVideo.play();
+      }
+    });
+
+    // Add an event listener to each video to advance the carousel when it ends
     videos.forEach(video => {
       video.addEventListener('ended', function() {
         carousel.next();
       });
-    });
-
-    // Pause all videos when a new slide is about to be shown
-    carouselElement.addEventListener('slide.bs.carousel', function () {
-      videos.forEach(video => {
-        video.pause();
-      });
-    });
-
-    // Play the video of the new slide after it becomes active
-    carouselElement.addEventListener('slid.bs.carousel', function (event) {
-      const activeVideo = event.relatedTarget.querySelector('video');
-      if (activeVideo) {
-        activeVideo.play();
-      }
     });
 
     // Manually play the first video on page load
