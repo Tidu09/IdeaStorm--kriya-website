@@ -351,13 +351,13 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   border-radius: 50%;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .hero-video {
-    height: 250px; /* Adjust this value as needed to match the desired height */
+    height: 250px; 
     width: auto;
     object-fit: contain;
   }
-}
+} */
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .kriya-logo {
@@ -549,7 +549,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
         </div>
         <div class="carousel-item">
           <div class="text-center">
-            <video id="speedyVideo" class="hero-video"  autoplay loop playsinline>
+            <video id="speedyVideo" class="hero-video"  autoplay muted loop playsinline>
               <source src="images/gemsortter.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
