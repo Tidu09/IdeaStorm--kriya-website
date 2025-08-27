@@ -339,35 +339,25 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
   border-bottom-left-radius: 0;
 }
 
-.merged-video {
-  border-radius: 5%;
-  opacity: 0.9s; /* Adjust for transparency */
-  box-shadow: none !important; /* Remove the shadow */
+.hero-video {
+  width: 100%;
+  height: auto;
+  max-height: 60vh; /* Prevents the video from becoming too tall */
+  object-fit: contain;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
 }
 
-@media (min-width: 768px) {
-  .first-video {
-    border-radius: 5%;
-    width: 490px; /* Or any other desired width */
-    height: auto;
-    opacity: 0.9s; /* Adjust for transparency */
+/* @media (max-width: 767px) {
+  .hero-video {
+    height: 250px; 
+    width: auto;
     object-fit: contain;
-    box-shadow: none !important; /* Remove the shadow */
-    margin-left: -100px; /* Adjust this value to shift it left */
   }
-  
-}
-@media (max-width: 767px) {
-  .first-video {
-    width: 100%; /* Makes the video take up the full width of its column */
-    border-radius: 5%;
-    height: auto;
-    object-fit: contain;
-    opacity: 0.9s; /* Adjust for transparency */
-    box-shadow: none !important; /* Remove the shadow */
-  }
-}
-
+} */
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .kriya-logo {
@@ -545,26 +535,57 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 <!-- Hero Section -->
 <section class="kriya-blue py-5">
   <div class="container">
-    <div class="row align-items-center text-white">
-      <div class="col-md-3 text-center mb-4 mb-md-0">
-     <video id="first-video" class="first-video" autoplay muted loop playsinline>
-      <source src="images/website_video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>     </div>
-      <div class="col-md-6 text-center">
-        <h1 class="fw-bold">Make Kids Smart</h1>
-        <p class="fs-5">Ensure your kid is a cut above</p>
-        <!-- <a href="#" class="btn btn-kriya btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#getInTouchModal">Get in Touch</a> -->
-        <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your 1<sup>st</sup> Kit</a>
-        <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline fs-5">or watch how it works</a></p>
-      </div>
-      <div class="col-md-3 text-center">
-<video id="landscapeVideo"class="img-fluid merged-video" autoplay muted loop playsinline>
-          <source src="images/gemsortter.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+<div class="row align-items-center text-white">
+  <div class="col-12">
+    <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="text-center">
+            <video class="hero-video" autoplay muted loop playsinline>
+              <source src="images/website_video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="text-center">
+            <video id="speedyVideo" class="hero-video"  autoplay muted loop playsinline>
+              <source src="images/gemsortter.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="text-center">
+            <video class="hero-video"  autoplay muted loop playsinline>
+              <source src="images/assemble.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="row text-center mt-3">
+  <div class="col-12">
+    <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+      ← Prev
+    </button>
+    <button class="btn btn-outline-dark" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+      Next →
+    </button>
+  </div>
+</div>
+
+<div class="row text-center text-white mt-4">
+  <div class="col-12">
+    <h1 class="fw-bold">Make Kids Smart</h1>
+    <p class="fs-5">Ensure your kid is a cut above</p>
+    <a href="checkout.html" class="btn btn-kriya btn-lg mt-2">Get Your 1st Kit</a>
+    <p class="mt-3"><a href="#get-started" class="text-white text-decoration-underline fs-5">or watch how it works</a></p>
+  </div>
+</div>
     <div class="text-center mt-5">
       <p class="fs-5 fw-semibold">
         <em>We provide a hands-on STEM curriculum for ages <strong>11+</strong></em>
@@ -1080,11 +1101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Select the specific video element by its ID
-    const landscapeVideo = document.getElementById("landscapeVideo");
+    const speedyVideo = document.getElementById("speedyVideo");
     
     // Check if the element exists and then set its playback rate
-    if (landscapeVideo) {
-      landscapeVideo.playbackRate = 2.0; // Sets the speed to 2x
+    if (speedyVideo) {
+      speedyVideo.playbackRate = 2.0; 
     }
   });
 </script>
