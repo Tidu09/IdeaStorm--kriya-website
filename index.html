@@ -541,7 +541,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="text-center">
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video class="hero-video"  muted loop playsinline>
               <source src="images/website_video.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -549,7 +549,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
         </div>
         <div class="carousel-item">
           <div class="text-center">
-            <video id="speedyVideo" class="hero-video" autoplay muted loop playsinline>
+            <video id="speedyVideo" class="hero-video"  muted loop playsinline>
               <source src="images/gemsortter.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -557,7 +557,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
         </div>
         <div class="carousel-item">
           <div class="text-center">
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video class="hero-video"  muted loop playsinline>
               <source src="images/assemble.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1112,42 +1112,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Select the carousel element
     const carouselElement = document.getElementById('videoCarousel');
-    // Initialize the carousel with no interval, so it doesn't auto-rotate
     const carousel = new bootstrap.Carousel(carouselElement, {
       interval: false, 
       wrap: true
     });
 
-    // Select all video elements within the carousel
     const videos = document.querySelectorAll('#videoCarousel video');
     
-    // Add an event listener to the carousel itself
-    carouselElement.addEventListener('slide.bs.carousel', function (event) {
-      // Pause all videos when a new slide starts
-      videos.forEach(video => {
-        video.pause();
-      });
-
-      // Get the video element from the new slide
-      const nextVideo = event.relatedTarget.querySelector('video');
-      
-      // If a video element is found, play it
-      if (nextVideo) {
-        nextVideo.play();
-      }
-    });
-
-    // Add an event listener to each video to advance the carousel when it ends
+    // Add event listener to each video to advance the carousel when it ends
     videos.forEach(video => {
       video.addEventListener('ended', function() {
         carousel.next();
       });
     });
 
-    // Manually start the first video when the page loads
-    // This is needed because the 'slide.bs.carousel' event won't fire for the first slide
+    // Pause all videos when a new slide is about to be shown
+    carouselElement.addEventListener('slide.bs.carousel', function () {
+      videos.forEach(video => {
+        video.pause();
+      });
+    });
+
+    // Play the video of the new slide after it becomes active
+    carouselElement.addEventListener('slid.bs.carousel', function (event) {
+      const activeVideo = event.relatedTarget.querySelector('video');
+      if (activeVideo) {
+        activeVideo.play();
+      }
+    });
+
+    // Manually play the first video on page load
     const firstVideo = videos[0];
     if (firstVideo) {
       firstVideo.play();
