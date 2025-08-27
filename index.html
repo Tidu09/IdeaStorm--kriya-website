@@ -527,7 +527,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
 <!-- Hero Section -->
 <section class="kriya-blue py-5">
   <div class="container">
-  <div class="row align-items-center text-white">
+<div class="row align-items-center text-white">
   <div class="col-12">
     <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -541,7 +541,7 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
         </div>
         <div class="carousel-item">
           <div class="text-center">
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video id="speedyVideo" class="hero-video" autoplay muted loop playsinline>
               <source src="images/gemsortter.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -550,23 +550,34 @@ background: linear-gradient(45deg, #FFD700, #00FFFF);
         <div class="carousel-item">
           <div class="text-center">
             <video class="hero-video" autoplay muted loop playsinline>
-              <source src="images/website_video.mp4" type="video/mp4">
+              <source src="images/assemble.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
 </div>
+<div class="row text-center text-white mt-4">
+  <div class="col-12">
+    <h1 class="fw-bold fs-2">Make Kids Smart</h1>
+    <p class="fs-6">Ensure your kid is a cut above</p>
+    <a href="checkout.html" class="btn btn-kriya btn-sm mt-2">Get Your 1st Kit</a>
+    <p class="mt-2"><a href="#get-started" class="text-white text-decoration-underline fs-6">or watch how it works</a></p>
+  </div>
+</div>
+<div class="row text-center mt-3">
+  <div class="col-12">
+    <button class="btn btn-outline-dark me-2" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+      ← Prev
+    </button>
+    <button class="btn btn-outline-dark" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+      Next →
+    </button>
+  </div>
+</div>
+
 <div class="row text-center text-white mt-4">
   <div class="col-12">
     <h1 class="fw-bold">Make Kids Smart</h1>
@@ -1090,11 +1101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Select the specific video element by its ID
-    const landscapeVideo = document.getElementById("landscapeVideo");
+    const speedyVideo = document.getElementById("speedyVideo");
     
     // Check if the element exists and then set its playback rate
-    if (landscapeVideo) {
-      landscapeVideo.playbackRate = 2.0; // Sets the speed to 2x
+    if (speedyVideo) {
+      speedyVideo.playbackRate = 2.0; 
     }
   });
 </script>
