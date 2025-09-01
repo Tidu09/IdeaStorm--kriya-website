@@ -94,7 +94,7 @@ module.exports = async function handler(req, res) {
         units: 1,
         selling_price: price,
         discount: 0,
-        tax: 12
+        tax: 18
       }
     ],
     payment_method: "Prepaid",
