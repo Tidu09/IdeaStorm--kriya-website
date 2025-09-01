@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
     annual: "Annual Subscription"
   };
 
-  const amount = plan === "monthly" ? 1350 : plan === "annual" ? 14500 : 999;
+  const amount = plan === "monthly" ? 1350 : plan === "annual" ? 14500 : 2800;
   const description = planNameMap[plan] || "Kriya STEM Kit";
 
   try {
