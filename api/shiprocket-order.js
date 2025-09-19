@@ -186,6 +186,16 @@ module.exports = async function handler(req, res) {
       },
     });
 
+//     const transporter = nodemailer.createTransport({
+//   host: "smtp.zoho.com",
+//   port: 465,
+//   secure: true, // use SSL
+//   auth: {
+//     user: EMAIL_USER,
+//     pass: EMAIL_PASS,
+//   },
+// });
+
 // Customer Confirmation Email with Logo
     await transporter.sendMail({
       from: 'Kriya <ideastorm.technologies@gmail.com>',
