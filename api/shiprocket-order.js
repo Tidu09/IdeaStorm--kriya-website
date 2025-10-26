@@ -262,7 +262,6 @@ module.exports = async function handler(req, res) {
           
           <p>Hi ${data.name},</p>
           <p>Great news! Your Kriya STEM Kit (<strong>${data.plan} plan</strong>) is on its way.</p>
-          <p>We Shall Ship all orders from September 1. Thanks for preordering!</p>
           <p>While you wait, check out <strong>Kriya Station</strong> (where you will be having fun): <a href="https://station.kriyaedu.com/" target="_blank">https://station.kriyaedu.com/</a></p>
           <p>Also, Join our <strong> WhatsApp community </strong> <a href="https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk" target="_blank">https://chat.whatsapp.com/DIHIUJHZaLtIjPjS6Ruwvk</a></p>
           <p>We are so excited for you to begin your learning adventure!</p>
