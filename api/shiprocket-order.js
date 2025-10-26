@@ -62,7 +62,6 @@ module.exports = async function handler(req, res) {
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
 
-  // We assume 'data.amount' is the final paid amount (in Rupees)
   const data = req.body; 
 
   // --- FIX 1: Define basePrice for calculating discount ---
@@ -71,7 +70,7 @@ module.exports = async function handler(req, res) {
   else if (data.plan === "annual") basePrice = 14500;
 
   // Final price paid by the customer. Use data.amount from the client (Rupees).
-  const finalPrice = data.amount || basePrice; 
+  const finalPrice = data.final_amount || basePrice; 
   const discountAmount = Math.max(0, basePrice - finalPrice);
   // --------------------------------------------------------
   
