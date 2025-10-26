@@ -380,6 +380,8 @@ document.getElementById("apply-coupon-btn").onclick = async () => {
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
       invite: appliedCoupon,
+      coupon: appliedCoupon, // NEW: Log the coupon
+      final_amount: finalAmount / 100, // NEW: Log the final amount in Rupees
       address: {
         house: document.getElementById("house").value,
         building: document.getElementById("building").value,
@@ -642,3 +644,4 @@ document.getElementById("apply-coupon-btn").onclick = async () => {
 
 </body>
 </html>
+
