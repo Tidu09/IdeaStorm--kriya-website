@@ -68,6 +68,9 @@ module.exports = async function handler(req, res) {
   if (data.plan === "monthly") price = 1350;
   else if (data.plan === "annual") price = 14500;
 
+  const finalPrice = data.final_amount || basePrice;
+  const discountAmount = Math.max(0, basePrice - finalPrice);
+  
   const payload = {
     order_id: data.payment_id,
     order_date: new Date().toISOString().split('T')[0],
@@ -93,12 +96,12 @@ module.exports = async function handler(req, res) {
         sku: `kriya-kit-${data.plan}`,
         units: 1,
         selling_price: price,
-        discount: 0,
+        discount: discountAmount,
         tax: 18
       }
     ],
     payment_method: "Prepaid",
-    sub_total: price,
+    sub_total: finalPrice,
     length: 10,
     breadth: 10,
     height: 10,
