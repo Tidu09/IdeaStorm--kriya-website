@@ -195,7 +195,6 @@ const selectedPlan = urlParams.get("plan") || "trial";
 let originalAmount;
 let finalAmount;
 let appliedCoupon = null;
-let amount;
 let label;
 let kitTitle = "What’s Inside the First Kit?";
 // let kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!<br><br><i>Do <a href='subscription.html' class='kriya-gold'>subscribe</a> for more such fun projects.</i>`;
@@ -205,19 +204,19 @@ const offerContent = document.getElementById("offer-content");
 const planAmountRegular = document.getElementById("plan-amount-regular");
 
 if (selectedPlan === "trial") {
-  amount = 320000;
+  originalAmount = 320000;
   label = "Trial Kit";
   offerContent.style.display = 'block';
   planAmountRegular.style.display = 'none';
 } else if (selectedPlan === "monthly") {
-  amount = 135000;
+  originalAmount = 135000;
   label = "Monthly Plan - Autopay Enabled";
   offerContent.style.display = 'none';
   planAmountRegular.style.display = 'block';
   kitTitle = "Glance inside the First kit";
   kitDesc = `Your child’s journey begins with an eye-popping, color-sorting experience! The first kit is a real working <strong>Gem Sorter</strong> — it uses sensors to detect colors and automatically sort <em>Gems candies</em> based on their shades. 🍬✨<br>It’s the perfect combo of fun and learning: they’ll build circuits, explore color sensors, and see real automation in action — just like a mini factory!`;
 } else if (selectedPlan === "annual") {
-  amount = 1450000;
+  originalAmount = 1450000;
   label = "Annual Plan - One-Time Payment";
   offerContent.style.display = 'none';
   planAmountRegular.style.display = 'block';
@@ -229,10 +228,11 @@ document.getElementById("plan-label").innerText = label;
 
 // Conditionally update the amount display
 if (selectedPlan === "trial") {
-    document.getElementById("plan-amount").innerText = `₹${(amount / 100).toLocaleString()}`;
+    document.getElementById("plan-amount").innerText = `₹${(originalAmount / 100).toLocaleString()}`; // CHANGED from 'amount'
 } else {
-    document.getElementById("plan-amount-regular").innerText = `₹${(amount / 100).toLocaleString()}`;
+    document.getElementById("plan-amount-regular").innerText = `₹${(originalAmount / 100).toLocaleString()}`; // CHANGED from 'amount'
 }
+
 
 function updatePriceDisplay() {
   document.getElementById("total-amount-display").innerText = `₹${(finalAmount / 100).toLocaleString()}`;
@@ -247,6 +247,81 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
   document.getElementById("modal-kit-desc").innerHTML = kitDesc;
 });
+
+
+document.getElementById("apply-coupon-btn").onclick = async () => {
+  const code = document.getElementById("coupon-code").value.trim().toUpperCase();
+  const messageEl = document.getElementById("coupon-message");
+  const discountRow = document.getElementById("discount-row");
+  const discountAmountEl = document.getElementById("discount-amount");
+  const applyBtn = document.getElementById("apply-coupon-btn");
+
+  if (!code) {
+    messageEl.textContent = "Please enter a code.";
+    messageEl.className = "text-danger mt-2";
+    return;
+  }
+  
+  if (appliedCoupon === code) {
+    messageEl.textContent = "This coupon is already applied.";
+    messageEl.className = "text-success mt-2";
+    return;
+  }
+
+  // Logic to extract discount percentage (e.g., '20' from '20ABCD')
+  const discountString = code.substring(0, 2);
+  const discountPercentage = parseInt(discountString, 10);
+
+  if (isNaN(discountPercentage) || discountPercentage <= 0 || discountPercentage >= 100) {
+    messageEl.textContent = "Invalid coupon format or discount amount (must be 01-99).";
+    messageEl.className = "text-danger mt-2";
+    return;
+  }
+
+  messageEl.textContent = "Validating...";
+  messageEl.className = "text-muted mt-2";
+  applyBtn.disabled = true;
+
+  try {
+    const res = await fetch(`/api/validate-invite?code=${code}`);
+    const data = await res.json();
+
+    if (data.valid) {
+      // Use the extracted discountPercentage
+      const discount = (originalAmount * discountPercentage) / 100;
+      finalAmount = originalAmount - discount;
+      appliedCoupon = code; 
+
+      // Update UI
+      discountAmountEl.innerText = `- ₹${(discount / 100).toLocaleString()} (${discountPercentage}%)`;
+      discountRow.style.display = 'block';
+      messageEl.textContent = `Success! "${code}" applied for a ${discountPercentage}% discount.`;
+      messageEl.className = "text-success mt-2";
+      
+      updatePriceDisplay();
+
+    } else {
+      messageEl.textContent = "Invalid or expired invite code.";
+      messageEl.className = "text-danger mt-2";
+      
+      // Reset price if a different coupon was previously applied
+      if (appliedCoupon) {
+          finalAmount = originalAmount;
+          appliedCoupon = null;
+          discountRow.style.display = 'none';
+          updatePriceDisplay();
+      }
+    }
+  } catch (err) {
+    console.error("Coupon validation error:", err);
+    messageEl.textContent = "Error applying coupon. Please try again.";
+    messageEl.className = "text-danger mt-2";
+  } finally {
+    applyBtn.disabled = false;
+  }
+};
+
+
 
     document.getElementById("rzp-button1").onclick = function (e) {
       const name = document.getElementById("name").value;
