@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
         },
         body: JSON.stringify({
           // FIXED: Convert Rupees (from client) to Paise (for Razorpay)
-          amount: amount * 100, 
+          amount: amount, 
           currency: "INR",
           receipt: `order_${Date.now()}`,
           payment_capture: 1,
