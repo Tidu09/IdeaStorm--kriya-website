@@ -62,14 +62,18 @@ module.exports = async function handler(req, res) {
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
 
-  const data = req.body;
+  // We assume 'data.amount' is the final paid amount (in Rupees)
+  const data = req.body; 
 
-  let price = 3200;
-  if (data.plan === "monthly") price = 1350;
-  else if (data.plan === "annual") price = 14500;
+  // --- FIX 1: Define basePrice for calculating discount ---
+  let basePrice = 3200;
+  if (data.plan === "monthly") basePrice = 1350;
+  else if (data.plan === "annual") basePrice = 14500;
 
-  const finalPrice = data.final_amount || basePrice;
+  // Final price paid by the customer. Use data.amount from the client (Rupees).
+  const finalPrice = data.amount || basePrice; 
   const discountAmount = Math.max(0, basePrice - finalPrice);
+  // --------------------------------------------------------
   
   const payload = {
     order_id: data.payment_id,
@@ -95,13 +99,14 @@ module.exports = async function handler(req, res) {
         name: `Kriya STEM Kit - ${data.plan}`,
         sku: `kriya-kit-${data.plan}`,
         units: 1,
-        selling_price: price,
+        // --- FIX 2: Use basePrice as the selling price ---
+        selling_price: basePrice, 
         discount: discountAmount,
         tax: 18
       }
     ],
     payment_method: "Prepaid",
-    sub_total: finalPrice,
+    sub_total: finalPrice, // Correctly using the paid amount
     length: 10,
     breadth: 10,
     height: 10,
@@ -279,4 +284,4 @@ module.exports = async function handler(req, res) {
     console.error("❌ Shiprocket error:", error);
     return res.status(500).json({ error: error.message });
   }
-}; 
+};
