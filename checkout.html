@@ -122,22 +122,45 @@
               <label for="pincode" class="form-label">Pincode</label>
               <input type="text" class="form-control" id="pincode" required>
             </div>
-            <div class="mb-4">
-            <label class="form-label">Selected Plan</label>
-            <p id="plan-label" class="fs-6 text-muted">Loading...</p>
-            <label class="form-label mt-2">Amount Payable</label>
 
-            <div id="offer-content">
-              <p class="fs-5">
-                <span style="text-decoration: line-through; color: #888;">₹4000</span> 
-                <span id="plan-amount" class="fw-bold ms-2" style="color: #FF6500;">Loading...</span>
-              </p>
-              <!-- <p class="fs-6 text-success fw-bold">Pre-Launch offer</p>
-              <p class="text-muted" style="font-size: 0.85rem;">Deliveries begin 1st September</p> -->
+            <div class="mb-3">
+            <label for="coupon-code" class="form-label">Coupon Code (Optional)</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="coupon-code" placeholder="Enter invite code">
+              <button class="btn btn-outline-secondary" type="button" id="apply-coupon-btn">Apply</button>
             </div>
-            
-            <p id="plan-amount-regular" class="fs-5 fw-bold" style="display: none;">Loading...</p>
+            <div id="coupon-message" class="mt-2" style="font-size: 0.9rem;"></div>
           </div>
+
+            <div class="mb-4">
+                <label class="form-label">Selected Plan</label>
+                <p id="plan-label" class="fs-6 text-muted">Loading...</p>
+                
+                <label class="form-label mt-2">Amount Payable</label>
+
+                <div id="offer-content">
+                  <p class="fs-5">
+                    <span style="text-decoration: line-through; color: #888;">₹4000</span> 
+                    <span id="plan-amount" class="fw-bold ms-2" style="color: #FF6500;">Loading...</span>
+                  </p>
+                </div>
+                
+                <p id="plan-amount-regular" class="fs-5 fw-bold" style="display: none;">Loading...</p>
+
+                <div id="discount-row" style="display: none;">
+                  <p class="fs-6 text-success mb-1">
+                    Discount: <span id="discount-amount" class="fw-bold"></span>
+                  </p>
+                </div>
+
+                <hr class="my-2">
+                
+                <p class="fs-5 fw-bold">
+                  Final Amount: 
+                  <span id="total-amount-display" class="ms-2" style="color: #FF6500;">Loading...</span>
+                </p>
+              </div>
+
             <button type="button" class="btn btn-kriya w-40  mx-auto d-block" id="rzp-button1"><strong>LETS GO !</strong> </button>
           </form>
         </div>
@@ -168,6 +191,10 @@
 
 const selectedPlan = urlParams.get("plan") || "trial";
 
+
+let originalAmount;
+let finalAmount;
+let appliedCoupon = null;
 let amount;
 let label;
 let kitTitle = "What’s Inside the First Kit?";
@@ -207,6 +234,15 @@ if (selectedPlan === "trial") {
     document.getElementById("plan-amount-regular").innerText = `₹${(amount / 100).toLocaleString()}`;
 }
 
+function updatePriceDisplay() {
+  document.getElementById("total-amount-display").innerText = `₹${(finalAmount / 100).toLocaleString()}`;
+}
+
+// NEW: Initialize final amount and update display
+finalAmount = originalAmount;
+updatePriceDisplay();
+
+
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("modal-kit-title").innerHTML = `<strong>${kitTitle}</strong>`;
   document.getElementById("modal-kit-desc").innerHTML = kitDesc;
@@ -233,10 +269,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       fetch("/api/create-subscription", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, selectedPlan, amount})
-    })
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ 
+    name, 
+    email, 
+    phone, 
+    selectedPlan, 
+    amount: finalAmount, // NEW: Send finalAmount
+    coupon: appliedCoupon  // NEW: Send applied coupon
+  })
+})
       .then(async res => {
         const contentType = res.headers.get("content-type");
 
@@ -254,8 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(options => {
   options.handler = function (response) {
     document.getElementById("loading-overlay").classList.add("loading-visible");
-    const invite = new URLSearchParams(window.location.search).get('invite') || sessionStorage.getItem('inviteCode');
-
 
     const orderData = {
       payment_id: response.razorpay_payment_id || response.razorpay_subscription_id,
@@ -263,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: document.getElementById("name").value,
       email: document.getElementById("email").value,
       phone: document.getElementById("phone").value,
-      invite: invite,
+      invite: appliedCoupon,
       address: {
         house: document.getElementById("house").value,
         building: document.getElementById("building").value,
@@ -294,6 +335,8 @@ document.addEventListener("DOMContentLoaded", () => {
             payment_id: response.razorpay_payment_id,
             shipping_awb: data.tracking.awb_code || "Unavailable",
             plan: selectedPlan,
+            coupon: appliedCoupon, // NEW: Log the coupon
+            final_amount: finalAmount / 100, // NEW: Log the final amount in Rupees
             address: {
               house: document.getElementById("house").value,
               building: document.getElementById("building").value,
@@ -362,6 +405,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   </script>
+
+
+
+
+
+
+
+
 <!-- 
   <gmpx-api-loader key="YOUR_API_KEY"></gmpx-api-loader>
 
