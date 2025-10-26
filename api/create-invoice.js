@@ -14,7 +14,8 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, phone, plan, payment_id } = req.body;
+  // MODIFIED: Accept final paid 'amount' and optional 'coupon' directly from the client
+  const { name, email, phone, plan, payment_id, amount, coupon } = req.body; 
 
   const planNameMap = {
     trial: "Trial Kit",
@@ -22,8 +23,13 @@ module.exports = async function handler(req, res) {
     annual: "Annual Subscription"
   };
 
-  const amount = plan === "monthly" ? 1350 : plan === "annual" ? 14500 : 3200;
-  const description = planNameMap[plan] || "Kriya STEM Kit";
+  // Price will be used directly from the body (received as 'amount')
+  let description = planNameMap[plan] || "Kriya STEM Kit";
+  
+  // NEW: Add coupon code to description if present
+  if (coupon) {
+    description = `${description} (Coupon: ${coupon})`;
+  }
 
   try {
     const response = await fetch("https://api.razorpay.com/v1/invoices", {
@@ -43,7 +49,7 @@ module.exports = async function handler(req, res) {
         line_items: [
           {
             name: description,
-            amount: amount * 100, // in paise
+            amount: amount * 100, // in paise - Uses 'amount' from req.body
             currency: "INR",
             quantity: 1
           }
