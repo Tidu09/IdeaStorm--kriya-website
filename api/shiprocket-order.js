@@ -99,9 +99,10 @@ module.exports = async function handler(req, res) {
         name: `Kriya STEM Kit - ${data.plan}`,
         sku: `kriya-kit-${data.plan}`,
         units: 1,
-        // --- FIX 2: Use basePrice as the selling price ---
-        selling_price: basePrice, 
-        discount: discountAmount,
+        // --- MODIFIED: Use finalPrice as the selling price to reflect paid amount in UI ---
+        selling_price: finalPrice, 
+        // --- MODIFIED: Set discount to 0 as the price already reflects the discount ---
+        discount: 0, 
         tax: 18
       }
     ],
