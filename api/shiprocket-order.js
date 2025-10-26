@@ -72,7 +72,8 @@ module.exports = async function handler(req, res) {
   // Final price paid by the customer. Use data.amount from the client (Rupees).
   const finalPrice = data.final_amount || basePrice; 
   const discountAmount = Math.max(0, basePrice - finalPrice);
-  // --------------------------------------------------------
+
+  console.log(`💰 FINANCIAL SUMMARY: Base Price: ₹${basePrice}, Discount: ₹${discountAmount}, Final Paid: ₹${finalPrice}`);  // --------------------------------------------------------
   
   const payload = {
     order_id: data.payment_id,
