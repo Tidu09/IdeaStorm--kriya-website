@@ -224,7 +224,6 @@ module.exports = async function handler(req, res) {
 
             text: `Hi ${data.name},\n\n` +
             `Great news! Your Kriya STEM Kit (${data.plan} plan) is on its way.\n\n` +
-            `We Shall Ship all orders from September 1. Thanks for preordering! \n` +
             `While you wait, check out Kriya Station (where you will be having fun): https://station.kriyaedu.com/\n\n` +
             `We're so excited for you to begin your learning adventure!\n\n` +
             `Thanks for your order,\n` +
