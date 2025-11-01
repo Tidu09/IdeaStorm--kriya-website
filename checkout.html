@@ -126,7 +126,7 @@
             <div class="mb-3">
             <label for="coupon-code" class="form-label">Coupon Code (Optional)</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="coupon-code" placeholder="Enter invite code">
+              <input type="text" class="form-control" id="coupon-code" placeholder="Enter Coupon code">
               <button class="btn btn-outline-secondary" type="button" id="apply-coupon-btn">Apply</button>
             </div>
             <div id="coupon-message" class="mt-2" style="font-size: 0.9rem;"></div>
@@ -301,7 +301,7 @@ document.getElementById("apply-coupon-btn").onclick = async () => {
       updatePriceDisplay();
 
     } else {
-      messageEl.textContent = "Invalid or expired invite code.";
+      messageEl.textContent = "Invalid or expired code.";
       messageEl.className = "text-danger mt-2";
       
       // Reset price if a different coupon was previously applied
@@ -644,4 +644,5 @@ document.getElementById("apply-coupon-btn").onclick = async () => {
 
 </body>
 </html>
+
 
